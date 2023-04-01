@@ -1,4 +1,6 @@
-﻿namespace TakeAIMeal.API
+﻿using TakeAIMeal.API.Extensions;
+
+namespace TakeAIMeal.API
 {
     public class Startup
     {
@@ -15,6 +17,9 @@
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddApplicationOptions(_configuration);
+            services.AddRefitClients();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,7 +35,6 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
