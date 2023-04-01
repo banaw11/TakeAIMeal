@@ -1,4 +1,4 @@
-﻿namespace TakeAIMeal.Common.Services.Models
+﻿namespace TakeAIMeal.Common.Services.Models.OpenAI
 {
     /// <summary>
     /// Represents the body of the request sent to the OpenAI Completion API, containing the prompt and
