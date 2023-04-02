@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TakeAIMeal.Common.Services\TakeAIMeal.Common.Services.csproj" />
+    <ProjectReference Include="..\TakeAIMeal.Data\TakeAIMeal.Data.csproj" />
   </ItemGroup>
 
 </Project>

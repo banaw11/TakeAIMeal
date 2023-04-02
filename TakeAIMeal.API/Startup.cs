@@ -18,6 +18,9 @@ namespace TakeAIMeal.API
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
+            services.RegisterServices(_configuration);
+            services.RegisterRepositories();
+
             services.AddApplicationOptions(_configuration);
             services.AddRefitClients();
         }
