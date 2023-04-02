@@ -47,15 +47,18 @@
 
     // Examples:
     //FilterSettings.SchemaFilters.Add(new RegexExcludeFilter("[Ff]inance.*")); // This excludes the Finance schema
-    //FilterSettings.SchemaFilters.Add(new RegexIncludeFilter("dbo.*")); // This includes only dbo schema
+    FilterSettings.SchemaFilters.Add(new RegexIncludeFilter("dbo.*")); // This includes only dbo schema
     //FilterSettings.TableFilters.Add(new RegexExcludeFilter(".*[Bb]illing.*")); // This excludes all tables with 'billing' anywhere in the name
     //FilterSettings.TableFilters.Add(new RegexIncludeFilter("^[Cc]ustomer.*")); // This includes any remaining tables with names beginning with 'customer'
     FilterSettings.TableFilters.Add(new RegexExcludeFilter("AspNet.*")); // This excludes all tables starting with 'AspNet'
+    FilterSettings.TableFilters.Add(new RegexExcludeFilter("sys.*")); // This excludes all tables starting with 'sys'
+    FilterSettings.TableFilters.Add(new RegexExcludeFilter("SpHelp.*")); // This excludes all tables starting with 'SpHelp'
     FilterSettings.TableFilters.Add(new RegexExcludeFilter("__EFMigrationsHistory")); // This excludes a table called '__EFMigrationsHistory'
     //FilterSettings.ColumnFilters.Add(new RegexExcludeFilter("[Cc]reated[Aa]t.*")); // This excludes all columns starting with 'CreatedAt' e.g CreatedAtUtc
     //FilterSettings.ColumnFilters.Add(new RegexIncludeFilter(".*")); // Rarely used as it would only include columns with names listed here
     //FilterSettings.StoredProcedureFilters.Add(new RegexExcludeFilter("Calc")); // This excludes all stored procedures 'Calc' in the name
     //FilterSettings.StoredProcedureFilters.Add(new RegexIncludeFilter("Pricing.*")); // This includes all stored procedures starting with 'Pricing'
+    FilterSettings.StoredProcedureFilters.Add(new RegexIncludeFilter("sp_.*")); // This includes all stored procedures starting with 'sp_'
     
 
     // Elements to generate ***************************************************************************************************************
@@ -76,7 +79,7 @@
     // Other settings *********************************************************************************************************************
     Settings.CommandTimeout                         = 600; // SQL Command timeout in seconds. 600 is 10 minutes, 0 will wait indefinitely. Some databases can be slow retrieving schema information.
     Settings.DbContextInterfaceBaseClasses          = "IDisposable"; // Specify what the base classes are for your database context interface
-    Settings.DbContextBaseClass                     = "DbContext"; // Specify what the base class is for your DbContext. For ASP.NET Identity use "IdentityDbContext<ApplicationUser>";
+    Settings.DbContextBaseClass                     = "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<TakeAIMeal.Data.Entities.ApplicationUser, TakeAIMeal.Data.Entities.ApplicationRole, int>"; // Specify what the base class is for your DbContext. For ASP.NET Identity use "IdentityDbContext<ApplicationUser>";
     Settings.OnConfiguration                        = OnConfiguration.ConnectionString; // EFCore only. Determines the code generated within DbContext.OnConfiguration(). Please read https://github.com/sjh37/EntityFramework-Reverse-POCO-Code-First-Generator/wiki/Settings.OnConfiguration
     Settings.AddParameterlessConstructorToDbContext = true; // EF6 only. If true, then DbContext will have a default (parameter-less) constructor which automatically passes in the connection string name, if false then no parameter-less constructor will be created.
     Settings.ConfigurationClassName                 = "Configuration"; // Configuration, Mapping, Map, etc. This is appended to the Poco class name to configure the mappings.

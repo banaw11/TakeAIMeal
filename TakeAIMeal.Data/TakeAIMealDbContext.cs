@@ -18,7 +18,7 @@ namespace TakeAIMeal.Data
     // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
     // ****************************************************************************************************
 
-    public class TakeAIMealDbContext : DbContext, ITakeAIMealDbContext
+    public class TakeAIMealDbContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<TakeAIMeal.Data.Entities.ApplicationUser, TakeAIMeal.Data.Entities.ApplicationRole, int>, ITakeAIMealDbContext
     {
         public TakeAIMealDbContext()
         {
@@ -29,7 +29,11 @@ namespace TakeAIMeal.Data
         {
         }
 
-        public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
+        public DbSet<Product> Products { get; set; } // Products
+        public DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
+        public DbSet<Receipe> Receipes { get; set; } // Receipes
+        public DbSet<UserDiet> UserDiets { get; set; } // UserDiets
+        public DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,7 +56,11 @@ namespace TakeAIMeal.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new sys_DatabaseFirewallRuleConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceipeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserDietConfiguration());
+            modelBuilder.ApplyConfiguration(new UserProductsExclusionConfiguration());
         }
 
     }

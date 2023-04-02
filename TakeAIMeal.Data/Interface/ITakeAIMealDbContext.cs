@@ -20,7 +20,11 @@ namespace TakeAIMeal.Data
 
     public interface ITakeAIMealDbContext : IDisposable
     {
-        DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
+        DbSet<Product> Products { get; set; } // Products
+        DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
+        DbSet<Receipe> Receipes { get; set; } // Receipes
+        DbSet<UserDiet> UserDiets { get; set; } // UserDiets
+        DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

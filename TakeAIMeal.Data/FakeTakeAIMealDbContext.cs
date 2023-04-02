@@ -20,13 +20,21 @@ namespace TakeAIMeal.Data
 
     public class FakeTakeAIMealDbContext : ITakeAIMealDbContext
     {
-        public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
+        public DbSet<Product> Products { get; set; } // Products
+        public DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
+        public DbSet<Receipe> Receipes { get; set; } // Receipes
+        public DbSet<UserDiet> UserDiets { get; set; } // UserDiets
+        public DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
         public FakeTakeAIMealDbContext()
         {
             _database = new FakeDatabaseFacade(new TakeAIMealDbContext());
 
-            sys_DatabaseFirewallRules = new FakeDbSet<sys_DatabaseFirewallRule>();
+            Products = new FakeDbSet<Product>("Id");
+            ProductCategories = new FakeDbSet<ProductCategory>("Id");
+            Receipes = new FakeDbSet<Receipe>("Id");
+            UserDiets = new FakeDbSet<UserDiet>("Id");
+            UserProductsExclusions = new FakeDbSet<UserProductsExclusion>("Id");
 
         }
 
