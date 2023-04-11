@@ -26,24 +26,26 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '/TakeAIMeal.WebUI'
+    workingDir: 'TakeAIMeal.WebUI'
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '/TakeAIMeal.WebUI'
-    customCommand: 'npm run build'
+    workingDir: 'TakeAIMeal.WebUI'
+    customCommand: 'run build'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '--output publish-output --configuration $(buildConfiguration)'
-- task: VSBuild@1
+    arguments: '--output publish_output --configuration $(buildConfiguration)'
+
+- task: ArchiveFiles@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    rootFolderOrFile: 'publish_output'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -51,4 +53,4 @@ steps:
     azureSubscription: 'Private(df289f54-c76c-4ea5-a1fb-aeba008c3983)'
     appType: 'webApp'
     WebAppName: 'take-ai-meal-app'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
