@@ -44,10 +44,3 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Private(df289f54-c76c-4ea5-a1fb-aeba008c3983)'
-    appType: 'webApp'
-    WebAppName: 'take-ai-meal-app'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
