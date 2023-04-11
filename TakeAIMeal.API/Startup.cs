@@ -23,6 +23,21 @@ namespace TakeAIMeal.API
 
             services.AddApplicationOptions(_configuration);
             services.AddRefitClients();
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +53,20 @@ namespace TakeAIMeal.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+            
+            app.UseSpa(spa =>
+            {
+                spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                spa.Options.SourcePath = "wwwroot";
+            });
+
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

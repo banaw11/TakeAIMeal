@@ -1,3 +1,5 @@
 # Config files
 appsettings.Development.json
 
+# Ignore static files
+wwwroot/**/*.*
