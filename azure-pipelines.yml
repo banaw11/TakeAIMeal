@@ -26,11 +26,11 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '/TakeAIMeal.WebUI'
+    workingDir: 'TakeAIMeal.WebUI'
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '/TakeAIMeal.WebUI'
+    workingDir: 'TakeAIMeal.WebUI'
     customCommand: 'npm run build'
 
 - task: DotNetCoreCLI@2
