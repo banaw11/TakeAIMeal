@@ -1,4 +1,6 @@
-﻿namespace TakeAIMeal.API
+﻿using TakeAIMeal.API.Extensions;
+
+namespace TakeAIMeal.API
 {
     public class Startup
     {
@@ -15,6 +17,27 @@
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.RegisterServices(_configuration);
+            services.RegisterRepositories();
+
+            services.AddApplicationOptions(_configuration);
+            services.AddRefitClients();
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,6 +53,19 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+            
+            app.UseSpa(spa =>
+            {
+                spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                spa.Options.SourcePath = "wwwroot";
+            });
 
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
