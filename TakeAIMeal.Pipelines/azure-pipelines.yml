@@ -1,0 +1,56 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  name: 'default'
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/TakeAIMeal.sln'
+  project: '**/TakeAIMeal.API.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'TakeAIMeal.WebUI'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'TakeAIMeal.WebUI'
+    customCommand: 'run build'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--output publish_output --configuration $(buildConfiguration)'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'publish_output'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Private(df289f54-c76c-4ea5-a1fb-aeba008c3983)'
+    appType: 'webApp'
+    WebAppName: 'take-ai-meal-app'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
