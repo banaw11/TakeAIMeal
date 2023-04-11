@@ -37,14 +37,14 @@ steps:
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '--output publish-output --configuration $(buildConfiguration)'
+    arguments: '--output publish_output --configuration $(buildConfiguration)'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
+    rootFolderOrFile: 'publish_output'
+    includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/**/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
 - task: AzureRmWebAppDeployment@4
