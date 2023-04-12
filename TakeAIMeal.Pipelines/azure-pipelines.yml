@@ -13,6 +13,7 @@ pool:
 variables:
   solution: '**/TakeAIMeal.sln'
   project: '**/TakeAIMeal.API.csproj'
+  project_fun : '**/TakeAIMeal.Functions.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -37,14 +38,28 @@ steps:
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '--output publish_output --configuration $(buildConfiguration)'
+    arguments: '--output publish_api_output --configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(project_fun)'
+    arguments: '--output publish_fun_output --configuration $(buildConfiguration)'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'publish_output'
+    rootFolderOrFile: 'publish_api_output'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/api.zip'
+    replaceExistingArchive: true
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'publish_fun_output'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/fun.zip'
     replaceExistingArchive: true
 
 - task: AzureRmWebAppDeployment@4
@@ -53,4 +68,12 @@ steps:
     azureSubscription: 'Private(df289f54-c76c-4ea5-a1fb-aeba008c3983)'
     appType: 'webApp'
     WebAppName: 'take-ai-meal-app'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/api.zip'
+
+- task: AzureFunctionApp@2
+  inputs:
+    azureSubscription: 'Private(df289f54-c76c-4ea5-a1fb-aeba008c3983)'
+    appType: 'functionApp'
+    appName: 'fun-take-ai-meal'
+    package: '$(Build.ArtifactStagingDirectory)/fun.zip'
+    deploymentMethod: 'auto'
