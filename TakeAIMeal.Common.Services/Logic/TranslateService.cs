@@ -29,7 +29,7 @@ namespace TakeAIMeal.Common.Services.Logic
                 try
                 {
                     var result = await _translateApi.GetTextTranslation(body, from, to);
-                    return result?.Translations.FirstOrDefault()?.Text;
+                    return result.FirstOrDefault()?.Translations.FirstOrDefault().Text;
                 }
                 catch (Exception ex)
                 {
@@ -49,7 +49,7 @@ namespace TakeAIMeal.Common.Services.Logic
                 try
                 {
                     var result = await _translateApi.GetTextTranslation(body, from, to);
-                    return result?.Translations.Select(x => x.Text).ToList();
+                    return result.FirstOrDefault()?.Translations.Select(x => x.Text).ToList();
                 }
                 catch (Exception ex)
                 {

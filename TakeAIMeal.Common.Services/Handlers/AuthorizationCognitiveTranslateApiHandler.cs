@@ -15,9 +15,12 @@ namespace TakeAIMeal.Common.Services.Handlers
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             request.Headers.Add("Ocp-Apim-Subscription-Key", _option.ApiKey);
+            request.Headers.Add("Ocp-Apim-Subscription-Region", _option.Region);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            var content = await response.Content.ReadAsStringAsync();
+            return response;
         }
     }
 }

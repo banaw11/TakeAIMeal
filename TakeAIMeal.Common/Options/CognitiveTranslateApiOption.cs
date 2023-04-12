@@ -14,5 +14,10 @@
         /// Gets or sets the API url used to coomunicate the client with the Azure Cognitive Services Translate API.
         /// </summary>
         public string ApiUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the region used to coomunicate the client with the Azure Cognitive Services Translate API.
+        /// </summary>
+        public string Region { get; set; }
     }
 }

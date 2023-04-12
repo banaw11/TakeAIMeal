@@ -19,12 +19,12 @@
         /// <summary>
         /// The maximum number of tokens in the generated text.
         /// </summary>
-        public int Max_Tokens { get; set; }
+        public int Max_tokens { get; set; }
 
         /// <summary>
         /// The temperature of the sampling distribution used for generating the text.
         /// </summary>
-        public float Temperature { get; set; }
+        public double Temperature { get; set; }
 
         /// <summary>
         /// The number of completions to generate for the given prompt.

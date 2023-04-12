@@ -13,7 +13,7 @@ namespace TakeAIMeal.Common.Services.Logic
             _openAIApi = openAIApi;
         }
 
-        public async Task<ICollection<string>> GenerateText(string prompt, int completionCount = 1, float temperature = 0.2F, int maxTokens = 1024)
+        public async Task<ICollection<string>> GenerateText(string prompt, int completionCount = 1, double temperature = 0.2, int maxTokens = 1024)
         {
             if (!string.IsNullOrEmpty(prompt))
             {
@@ -23,7 +23,7 @@ namespace TakeAIMeal.Common.Services.Logic
                     Model = OpenAIModels.Davinci3,
                     N = completionCount,
                     Temperature = temperature,
-                    Max_Tokens = maxTokens
+                    Max_tokens = maxTokens
                 };
 
                 try

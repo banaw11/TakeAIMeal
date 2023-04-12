@@ -14,8 +14,8 @@ namespace TakeAIMeal.Common.Services.Interfaces
         /// <param name="body">The collection of TextTranslation objects to be translated.</param>
         /// <param name="from">The origin language code.</param>
         /// <param name="to">The target language code.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result contains a TextTranslationResponse object that represents the response from the API.</returns>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a collection of TextTranslationResponse object that represents the response from the API.</returns>
         [Post("/translate?api-version=3.0&from={from}&to={to}")]
-        Task<TextTranslationResponse> GetTextTranslation([Body] ICollection<TextTranslation> body, [AliasAs("from")] string from, [AliasAs("to")] string to);
+        Task<ICollection<TextTranslationResponse>> GetTextTranslation([Body] ICollection<TextTranslation> body, [AliasAs("from")] string from, [AliasAs("to")] string to);
     }
 }
