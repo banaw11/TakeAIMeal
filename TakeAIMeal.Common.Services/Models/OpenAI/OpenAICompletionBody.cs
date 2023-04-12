@@ -24,7 +24,7 @@
         /// <summary>
         /// The temperature of the sampling distribution used for generating the text.
         /// </summary>
-        public int Temperature { get; set; }
+        public float Temperature { get; set; }
 
         /// <summary>
         /// The number of completions to generate for the given prompt.
