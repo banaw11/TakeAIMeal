@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TakeAIMeal.API.Services\TakeAIMeal.API.Services.csproj" />
     <ProjectReference Include="..\TakeAIMeal.Common.Services\TakeAIMeal.Common.Services.csproj" />
     <ProjectReference Include="..\TakeAIMeal.Data\TakeAIMeal.Data.csproj" />
   </ItemGroup>

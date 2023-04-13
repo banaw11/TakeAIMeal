@@ -1,4 +1,6 @@
-﻿using TakeAIMeal.API.Extensions;
+﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
+using TakeAIMeal.API.Extensions;
 
 namespace TakeAIMeal.API
 {
@@ -16,7 +18,12 @@ namespace TakeAIMeal.API
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "TakeAIMeal API", Version = "v1" });
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+            });
 
             services.RegisterServices(_configuration);
             services.RegisterRepositories();
@@ -45,7 +52,10 @@ namespace TakeAIMeal.API
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "TakeAIMeal API V1");
+                });
             }
 
             app.UseHttpsRedirection();
@@ -63,7 +73,7 @@ namespace TakeAIMeal.API
             
             app.UseSpa(spa =>
             {
-                spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                //spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
                 spa.Options.SourcePath = "wwwroot";
             });
 
