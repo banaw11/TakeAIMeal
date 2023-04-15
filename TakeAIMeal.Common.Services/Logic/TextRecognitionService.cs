@@ -5,9 +5,9 @@ namespace TakeAIMeal.Common.Services.Logic
 {
     public class TextRecognitionService : ITextRecognitionService
     {
-        private readonly ICognitiveLanguageAPI _cognitiveLanguageAPI;
+        private readonly ICognitiveLanguageApi _cognitiveLanguageAPI;
 
-        public TextRecognitionService(ICognitiveLanguageAPI cognitiveLanguageAPI)
+        public TextRecognitionService(ICognitiveLanguageApi cognitiveLanguageAPI)
         {
             _cognitiveLanguageAPI = cognitiveLanguageAPI;
         }

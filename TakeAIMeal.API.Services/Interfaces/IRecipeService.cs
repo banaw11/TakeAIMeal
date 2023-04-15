@@ -5,7 +5,7 @@ namespace TakeAIMeal.API.Services.Interfaces
     /// <summary>
     /// Represents a service for generating recipes based on a given prompt.
     /// </summary>
-    internal interface IRecipeService
+    public interface IRecipeService
     {
         /// <summary>
         /// Generates a recipe based on the given prompt.

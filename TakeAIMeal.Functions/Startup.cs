@@ -35,7 +35,7 @@ namespace TakeAIMeal.Functions
 
             // Http message handler declaration area
             builder.Services.AddTransient<AuthorizationCognitiveTranslateApiHandler>();
-            builder.Services.AddTransient<AuthorizationOpenAIApiHandler>();
+            builder.Services.AddTransient<AuthorizationOpenAiApiHandler>();
 
             // Refit client declaration area
             builder.Services.AddRefitClient<IOpenAIApi>(new RefitSettings
@@ -48,7 +48,7 @@ namespace TakeAIMeal.Functions
             {
                 httpClient.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<OpentAIApiOption>>().Value.ApiUrl);
                 httpClient.Timeout = TimeSpan.FromMinutes(10);
-            }).AddHttpMessageHandler<AuthorizationOpenAIApiHandler>();
+            }).AddHttpMessageHandler<AuthorizationOpenAiApiHandler>();
 
             builder.Services.AddRefitClient<ICognitiveTranslateApi>(new RefitSettings
             {

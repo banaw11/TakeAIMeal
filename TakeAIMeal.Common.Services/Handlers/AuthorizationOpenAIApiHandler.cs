@@ -4,10 +4,10 @@ using TakeAIMeal.Common.Options;
 
 namespace TakeAIMeal.Common.Services.Handlers
 {
-    public class AuthorizationOpenAIApiHandler : DelegatingHandler
+    public class AuthorizationOpenAiApiHandler : DelegatingHandler
     {
         private readonly OpentAIApiOption _option;
-        public AuthorizationOpenAIApiHandler(IOptions<OpentAIApiOption> options)
+        public AuthorizationOpenAiApiHandler(IOptions<OpentAIApiOption> options)
         {
             _option = options.Value;
         }
