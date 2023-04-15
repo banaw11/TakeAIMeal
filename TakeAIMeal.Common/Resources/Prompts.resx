@@ -120,6 +120,9 @@
   <data name="DishTitleFromTags" xml:space="preserve">
     <value>Generate a title for dish based on this ingredients :  {0}</value>
   </data>
+  <data name="RecipeFromIngredients" xml:space="preserve">
+    <value>Generate a recipe using these ingredients : {0}</value>
+  </data>
   <data name="TipHealthyEating" xml:space="preserve">
     <value>Generate one short tip about healthy eating.</value>
   </data>
