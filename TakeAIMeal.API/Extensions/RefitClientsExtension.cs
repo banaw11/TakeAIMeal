@@ -13,8 +13,9 @@ namespace TakeAIMeal.API.Extensions
         public static IServiceCollection AddRefitClients(this IServiceCollection services)
         {
             // Http message handler declaration area
+            services.AddTransient<AuthorizationOpenAiApiHandler>();
             services.AddTransient<AuthorizationCognitiveLanguageApiHandler>();
-            services.AddTransient<AuthorizationCognitiveLanguageApiHandler>();
+            services.AddTransient<AuthorizationCognitiveTranslateApiHandler>();
 
             // Refit client declaration area
             services.AddRefitClient<IOpenAIApi>(new RefitSettings
@@ -27,9 +28,9 @@ namespace TakeAIMeal.API.Extensions
             {
                 httpClient.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<OpentAIApiOption>>().Value.ApiUrl);
                 httpClient.Timeout = TimeSpan.FromMinutes(10);
-            }).AddHttpMessageHandler<AuthorizationOpenAIApiHandler>();
+            }).AddHttpMessageHandler<AuthorizationOpenAiApiHandler>();
 
-            services.AddRefitClient<ICognitiveLanguageAPI>(new RefitSettings
+            services.AddRefitClient<ICognitiveLanguageApi>(new RefitSettings
             {
                 ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
                 {
@@ -40,6 +41,18 @@ namespace TakeAIMeal.API.Extensions
                 httpClient.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<CognitiveLanguageApiOption>>().Value.ApiUrl);
                 httpClient.Timeout = TimeSpan.FromMinutes(10);
             }).AddHttpMessageHandler<AuthorizationCognitiveLanguageApiHandler>();
+
+            services.AddRefitClient<ICognitiveTranslateApi>(new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                })
+            }).ConfigureHttpClient((serviceProvider, httpClient) =>
+            {
+                httpClient.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<CognitiveTranslateApiOption>>().Value.ApiUrl);
+                httpClient.Timeout = TimeSpan.FromMinutes(10);
+            }).AddHttpMessageHandler<AuthorizationCognitiveTranslateApiHandler>();
 
             return services;
         }

@@ -18,7 +18,6 @@ namespace TakeAIMeal.API.Controllers
         /// <summary>
         /// Retrieves a collection of tips in the specified language.
         /// </summary>
-        /// <remarks>
         /// <param name="language">The language of the tips to retrieve.</param>
         /// <returns>Returns an <see cref="IActionResult"/> containing the collection of tips if the operation is successful. 
         /// If an error occurs, returns a <see cref="BadRequestObjectResult"/> with the error message.</returns>

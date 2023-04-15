@@ -17,7 +17,12 @@ namespace TakeAIMeal.API.Extensions
             });
 
             services.AddScoped<IBlobStorageService, BlobStorageService>(provider => new BlobStorageService(configuration.GetConnectionString("StorageAccount")));
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<ITextGeneratorService, TextGeneratorService>();
+            services.AddScoped<ITextRecognitionService, TextRecognitionService>();
+            services.AddScoped<ITranslateService, TranslateService>();
             services.AddScoped<ITipsService, TipsService>();
+            services.AddScoped<IRecipeService, RecipeService>();
 
             return services;
         }
