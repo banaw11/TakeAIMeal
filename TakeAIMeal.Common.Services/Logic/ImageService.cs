@@ -24,11 +24,18 @@ namespace TakeAIMeal.Common.Services.Logic
                     Size = size
                 };
 
-                var response = await _openAIApi.GetImage(body);
-
-                if(response != null && response.Data != null && response.Data.Count > 0)
+                try
                 {
-                    return response.Data.FirstOrDefault().B64_json;
+                    var response = await _openAIApi.GetImage(body);
+
+                    if (response != null && response.Data != null && response.Data.Count > 0)
+                    {
+                        return response.Data.FirstOrDefault().B64_json;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // To-do error handling
                 }
             }
 
