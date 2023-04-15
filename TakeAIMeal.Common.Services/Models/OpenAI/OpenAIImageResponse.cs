@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the timestamp indicating when the response was created.
         /// </summary>
-        public TimeSpan Created { get; set; }
+        public long Created { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of image data returned by the OpenAI API.

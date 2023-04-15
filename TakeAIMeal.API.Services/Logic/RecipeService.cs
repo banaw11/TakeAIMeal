@@ -124,6 +124,8 @@ namespace TakeAIMeal.API.Services.Logic
                 {
                     model.Title = await _translateService.TranslateText(recipe.Title, language);
                 }
+
+                return model;
             }
 
             return recipe;

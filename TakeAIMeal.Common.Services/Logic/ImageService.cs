@@ -20,7 +20,7 @@ namespace TakeAIMeal.Common.Services.Logic
                 {
                     N = 1,
                     Prompt = prompt,
-                    Response_type = "b64_json",
+                    Response_format = "b64_json",
                     Size = size
                 };
 

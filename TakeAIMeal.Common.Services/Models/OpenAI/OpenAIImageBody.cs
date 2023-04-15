@@ -23,6 +23,6 @@
         /// <summary>
         /// The response of the generated image, specified as a string (url, b64_json).
         /// </summary>
-        public string Response_type { get; set; }
+        public string Response_format { get; set; }
     }
 }

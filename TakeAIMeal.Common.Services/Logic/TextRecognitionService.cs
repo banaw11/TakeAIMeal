@@ -23,7 +23,8 @@ namespace TakeAIMeal.Common.Services.Logic
                         new RecognitionDocument
                         {
                             Language = language,
-                            Text = text
+                            Text = text,
+                            Id = Guid.NewGuid().ToString()
                         }
                     }
                 };
