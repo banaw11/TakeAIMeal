@@ -25,5 +25,10 @@
         /// Gets or sets the URL of the image.
         /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or sets the string of the image in base64 format.
+        /// </summary>
+        public string B64_json { get; set; }
     }
 }

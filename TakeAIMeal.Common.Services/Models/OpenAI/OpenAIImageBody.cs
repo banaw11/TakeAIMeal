@@ -19,5 +19,10 @@
         /// The size of the generated image, specified as a string in the format "width,height".
         /// </summary>
         public string Size { get; set; }
+
+        /// <summary>
+        /// The response of the generated image, specified as a string (url, b64_json).
+        /// </summary>
+        public string Response_type { get; set; }
     }
 }

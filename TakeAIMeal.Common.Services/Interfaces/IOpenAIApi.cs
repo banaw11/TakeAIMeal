@@ -22,6 +22,6 @@ namespace TakeAIMeal.Common.Services.Interfaces
         /// <param name="body">The request body containing the parameters for generating the image.</param>
         /// <returns>A task representing the asynchronous operation. The result is an OpenAIImageResponse object containing the image data returned by the API.</returns>
         [Post("/v1/images/generations")]
-        Task<OpenAIImageResponse> GetImageUrl([Body] OpenAIImageBody body);
+        Task<OpenAIImageResponse> GetImage([Body] OpenAIImageBody body);
     }
 }
