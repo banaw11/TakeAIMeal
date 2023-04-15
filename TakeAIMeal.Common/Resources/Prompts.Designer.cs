@@ -61,6 +61,15 @@ namespace TakeAIMeal.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate a title for dish based on this ingredients :  {0}.
+        /// </summary>
+        public static string DishTitleFromTags {
+            get {
+                return ResourceManager.GetString("DishTitleFromTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate one short tip about healthy eating..
         /// </summary>
         public static string TipHealthyEating {
