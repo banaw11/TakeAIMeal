@@ -15,6 +15,8 @@ namespace TakeAIMeal.API.Extensions
             {
                 options.UseSqlServer(configuration.GetConnectionString("TakeAIMealDbConnection"));
             });
+            services.AddHttpContextAccessor();
+
 
             services.AddScoped<IBlobStorageService, BlobStorageService>(provider => new BlobStorageService(configuration.GetConnectionString("StorageAccount")));
             services.AddScoped<IImageService, ImageService>();
@@ -24,6 +26,7 @@ namespace TakeAIMeal.API.Extensions
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITipsService, TipsService>();
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<ITemplateService, RazorViewTemplateService>();
 
             return services;
         }
