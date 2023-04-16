@@ -21,6 +21,7 @@ namespace TakeAIMeal.API.Extensions
             services.AddScoped<ITextGeneratorService, TextGeneratorService>();
             services.AddScoped<ITextRecognitionService, TextRecognitionService>();
             services.AddScoped<ITranslateService, TranslateService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITipsService, TipsService>();
             services.AddScoped<IRecipeService, RecipeService>();
 

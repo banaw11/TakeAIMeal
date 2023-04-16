@@ -9,6 +9,7 @@ namespace TakeAIMeal.API.Extensions
             services.AddOptions<OpentAIApiOption>().Bind(configuration.GetSection("OpenAI"));
             services.AddOptions<CognitiveLanguageApiOption>().Bind(configuration.GetSection("CognitiveLanguage"));
             services.AddOptions<CognitiveTranslateApiOption>().Bind(configuration.GetSection("CognitiveTranslate"));
+            services.AddOptions<EmailClientOption>().Bind(configuration.GetSection("EmailClient"));
 
             return services;
         }
