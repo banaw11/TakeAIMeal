@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TakeAIMeal.API.Models;
+using TakeAIMeal.API.Models.Recipe;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Resources;

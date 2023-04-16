@@ -1,4 +1,4 @@
-﻿namespace TakeAIMeal.API.Models
+﻿namespace TakeAIMeal.API.Models.Recipe
 {
     /// <summary>
     /// Represents a body object for generating a recipe.

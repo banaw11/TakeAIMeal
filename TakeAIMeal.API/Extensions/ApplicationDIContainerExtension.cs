@@ -27,6 +27,7 @@ namespace TakeAIMeal.API.Extensions
             services.AddScoped<ITipsService, TipsService>();
             services.AddScoped<IRecipeService, RecipeService>();
             services.AddScoped<ITemplateService, RazorViewTemplateService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }
