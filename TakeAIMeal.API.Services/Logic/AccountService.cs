@@ -36,12 +36,12 @@ namespace TakeAIMeal.API.Services.Logic
                 throw new Exception("Invalid credentials");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+            var result = await _userManager.ConfirmEmailAsync(user, System.Web.HttpUtility.UrlDecode(code));
 
             return result.Succeeded;
         }
 
-        public async Task RegisterAccountAsync(string email, string password, string username)
+        public async Task<bool> RegisterAccountAsync(string email, string password, string username)
         {
             var normalizedEmail = _userManager.NormalizeEmail(email);
             var user = await _userManager.FindByEmailAsync(normalizedEmail);
@@ -55,7 +55,13 @@ namespace TakeAIMeal.API.Services.Logic
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                await GenerateEmailConfirmationTokenAsync(user);
+                var emailConfirmationResult = await GenerateEmailConfirmationTokenAsync(user);
+                if (!emailConfirmationResult)
+                {
+                    await _userManager.DeleteAsync(user);
+                }
+
+                return emailConfirmationResult;
             }
 
             throw new Exception(string.Join(", ", result.Errors.Select(x => x.Description)));
@@ -86,27 +92,11 @@ namespace TakeAIMeal.API.Services.Logic
             {
                 throw new Exception("Invalid credentials.");
             }
-
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, normalizedEmail));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-            var principal = new ClaimsPrincipal(identity);
-            await _httpContextAccessor.HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                principal,
-                new AuthenticationProperties
-                {
-                    IsPersistent = false,
-                    AllowRefresh = true,
-                    ExpiresUtc = DateTime.Now.AddMinutes(60)
-                });
         }
 
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
-
-            await _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         /// <summary>
@@ -114,7 +104,7 @@ namespace TakeAIMeal.API.Services.Logic
         /// </summary>
         /// <param name="user">The user for whom the email confirmation token is generated.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        private async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        private async Task<bool> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
         {
             var request = _httpContextAccessor.HttpContext.Request;
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -129,7 +119,7 @@ namespace TakeAIMeal.API.Services.Logic
 
             var body = await _templateService.RenderTemplateAsync("Templates/EmailConfirmationTemplate", new ConfirmationEmailModel { Url = uri.ToString() });
 
-            await _emailService.SendEmail(user.Email, "Take ai meal - potwierdzenie adresu email", body);
+            return await _emailService.SendEmail(user.Email, "Take ai meal - potwierdzenie adresu email", body);
         }
     }
 }

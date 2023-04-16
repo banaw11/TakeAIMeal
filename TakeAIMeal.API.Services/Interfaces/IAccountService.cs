@@ -26,7 +26,7 @@
         /// <param name="password">The password of the user.</param>
         /// <param name="username">The username of the user.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        Task RegisterAccountAsync(string email, string password, string username);
+        Task<bool> RegisterAccountAsync(string email, string password, string username);
 
         /// <summary>
         /// Confirms the email address of a user with the specified email and code.

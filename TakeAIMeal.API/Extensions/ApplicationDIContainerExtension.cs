@@ -16,6 +16,7 @@ namespace TakeAIMeal.API.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("TakeAIMealDbConnection"));
             });
             services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
 
 
             services.AddScoped<IBlobStorageService, BlobStorageService>(provider => new BlobStorageService(configuration.GetConnectionString("StorageAccount")));

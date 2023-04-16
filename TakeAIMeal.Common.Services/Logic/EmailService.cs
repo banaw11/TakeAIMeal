@@ -17,20 +17,24 @@ namespace TakeAIMeal.Common.Services.Logic
             _emailFrom = option.EmailFrom;
         }
 
-        public async Task SendEmail(string to, string subject, string body)
+        public async Task<bool> SendEmail(string to, string subject, string body)
         {
             try
             {
-                await _emailClient.SendAsync(
+                var operation = await _emailClient.SendAsync(
                     wait: Azure.WaitUntil.Completed,
                     senderAddress: _emailFrom,
                     recipientAddress: to,
                     subject: subject,
                     htmlContent: body).ConfigureAwait(false);
+
+                var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+
+                return result?.Value.Status == EmailSendStatus.Succeeded;
             }
             catch(Exception ex)
             {
-
+                return false;
             }
         }
     }
