@@ -31,6 +31,8 @@ namespace TakeAIMeal.API
             services.AddApplicationOptions(_configuration);
             services.AddRefitClients();
 
+            services.AddIdentityServices();
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>

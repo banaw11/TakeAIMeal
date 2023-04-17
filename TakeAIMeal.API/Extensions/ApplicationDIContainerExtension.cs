@@ -15,14 +15,20 @@ namespace TakeAIMeal.API.Extensions
             {
                 options.UseSqlServer(configuration.GetConnectionString("TakeAIMealDbConnection"));
             });
+            services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
+
 
             services.AddScoped<IBlobStorageService, BlobStorageService>(provider => new BlobStorageService(configuration.GetConnectionString("StorageAccount")));
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<ITextGeneratorService, TextGeneratorService>();
             services.AddScoped<ITextRecognitionService, TextRecognitionService>();
             services.AddScoped<ITranslateService, TranslateService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITipsService, TipsService>();
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<ITemplateService, RazorViewTemplateService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }
