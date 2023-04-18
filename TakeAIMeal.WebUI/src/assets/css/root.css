@@ -1,0 +1,13 @@
+@font-face {
+    font-family: Poppins-Light;
+    src: url(../fonts/Poppins-Light.ttf);
+}
+
+:root {
+    --color-main: rgb(55, 188, 247);
+    --color-white: #fff;
+    --color-grey: #ccc;
+    --color-yellow: rgb(255, 217, 102);
+    --font-primary: 'Poppins-Light';
+    --font-primary-size: 1rem;
+}

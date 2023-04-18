@@ -1,4 +1,4 @@
-﻿namespace TakeAIMeal.Common.Services.Models
+﻿namespace TakeAIMeal.Common.Services.Models.OpenAI
 {
     /// <summary>
     /// Represents the response from the OpenAI Completion API, which contains the generated text

@@ -3,25 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.API", "TakeAIMeal.API\TakeAIMeal.API.csproj", "{AB70797A-94A6-4D43-8989-B58FFAF9CBAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.API", "TakeAIMeal.API\TakeAIMeal.API.csproj", "{AB70797A-94A6-4D43-8989-B58FFAF9CBAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.API.Services", "TakeAIMeal.API.Services\TakeAIMeal.API.Services.csproj", "{0B54F081-467E-43C0-9757-A22CD5A4E29E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.API.Services", "TakeAIMeal.API.Services\TakeAIMeal.API.Services.csproj", "{0B54F081-467E-43C0-9757-A22CD5A4E29E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Common", "TakeAIMeal.Common\TakeAIMeal.Common.csproj", "{CAA8028D-2213-47EA-ACF2-1A95ED07ECC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.Common", "TakeAIMeal.Common\TakeAIMeal.Common.csproj", "{CAA8028D-2213-47EA-ACF2-1A95ED07ECC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4B48842F-01C3-4861-B98D-B7DE90A1C522}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{47521BD3-5817-4806-B153-71A4B35B3905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Common.Services", "TakeAIMeal.Common.Services\TakeAIMeal.Common.Services.csproj", "{85C32283-D94B-49AA-AADC-E2028B718B2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.Common.Services", "TakeAIMeal.Common.Services\TakeAIMeal.Common.Services.csproj", "{85C32283-D94B-49AA-AADC-E2028B718B2B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5C50699E-467D-498A-A778-8F015BC4BD1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Data", "TakeAIMeal.Data\TakeAIMeal.Data.csproj", "{E371ED21-5919-470D-BCCB-63E0576DEF9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.Data", "TakeAIMeal.Data\TakeAIMeal.Data.csproj", "{E371ED21-5919-470D-BCCB-63E0576DEF9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Data.Repositories", "TakeAIMeal.Data.Repositories\TakeAIMeal.Data.Repositories.csproj", "{76F565D1-6139-499E-91A8-A172C97C82BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakeAIMeal.Data.Repositories", "TakeAIMeal.Data.Repositories\TakeAIMeal.Data.Repositories.csproj", "{76F565D1-6139-499E-91A8-A172C97C82BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{B518EAB0-1E6C-40E1-875A-F5D59AD44D65}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "takeaimeal.webui", "TakeAIMeal.WebUI\takeaimeal.webui.esproj", "{D1400AD0-177B-47F4-B2A6-C7D326FD3616}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{6620C8E6-8531-4E3D-B769-1E49EB604D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Functions", "TakeAIMeal.Functions\TakeAIMeal.Functions.csproj", "{CF0A9072-C876-4923-8A47-FAA90C32706D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeAIMeal.Functions.Services", "TakeAIMeal.Functions.Services\TakeAIMeal.Functions.Services.csproj", "{EB40F7DD-0526-43BE-A0CC-397FF81F076A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +61,20 @@ Global
 		{76F565D1-6139-499E-91A8-A172C97C82BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F565D1-6139-499E-91A8-A172C97C82BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76F565D1-6139-499E-91A8-A172C97C82BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CF0A9072-C876-4923-8A47-FAA90C32706D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0A9072-C876-4923-8A47-FAA90C32706D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0A9072-C876-4923-8A47-FAA90C32706D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0A9072-C876-4923-8A47-FAA90C32706D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB40F7DD-0526-43BE-A0CC-397FF81F076A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB40F7DD-0526-43BE-A0CC-397FF81F076A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB40F7DD-0526-43BE-A0CC-397FF81F076A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB40F7DD-0526-43BE-A0CC-397FF81F076A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +86,9 @@ Global
 		{85C32283-D94B-49AA-AADC-E2028B718B2B} = {4B48842F-01C3-4861-B98D-B7DE90A1C522}
 		{E371ED21-5919-470D-BCCB-63E0576DEF9B} = {5C50699E-467D-498A-A778-8F015BC4BD1D}
 		{76F565D1-6139-499E-91A8-A172C97C82BD} = {5C50699E-467D-498A-A778-8F015BC4BD1D}
+		{D1400AD0-177B-47F4-B2A6-C7D326FD3616} = {B518EAB0-1E6C-40E1-875A-F5D59AD44D65}
+		{CF0A9072-C876-4923-8A47-FAA90C32706D} = {6620C8E6-8531-4E3D-B769-1E49EB604D57}
+		{EB40F7DD-0526-43BE-A0CC-397FF81F076A} = {6620C8E6-8531-4E3D-B769-1E49EB604D57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56B2DC32-F465-4EFE-8F9B-ADF70A76CB71}
