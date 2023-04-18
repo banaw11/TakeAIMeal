@@ -1,0 +1,6 @@
+i.icon-hint {
+    content: url('../icons/light-bulb.svg');
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}

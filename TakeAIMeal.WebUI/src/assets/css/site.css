@@ -1,0 +1,117 @@
+@import 'root.css';
+@import 'icons.css';
+
+* {
+    font-family: var(--font-primary);
+    font-size: var(--font-primary-size);
+    color: var(--color-white);
+}
+
+html{
+    height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+    #app .page-header {
+        position: sticky;
+        width: 100%;
+        top: 0;
+        height: 56px;
+        background-color: var(--color-white);
+        
+    }
+
+        #app .page-header .navbar .navbar-collapse{
+            justify-content: end;
+        }
+
+        #app .page-header .navbar .navbar-brand,
+        #app .page-header .navbar .navbar-nav .nav-link{
+            color: var(--color-main);
+            font-weight: 600;
+        }
+
+    #app .page-container {
+        flex-grow: 1;
+        background-color: var(--color-main);
+        padding: 5% 3% 0 3%;
+    }
+
+        #app .page-container .btn {
+            min-width: 250px;
+            height: 45px;
+            border-radius: .4rem;
+            border: 1px solid;
+            font-size: 1.1rem;
+        }
+
+            #app .page-container .btn:hover {
+                font-weight: 600;
+                border: 2px solid;
+            }
+
+            #app .page-container .btn.btn-primary {
+                background-color: var(--color-main);
+                color: var(--color-white);
+            }
+
+            #app .page-container .btn.btn-secondary {
+                background-color: var(--color-white);
+                color: var(--color-main);
+                border-color: var(--color-white);
+            }
+
+                #app .page-container .content-container .content-header {
+                    text-align: center;
+                    margin-bottom: 5rem;
+                }
+
+        #app .page-container .content-container .action-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            #app .page-container .content-container .action-container .left-part,
+            #app .page-container .content-container .action-container .right-part {
+                padding: 0px 15px;
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+            }
+
+        #app .page-container .content-container .action-container .left-part {
+            border-right: 3px solid var(--color-white);
+        }
+
+            #app .page-container .content-container .action-container .left-part > div,
+            #app .page-container .content-container .action-container .left-part > ul,
+            #app .page-container .content-container .action-container .right-part > div,
+            #app .page-container .content-container .action-container .right-part > ul{
+                align-self: center;
+                margin-bottom: 1rem;
+            }
+
+            #app .page-container .content-container .action-container .right-part .sign-in-container{
+                display: flex;
+                flex-direction: column;
+            }
+
+            #app .page-container .content-container .action-container .right-part .sign-in-container span{
+                text-align: center;
+            }
+
+        #app .page-container .content-container .hint-container {
+            margin-bottom: 2rem;
+            padding: 0 15%;
+        }
