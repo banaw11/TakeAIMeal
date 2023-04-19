@@ -4,3 +4,24 @@ i.icon-hint {
     height: 100px;
     display: inline-block;
 }
+
+i.icon-flag {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.6);
+}
+
+    i.icon-flag:hover{
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    i.icon-flag.pl {
+        content: url('../icons/pl.svg');
+    }
+
+    i.icon-flag.en {
+        content: url('../icons/gb.svg');
+    }
