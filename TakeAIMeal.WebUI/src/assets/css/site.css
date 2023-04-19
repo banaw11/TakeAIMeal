@@ -32,7 +32,11 @@ body {
         
     }
 
-        #app .page-header .navbar .navbar-collapse{
+        #app .page-header .navbar .language-container{
+            display: inline-flex;
+        }
+
+        #app .page-header .navbar .navbar-collapse {
             justify-content: end;
         }
 

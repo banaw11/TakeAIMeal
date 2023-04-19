@@ -13,6 +13,10 @@
                     <a class="nav-item nav-link disabled" href="#">Disabled</a>
                 </div>
             </div>
+            <div class="language-container">
+                <i class="icon-flag pl"></i>
+                <i class="icon-flag en"></i>
+            </div>
         </nav>
 
         <!-- TODO: nie działa "hamburger" na widoku mobilnym -->
