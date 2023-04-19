@@ -14,25 +14,25 @@
             <div class="action-container">
                 <div class="left-part">
                     <div>
-                        <button class="btn btn-primary">Szybki przepis</button>
+                        <button class="btn btn-primary">{{ t('Home.QuickRecipe') }}</button>
                     </div>
                     <ul>
-                        <li>Wygeneruj danie na podstawie prostych wskazówek</li>
+                        <li>{{ t('Home.SimpleRecipeGenerate') }}</li>
                     </ul>
                 </div>
                 <div class="right-part">
                     <div>
-                        <button class="btn btn-secondary">Zarejestruj się</button>
+                        <button class="btn btn-secondary">{{ t('Home.SignUp') }}</button>
                     </div>
                     
                     <ul>
-                        <li>Personaluzuj dane dietetyczne</li>
-                        <li>Wskaż produkty, których nie lubisz</li>
-                        <li>Zapisuj przepisy w książce kucharskiej</li>
+                        <li>{{ t('Home.SimpleRecipeGenerate') }}</li>
+                        <li>{{ t('Home.PersonalizeDietData') }}</li>
+                        <li>{{ t('Home.ChooseProducts') }}</li>
                     </ul>
                     <div class="sign-in-container">
-                        <span>Masz konto?</span>
-                        <button class="btn btn-primary">Zaloguj się</button>
+                        <span>{{ t('Home.HaveAccount') }}</span>
+                        <button class="btn btn-primary">{{ t('Home.SignIn') }}</button>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,19 @@
 </template>
 
 <script>
-    export default {
-        name: 'ContentComponent'
-    }
+    import { defineComponent } from 'vue'
+    import { useI18n } from 'vue-i18n'
+    export default defineComponent({
+        name: 'ContentComponent',
+        setup() {
+            const { t } = useI18n({
+                inheritLocale: true,
+                useScope: 'local'
+            })
+
+            return { t }
+        }
+    })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

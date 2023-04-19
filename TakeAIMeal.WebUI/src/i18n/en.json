@@ -1,0 +1,17 @@
+{
+  "Home": {
+    "QuickRecipe": "Quick recipe",
+    "SimpleRecipeGenerate": "Generate a dish based on simple instructions",
+    "SignUp": "Sign up",
+    "PersonalizeDietData": "Personalize your dietary data",
+    "ChooseProducts": "Indicate the products you don't like",
+    "SaveCookbook": "Save recipes in a cookbook",
+    "HaveAccount": "Have you an account?",
+    "SignIn": "Sign in"
+  },
+  "Header": {
+    "Home": "Home",
+    "About": "About",
+    "SignIn": "Sign in"
+  }
+}

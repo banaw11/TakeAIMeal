@@ -7,15 +7,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Strona główna <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">O aplikacji</a>
-                    <a class="nav-item nav-link" href="#">Zaloguj się</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-item nav-link active" href="#">{{ t('Header.Home') }}<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">{{ t('Header.About') }}</a>
+                    <a class="nav-item nav-link" href="#">{{ t('Header.SignIn') }}</a>
                 </div>
             </div>
             <div class="language-container">
-                <i class="icon-flag pl"></i>
-                <i class="icon-flag en"></i>
+                <i v-if="isCurrentLocale('pl')" class="icon-flag pl" @click="changeLanguage('en')"></i>
+                <i v-if="isCurrentLocale('en')" class="icon-flag en" @click="changeLanguage('pl')"></i>
             </div>
         </nav>
 
@@ -24,9 +23,27 @@
 </template>
 
 <script>
-    export default {
-        name: 'NavComponent'
-    }
+    import { defineComponent } from 'vue'
+    import { useI18n } from 'vue-i18n'
+    export default defineComponent({
+        name: 'NavComponent',
+        methods: {
+            changeLanguage(locale) {
+                this.$i18n.locale = locale
+            },
+            isCurrentLocale(locale) {
+                return this.$i18n.locale === locale
+            }
+        },
+        setup() {
+            const { t } = useI18n({
+                inheritLocale: true,
+                useScope: 'local'
+            })
+
+            return { t }
+        }
+    })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

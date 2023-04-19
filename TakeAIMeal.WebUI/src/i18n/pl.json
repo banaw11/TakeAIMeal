@@ -1,0 +1,17 @@
+{
+  "Home": {
+    "QuickRecipe": "Szybki przepis",
+    "SimpleRecipeGenerate": "Wygeneruj danie na podstawie prostych wskazówek",
+    "SignUp": "Zarejestruj się",
+    "PersonalizeDietData": "Personalizuj dane dietetyczne",
+    "ChooseProducts": "Wskaż produkty, których nie lubisz",
+    "SaveCookbook": "Zapisuj przepisy w książce kucharskiej",
+    "HaveAccount": "Masz konto?",
+    "SignIn": "Zaloguj się"
+  },
+  "Header": {
+    "Home": "Strona główna",
+    "About": "O aplikacji",
+    "SignIn": "Zaloguj się"
+  }
+}
