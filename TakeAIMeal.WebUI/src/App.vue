@@ -1,17 +1,21 @@
 <template>
-  <NavComponent />
-  <ContentComponent />
+  <router-view/>
 </template>
 
 <script>
-import NavComponent from './components/Nav.vue'
-import ContentComponent from './components/Content.vue'
+// @ is an alias to /src
+import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-export default {
-    name: 'App',
-    components: {
-        NavComponent,
-        ContentComponent
-    }
-}
+export default defineComponent({ 
+  name: 'App',
+  setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: 'local'
+    })
+
+    return { t }
+  }
+})
 </script>
