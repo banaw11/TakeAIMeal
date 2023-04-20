@@ -6,9 +6,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-export default {
-  name: 'AboutView',
-}
+  export default {
+    name: 'AboutView',
+  }
 </script>

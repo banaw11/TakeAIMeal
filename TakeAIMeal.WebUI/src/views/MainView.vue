@@ -1,20 +1,16 @@
 <template>
-    <div>
-        <router-view></router-view>
-    </div>
-    
+    <NavigationComponent /> 
+    <router-view></router-view>
 </template>
 
 <script>
 // @ is an alias to /src
-// import NavigationComponent from '@/router/Navigation.vue'
-// import HomeComponent from '@/components/HomeComponent.vue'
+import NavigationComponent from '@/router/Navigation.vue'
 
 export default { 
     name: 'MainView',
     components: {
-        // NavigationComponent,
-        // HomeComponent
+        NavigationComponent
     },
 }
 </script>
