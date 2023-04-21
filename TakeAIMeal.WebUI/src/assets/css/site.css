@@ -36,6 +36,10 @@ body {
             display: inline-flex;
         }
 
+        #app .page-header .navbar .navbar-toggler{
+            margin-right: auto;
+        }
+
         #app .page-header .navbar .navbar-collapse {
             justify-content: end;
         }
@@ -119,3 +123,23 @@ body {
             margin-bottom: 2rem;
             padding: 0 15%;
         }
+
+@media only screen and (max-width: 600px){
+    #app .page-container .content-container .action-container{
+        flex-direction: column;
+    }
+
+        #app .page-container .content-container .action-container .left-part,
+        #app .page-container .content-container .action-container .right-part{
+            width: 100%;
+            padding: 20px 0px;
+        }
+
+        #app .page-container .content-container .action-container .left-part {
+            border: none;
+            border-bottom: 3px solid var(--color-white);
+        }
+    #app .page-container .content-container .hint-container {
+        padding: 0;
+    }
+}
