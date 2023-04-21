@@ -25,3 +25,10 @@ i.icon-flag {
     i.icon-flag.en {
         content: url('../icons/gb.svg');
     }
+
+
+i.logo {
+    content: url('../icons/logo.svg');
+    height: 40px;
+    display: inline-block;
+}
