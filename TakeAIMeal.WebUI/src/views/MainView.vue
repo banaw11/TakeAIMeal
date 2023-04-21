@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-import NavigationComponent from '@/router/Navigation.vue'
+import NavigationComponent from '@/components/NavigationComponent.vue'
 
 export default { 
     name: 'MainView',

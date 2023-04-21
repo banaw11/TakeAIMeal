@@ -40,14 +40,6 @@
     import { useI18n } from 'vue-i18n'
     export default defineComponent({
         name: 'HomeComponent',
-        methods: {
-            changeLanguage(locale) {
-                this.$i18n.locale = locale
-            },
-            isCurrentLocale(locale) {
-                return this.$i18n.locale === locale
-            }
-        },
         setup() {
             const { t } = useI18n({
                 inheritLocale: true,
