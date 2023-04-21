@@ -1,17 +1,9 @@
 <template>
-  <NavComponent />
-  <ContentComponent />
+  <router-view/>
 </template>
 
 <script>
-import NavComponent from './components/Nav.vue'
-import ContentComponent from './components/Content.vue'
-
-export default {
-    name: 'App',
-    components: {
-        NavComponent,
-        ContentComponent
+    export default {
+        name: 'App'
     }
-}
 </script>
