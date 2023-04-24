@@ -36,7 +36,7 @@ client.interceptors.response.use(
   error => {
     Event.$emit('error', 500, error.response.data.message)
 
-    // AutjServoce - został wywalony
+    // AuthService - został wywalony
     // if (error.response.status === 401) AuthService.logout()
 
     const errorMessage = error.response.data.message
