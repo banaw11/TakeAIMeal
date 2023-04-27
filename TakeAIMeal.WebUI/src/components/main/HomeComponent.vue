@@ -5,7 +5,7 @@
     <div class="hint-container">
         <i class="icon-hint"></i>
         <div class="hint-slider">
-
+            {{ this.hintText }}
         </div>
     </div>
     <div class="action-container">
@@ -38,8 +38,15 @@
 <script>
     import { defineComponent } from 'vue'
     import { useI18n } from 'vue-i18n'
+    import httpClient from '@/modules/http/client'
     export default defineComponent({
         name: 'HomeComponent',
+        data() {
+            return {
+                hintText: '',
+                tips: []
+            }
+        },
         setup() {
             const { t } = useI18n({
                 inheritLocale: true,
@@ -47,6 +54,37 @@
             })
 
             return { t }
+        },
+        mounted: function() {
+            this.getTips();
+            this.initTipsPool();
+        },
+        beforeUnmount: function(){
+            clearInterval(this.pooling)
+        },
+        methods: {
+            getTips: function() {
+                let self = this;
+                httpClient.get(`/api/tips/${self.$i18n.locale}`)
+                    .then(function(response) {
+                        self.tips = response.data;
+                        console.log(self.tips);
+                    });
+            },
+            initTipsPool: function() {
+                let self = this;
+                // get new tips from API
+                self.pooling = setInterval(function() {
+                    self.getTips();
+                }, 30000); // 5 minutes 
+            }            
+        },
+        watch: {
+            '$i18n.locale': function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    this.getTips();
+                }
+            }
         }
     })
 </script>

@@ -8,7 +8,7 @@ import axios from 'axios'
  * Axios basic configuration
  */
 const config = {
-//   baseURL: apiBaseUrl
+  baseURL: process.env.VUE_APP_BASE_API_URL
 }
 
 /**
