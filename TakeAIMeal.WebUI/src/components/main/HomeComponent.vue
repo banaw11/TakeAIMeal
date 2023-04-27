@@ -44,9 +44,7 @@
         data() {
             return {
                 hintText: '',
-                tips: [],
-                i: 0,
-                currentLanguage: ''
+                tips: []
             }
         },
         setup() {
@@ -58,40 +56,34 @@
             return { t }
         },
         mounted: function() {
-            let self = this;
-            self.getTips();
-            self.showTip(self.tips[0])
-            self.currentLanguage = self.$i18n.locale
-
-            // get new tips from API
-            window.setInterval(function() {
-                self.getTips();
-            }, 30000); // 5 minutes 
-
-            // reload tip
-            window.setInterval(function() {
-                if(self.currentLanguage != self.$i18n.locale) {
-                    self.currentLanguage = self.$i18n.locale;
-                    self.getTips();
-                }
-                if(self.i >= self.tips.length)
-                    self.i = 0;
-                self.showTip(self.tips[self.i]);
-            }, 5000); // 5 seconds
-            
+            this.getTips();
+            this.initTipsPool();
+        },
+        beforeUnmount: function(){
+            clearInterval(this.pooling)
         },
         methods: {
-            showTip: function(tip) {
-                this.hintText = tip;
-                this.i++;
-            },
             getTips: function() {
                 let self = this;
-                httpClient.get('https://take-ai-meal-app.azurewebsites.net/api/Tips/' + self.$i18n.locale)
+                httpClient.get(`/api/tips/${self.$i18n.locale}`)
                     .then(function(response) {
                         self.tips = response.data;
-                        self.hintText = self.tips[0];
+                        console.log(self.tips);
                     });
+            },
+            initTipsPool: function() {
+                let self = this;
+                // get new tips from API
+                self.pooling = setInterval(function() {
+                    self.getTips();
+                }, 30000); // 5 minutes 
+            }            
+        },
+        watch: {
+            '$i18n.locale': function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    this.getTips();
+                }
             }
         }
     })
