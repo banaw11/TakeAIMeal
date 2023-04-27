@@ -19,7 +19,7 @@
         </div>
         <div class="right-part">
             <div>
-                <button class="btn btn-secondary">{{ t('Home.SignUp') }}</button>
+                <router-link class="btn btn-secondary" to="/registration">{{ t('Home.SignUp') }}</router-link>
             </div>
             
             <ul>
@@ -29,7 +29,7 @@
             </ul>
             <div class="sign-in-container">
                 <span>{{ t('Home.HaveAccount') }}</span>
-                <button class="btn btn-primary">{{ t('Home.SignIn') }}</button>
+                <router-link class="btn btn-primary" to="/login">{{ t('Header.SignIn') }}</router-link>
             </div>
         </div>
     </div>

@@ -7,9 +7,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                <router-link class="nav-item nav-link active" to="/">{{ t('Header.Home') }}<span class="sr-only">(current)</span></router-link>
+                    <router-link class="nav-item nav-link active" to="/">{{ t('Header.Home') }}<span class="sr-only">(current)</span></router-link>
                     <router-link class="nav-item nav-link" to="/about">{{ t('Header.About') }}</router-link>
-                    <router-link class="nav-item nav-link" to="">{{ t('Header.SignIn') }}</router-link>
+                    <router-link class="nav-item nav-link" to="/login">{{ t('Header.SignIn') }}</router-link>
                 </div>
             </div>
             <div class="language-container">
