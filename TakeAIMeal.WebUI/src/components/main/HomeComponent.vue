@@ -5,7 +5,7 @@
     <div class="hint-container">
         <i class="icon-hint"></i>
         <div class="hint-slider">
-            {{ this.hintText }}
+            <CaruselComponent v-bind:data="tips"/>
         </div>
     </div>
     <div class="action-container">
@@ -38,13 +38,13 @@
 <script>
     import { defineComponent } from 'vue'
     import { useI18n } from 'vue-i18n'
+    import CaruselComponent from '../shared/CaruselComponent.vue'
     import httpClient from '@/modules/http/client'
     export default defineComponent({
         name: 'HomeComponent',
         data() {
             return {
-                hintText: '',
-                tips: []
+                tips : []
             }
         },
         setup() {
@@ -55,34 +55,37 @@
 
             return { t }
         },
-        mounted: function() {
-            this.getTips();
+        components: {
+            CaruselComponent
+        },
+        beforeMount: function () {
+            this.loadTips();
+        },
+        mounted: function(){
+            
             this.initTipsPool();
         },
         beforeUnmount: function(){
             clearInterval(this.pooling)
         },
         methods: {
-            getTips: function() {
-                let self = this;
-                httpClient.get(`/api/tips/${self.$i18n.locale}`)
-                    .then(function(response) {
-                        self.tips = response.data;
-                        console.log(self.tips);
-                    });
+            loadTips() {
+                httpClient.get(`/api/tips/${this.$i18n.locale}`)
+                    .then((response) => {
+                        this.tips = response.data;
+                    })
             },
-            initTipsPool: function() {
-                let self = this;
+            initTipsPool: function () {
                 // get new tips from API
-                self.pooling = setInterval(function() {
-                    self.getTips();
-                }, 30000); // 5 minutes 
-            }            
+                this.pooling = setInterval(() => {
+                    this.loadTips();
+                }, 300000); // 5 minutes 
+            }
         },
         watch: {
             '$i18n.locale': function (newValue, oldValue) {
                 if (newValue != oldValue) {
-                    this.getTips();
+                    this.loadTips()
                 }
             }
         }
