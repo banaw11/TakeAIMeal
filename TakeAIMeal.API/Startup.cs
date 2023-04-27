@@ -15,6 +15,15 @@ namespace TakeAIMeal.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
@@ -33,16 +42,6 @@ namespace TakeAIMeal.API
 
             services.AddIdentityServices();
 
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-            });
-
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "wwwroot";
@@ -59,6 +58,8 @@ namespace TakeAIMeal.API
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "TakeAIMeal API V1");
                 });
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
             app.UseRouting();
