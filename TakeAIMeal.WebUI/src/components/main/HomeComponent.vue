@@ -5,7 +5,7 @@
     <div class="hint-container">
         <i class="icon-hint"></i>
         <div class="hint-slider">
-
+            <CaruselComponent v-bind:data="tips"/>
         </div>
     </div>
     <div class="action-container">
@@ -38,8 +38,15 @@
 <script>
     import { defineComponent } from 'vue'
     import { useI18n } from 'vue-i18n'
+    import CaruselComponent from '../shared/CaruselComponent.vue'
+    import httpClient from '@/modules/http/client'
     export default defineComponent({
         name: 'HomeComponent',
+        data() {
+            return {
+                tips : []
+            }
+        },
         setup() {
             const { t } = useI18n({
                 inheritLocale: true,
@@ -47,6 +54,40 @@
             })
 
             return { t }
+        },
+        components: {
+            CaruselComponent
+        },
+        beforeMount: function () {
+            this.loadTips();
+        },
+        mounted: function(){
+            
+            this.initTipsPool();
+        },
+        beforeUnmount: function(){
+            clearInterval(this.pooling)
+        },
+        methods: {
+            loadTips() {
+                httpClient.get(`/api/tips/${this.$i18n.locale}`)
+                    .then((response) => {
+                        this.tips = response.data;
+                    })
+            },
+            initTipsPool: function () {
+                // get new tips from API
+                this.pooling = setInterval(() => {
+                    this.loadTips();
+                }, 300000); // 5 minutes 
+            }
+        },
+        watch: {
+            '$i18n.locale': function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    this.loadTips()
+                }
+            }
         }
     })
 </script>
