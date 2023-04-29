@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using TakeAIMeal.API.Services.Extensions;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Services.Interfaces;
@@ -27,6 +28,7 @@ namespace TakeAIMeal.API.Services.Logic
             _templateService = templateService;
         }
 
+        /// <inheritdoc />
         public async Task<bool> ConfirmEmailAsync(string email, string code)
         {
             var normalizedEmail = _userManager.NormalizeEmail(email);
@@ -41,6 +43,24 @@ namespace TakeAIMeal.API.Services.Logic
             return result.Succeeded;
         }
 
+        /// <inheritdoc />
+        public UserModel GetSignedUser()
+        {
+            var identity = _signInManager.Context.User;
+            if(identity?.Identity != null && _signInManager.IsSignedIn(identity))
+            {
+                return new UserModel
+                {
+                    Email = identity.GetUserEmail(),
+                    UserName = identity.GetUserName()
+                };
+            }
+
+            return null;
+            
+        }
+
+        /// <inheritdoc />
         public async Task<bool> RegisterAccountAsync(string email, string password, string username)
         {
             var normalizedEmail = _userManager.NormalizeEmail(email);
@@ -67,7 +87,8 @@ namespace TakeAIMeal.API.Services.Logic
             throw new Exception(string.Join(", ", result.Errors.Select(x => x.Description)));
         }
 
-        public async Task SignInAsync(string email, string password)
+        /// <inheritdoc />
+        public async Task<UserModel> SignInAsync(string email, string password)
         {
             var normalizedEmail = _userManager.NormalizeEmail(email);
             var user = await _userManager.FindByEmailAsync(normalizedEmail);
@@ -92,8 +113,15 @@ namespace TakeAIMeal.API.Services.Logic
             {
                 throw new Exception("Invalid credentials.");
             }
+
+            return new UserModel
+            {
+                Email = user.Email,
+                UserName = user.UserName
+            };
         }
 
+        /// <inheritdoc />
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();

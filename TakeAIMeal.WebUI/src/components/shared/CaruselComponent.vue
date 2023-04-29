@@ -38,17 +38,21 @@
                       return value.selected
                   });
                   if (this.collection.length - 1 > currentIndex) {
-                      this.goToIndex(currentIndex + 1);
+                      this.goToIndex(currentIndex + 1, false);
                   }
                   else {
-                      this.goToIndex(0);
+                      this.goToIndex(0, false);
                   }
               },20000)
           },
-          goToIndex(index) {
+          goToIndex(index, reset = true) {
               this.collection.forEach((value, i) => {
                   value.selected = index === i;
               })
+              if (reset) {
+                  clearInterval(this.pooling);
+                  this._setCaruselInterval();
+              }
           }
       },
       data() {

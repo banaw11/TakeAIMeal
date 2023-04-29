@@ -50,6 +50,35 @@ body {
             font-weight: 600;
         }
 
+        #app .page-header .navbar .user-container {
+            padding: 0 .5rem;
+            display: inline-flex
+        }
+
+            #app .page-header .navbar .user-container .user-toggle {
+                display: inline-flex;
+                cursor: pointer;
+                align-items: center
+            }
+
+            #app .page-header .navbar .user-container .dropdown-menu {
+                width: 100%;
+                min-width: max-content;
+            }
+
+                #app .page-header .navbar .user-container .dropdown-menu .dropdown-item{
+                    cursor: pointer;
+                }
+
+            #app .page-header .navbar .user-container * {
+                color: var(--color-main);
+                font-weight: 600;
+            }
+
+            #app .page-header .navbar .user-container .user-name {
+                margin: 0 .5rem;
+            }
+
     #app .page-container {
         flex-grow: 1;
         background-color: var(--color-main);
