@@ -40,9 +40,6 @@
             ...mapState('context', ['profile']),
             ...mapGetters('context', ['isAuthenticated']),
         },
-        mounted: function(){
-            this.testAuth();
-        },
         methods: {
             ...mapActions('context', ['logout']),
             changeLanguage(locale) {

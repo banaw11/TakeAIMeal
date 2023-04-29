@@ -16,7 +16,6 @@ export default {
     actions: {
         login({ commit }, credentials) {
             return httpClient.post('/api/account/sign-in', credentials).then((res) => {
-                console.log(res.data);
                 commit('setProfile', res.data);
             })
         },
