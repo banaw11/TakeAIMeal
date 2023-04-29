@@ -7,9 +7,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                <router-link class="nav-item nav-link active" to="/">{{ t('Header.Home') }}<span class="sr-only">(current)</span></router-link>
+                    <router-link class="nav-item nav-link active" to="/">{{ t('Header.Home') }}<span class="sr-only">(current)</span></router-link>
                     <router-link class="nav-item nav-link" to="/about">{{ t('Header.About') }}</router-link>
-                    <router-link class="nav-item nav-link" to="">{{ t('Header.SignIn') }}</router-link>
+                    <router-link v-if="!isAuthenticated" class="nav-item nav-link" to="">{{ t('Header.SignIn') }}</router-link>
+                </div>
+            </div>
+            <div v-if="isAuthenticated" class="user-container dropdown">
+                <div class="user-toggle" id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="user" ></i>
+                    <span class="user-name">{{ profile.userName }}</span>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="userMenuButton">
+                    <router-link class="dropdown-item" to="">{{ t('Header.Account') }}</router-link>
+                    <span class="dropdown-item" @click="logout()">{{ t('Header.SignOut') }}</span>
                 </div>
             </div>
             <div class="language-container">
@@ -23,9 +33,18 @@
 <script>
     import { defineComponent } from 'vue'
     import { useI18n } from 'vue-i18n'
+    import { mapGetters, mapState, mapActions } from 'vuex'
     export default defineComponent({
         name: 'NavigationComponent',
+        computed: {
+            ...mapState('context', ['profile']),
+            ...mapGetters('context', ['isAuthenticated']),
+        },
+        mounted: function(){
+            this.testAuth();
+        },
         methods: {
+            ...mapActions('context', ['logout']),
             changeLanguage(locale) {
                 this.$i18n.locale = locale
             },

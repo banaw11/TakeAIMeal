@@ -32,3 +32,10 @@ i.logo {
     height: 40px;
     display: inline-block;
 }
+
+i.user {
+    content: url('../icons/user.svg');
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}

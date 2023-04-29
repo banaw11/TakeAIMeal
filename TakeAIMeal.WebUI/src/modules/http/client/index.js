@@ -11,11 +11,11 @@ import client from './client'
         }
 
         async post(url, data) {
-            return client.post(url, data)
+            return client.post(url, data);
         }
 
         async delete(url, data) {
-            return client.delete(url, data)
+            return client.delete(url, data);
         }
     }
 

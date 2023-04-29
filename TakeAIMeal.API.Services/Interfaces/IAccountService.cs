@@ -1,4 +1,6 @@
-﻿namespace TakeAIMeal.API.Services.Interfaces
+﻿using TakeAIMeal.API.Services.Models;
+
+namespace TakeAIMeal.API.Services.Interfaces
 {
     /// <summary>
     /// Provides functionality to manage user accounts.
@@ -11,7 +13,7 @@
         /// <param name="email">The email address of the user.</param>
         /// <param name="password">The password of the user.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        Task SignInAsync(string email, string password);
+        Task<UserModel> SignInAsync(string email, string password);
 
         /// <summary>
         /// Signs out the current user.
@@ -35,5 +37,11 @@
         /// <param name="code">The code used to confirm the email address.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         Task<bool> ConfirmEmailAsync(string email, string code);
+
+        /// <summary>
+        /// Returns the currently signed-in user.
+        /// </summary>
+        /// <returns>A <see cref="UserModel"/> object representing the signed-in user, or null if no user is signed in.</returns>
+        UserModel GetSignedUser();
     }
 }

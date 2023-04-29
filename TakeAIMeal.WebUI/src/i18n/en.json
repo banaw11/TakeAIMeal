@@ -12,6 +12,8 @@
   "Header": {
     "Home": "Home",
     "About": "About",
-    "SignIn": "Sign in"
+    "SignIn": "Sign in",
+    "SignOut": "Sign out",
+    "Account": "Account"
   }
 }

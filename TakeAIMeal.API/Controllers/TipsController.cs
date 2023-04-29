@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Services.Interfaces;
 
 namespace TakeAIMeal.API.Controllers
@@ -26,15 +27,19 @@ namespace TakeAIMeal.API.Controllers
         [HttpGet("{language}")]
         public async Task<IActionResult> GetTips(string language)
         {
+            var responseModel = new ResponseModel();
             try
             {
                 var tips = await _tipsService.GetTips(language);
-
-                return Ok(tips);
+                responseModel.Success = true;
+                responseModel.Data = tips;
+                return Ok(responseModel);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                responseModel.Success = false;
+                responseModel.Message = ex.Message;
+                return BadRequest(responseModel);
             }
         }
     }
