@@ -14,6 +14,12 @@
     "About": "O aplikacji",
     "SignIn": "Zaloguj się",
     "SignOut": "Wyloguj",
-    "Account":  "Konto"
+    "Account": "Konto"
+  },
+  "Dropdown": {
+    "PleaseSelect": "Wybierz",
+    "PressEnterForSelect": "Wciśnij enter żeby wybrać",
+    "PressEnterForRemove": "Wciśnij enter żeby usunąć",
+    "Selected": "Wybrano"
   }
 }

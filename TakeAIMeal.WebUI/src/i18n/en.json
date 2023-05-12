@@ -15,5 +15,11 @@
     "SignIn": "Sign in",
     "SignOut": "Sign out",
     "Account": "Account"
+  },
+  "Dropdown": {
+    "PleaseSelect": "Select",
+    "PressEnterForSelect": "Press enter to select",
+    "PressEnterForRemove": "Press enter to remove",
+    "Selected": "Selected"
   }
 }

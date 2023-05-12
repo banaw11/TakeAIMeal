@@ -203,6 +203,22 @@ body {
             opacity: 0.7;
         }
 
+.custom-dropdown .multiselect__option:not(.multiselect__option--highlight) span{
+    color: var(--color-main);
+}
+
+.custom-dropdown .multiselect__select::before {
+    top: 85%;
+    border-width: 8px 8px 0 8px;
+    border-color: var(--color-main) transparent transparent transparent;
+    color: var(--color-main);
+}
+
+.custom-dropdown .multiselect__single,
+.custom-dropdown .multiselect__input {
+    color: var(--color-main);
+}
+
 @media only screen and (max-width: 600px) {
             #app .page-container .content-container .action-container{
         flex-direction: column;
