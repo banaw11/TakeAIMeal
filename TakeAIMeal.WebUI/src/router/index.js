@@ -6,6 +6,8 @@ import AccountView from '../views/AccountView.vue'
 import LoginComponent from '../components/account/LoginComponent.vue'
 import RegistrationComponent from '../components/account/RegistrationComponent.vue'
 
+import TestComponent from '../components/account/TestComponent.vue'
+
 const routes = [
   {
     path: '/',
@@ -41,6 +43,11 @@ const routes = [
         path: 'registration',
         name: 'registration',
         component: RegistrationComponent
+      },
+      {
+        path: 'test',
+        name: 'test',
+        component: TestComponent
       }
     ]
   }

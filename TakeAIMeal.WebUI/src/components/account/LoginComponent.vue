@@ -3,7 +3,7 @@
     <form>
         <input type="text" placeholder="E-mail" /><br/>
         <input type="password" placeholder="Hasło" /><br/>
-        <router-link class="btn btn-primary" to="/login">{{ t('Header.SignIn') }}</router-link>
+        <router-link class="btn btn-primary" to="">{{ t('Header.SignIn') }}</router-link>
     </form>
 </template>
 
