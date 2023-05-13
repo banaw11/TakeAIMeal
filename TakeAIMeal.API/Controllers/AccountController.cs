@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Models.Account;
 using TakeAIMeal.API.Services.Interfaces;
@@ -38,8 +39,10 @@ namespace TakeAIMeal.API.Controllers
             {
                 try
                 {
-                    await _accountService.SignInAsync(body.Email, body.Password);
-                    return Ok();
+                    var user = await _accountService.SignInAsync(body.Email, body.Password);
+                    responseModel.Success = true;
+                    responseModel.Data = user;
+                    return Ok(responseModel);
                 }
                 catch(Exception ex)
                 {
@@ -60,12 +63,30 @@ namespace TakeAIMeal.API.Controllers
         /// <returns>
         /// Returns an IActionResult representing the result of the operation:
         /// </returns>
-        /// <response code="200">The user was signed out successfully.</response>
+        /// <response code="204">The user was signed out successfully.</response>
+        [Authorize]
         [HttpPost("sign-out")]
         public async Task<IActionResult> SignOutUser()
         {
             await _accountService.SignOutAsync();
-            return Ok();
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Checks the session of the currently signed-in user.
+        /// </summary>
+        /// <returns>An IActionResult containing a ResponseModel indicating whether the user is signed in and the user's information if applicable.</returns>
+        /// <response code="200">Returns current signed in user's information if applicable.</response>
+        [HttpGet("check-session")]
+        public IActionResult CheckSession()
+        {
+            var user = _accountService.GetSignedUser();
+            var responseModel = new ResponseModel
+            {
+                Success = user != null,
+                Data = user
+            };
+            return Ok(responseModel);
         }
 
         /// <summary>

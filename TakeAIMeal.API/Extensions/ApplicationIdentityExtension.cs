@@ -21,9 +21,12 @@ namespace TakeAIMeal.API.Extensions
                 .AddEntityFrameworkStores<TakeAIMealDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication()
                 .AddCookie(options =>
                 {
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.Expiration = TimeSpan.FromDays(1);
+                    options.SlidingExpiration = true;
                     options.Events.OnRedirectToLogin = (context) =>
                     {
                         context.Response.StatusCode = 401;
@@ -35,7 +38,6 @@ namespace TakeAIMeal.API.Extensions
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
-                .AddAuthenticationSchemes(CookieAuthenticationDefaults.AuthenticationScheme)
                 .Build();
             });
 

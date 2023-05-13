@@ -8,7 +8,7 @@ import axios from 'axios'
  * Axios basic configuration
  */
 const config = {
-//   baseURL: apiBaseUrl
+    baseURL: process.env.VUE_APP_BASE_API_URL
 }
 
 /**
@@ -32,7 +32,7 @@ client.interceptors.request.use(loggerInterceptor)
 
 /** Adding the response interceptors */
 client.interceptors.response.use(
-  response => Promise.resolve(response),
+  response => Promise.resolve(response.data),
   error => {
     Event.$emit('error', 500, error.response.data.message)
 

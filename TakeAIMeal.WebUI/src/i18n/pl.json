@@ -12,6 +12,8 @@
   "Header": {
     "Home": "Strona główna",
     "About": "O aplikacji",
-    "SignIn": "Zaloguj się"
+    "SignIn": "Zaloguj się",
+    "SignOut": "Wyloguj",
+    "Account":  "Konto"
   }
 }
