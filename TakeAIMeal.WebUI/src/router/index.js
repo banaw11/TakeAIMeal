@@ -18,10 +18,13 @@ const routes = [
         component: HomeComponent
       },
       {
-        path: '/about',
+        path: 'about',
         name: 'about',
         component: AboutComponent
-      }
+      },
+      // {
+      //   //kucharska
+      // }
     ]
   },
   {
@@ -30,12 +33,12 @@ const routes = [
     component: AccountView,
     children: [
       {
-        path: '/login',
+        path: 'login',
         name: 'login',
         component: LoginComponent
       },
       {
-        path: '/registration',
+        path: 'registration',
         name: 'registration',
         component: RegistrationComponent
       }
