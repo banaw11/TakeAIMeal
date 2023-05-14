@@ -4,6 +4,8 @@ using TakeAIMeal.API.Services.Logic;
 using TakeAIMeal.Common.Services.Interfaces;
 using TakeAIMeal.Common.Services.Logic;
 using TakeAIMeal.Data;
+using TakeAIMeal.Data.Repositories.Interfaces;
+using TakeAIMeal.Data.Repositories.Logic;
 
 namespace TakeAIMeal.API.Extensions
 {
@@ -35,6 +37,9 @@ namespace TakeAIMeal.API.Extensions
 
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             return services;
         }
     }
