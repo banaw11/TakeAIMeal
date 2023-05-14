@@ -36,8 +36,8 @@
       "Dinner": "Dinner"
     },
     "Categories": {
-      "Grain": "Grain",
-      "Dairy": "Dairy",
+      "GrainProducts": "Grain",
+      "DairyProducts": "Dairy",
       "Meat": "Meat",
       "Fish": "Fish",
       "Vegetables": "Vegetables",

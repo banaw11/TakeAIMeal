@@ -33,7 +33,7 @@ namespace TakeAIMeal.API.Services.Logic
             {
                 productIds = productIds.Distinct().ToList();
                 var ingredients = _productRepository.Where(x => productIds.Contains(x.Id))
-                .Select(x => x.Name)
+                .Select(x => x.Name.ToLower())
                 .ToList();
 
                 return string.Join(", ", ingredients);

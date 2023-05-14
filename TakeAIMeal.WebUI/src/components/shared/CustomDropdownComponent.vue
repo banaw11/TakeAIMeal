@@ -49,7 +49,7 @@
             },
             translateLabel(item) {
                 if (this.translatePath) {
-                    return this.t(`QuickRecipe.Dictionary.${item.name}`);
+                    return this.t(`${this.translatePath}.${item.name}`);
                 }
                 return item.name;
             }

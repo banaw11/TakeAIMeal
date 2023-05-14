@@ -9,18 +9,18 @@
         <div class="form-group">
             <div class="meal-dropdown">
                 <span>{{t('QuickRecipe.Meal')}}</span>
-                <CustomDropdown :data="mealTypes" :multi="false" v-model="recipeData.mealId"></CustomDropdown>
+                <CustomDropdown :data="mealTypes" :multi="false" :translate-path="'QuickRecipe.Meals'" v-model="recipeData.mealId"></CustomDropdown>
             </div>
         </div>
         <div class="form-group" v-for="data in categoryData" :key="data.index">
             <div class="group">
                 <div class="category-dropdown">
                     <span>{{t('QuickRecipe.Category')}}</span>
-                    <CustomDropdown :data="categoryTypes" :multi="false" v-model="data.categoryId" @change="() => onCategoryChange(data.index)"></CustomDropdown>
+                    <CustomDropdown :data="categoryTypes" :multi="false" :translate-path="'QuickRecipe.Categories'" v-model="data.categoryId" @change="() => onCategoryChange(data.index)"></CustomDropdown>
                 </div>
                 <div class="product-dropdown" v-if="data.productTypes.length > 0">
                     <span>{{t('QuickRecipe.Product')}}</span>
-                    <CustomDropdown :data="data.productTypes" :multi="true" v-model="data.productIds"></CustomDropdown>
+                    <CustomDropdown :data="data.productTypes" :multi="true" :translate-path="'QuickRecipe.Products'" v-model="data.productIds"></CustomDropdown>
                 </div>
             </div>
             <div class="action-column" v-if="categoryData.length - 1 === data.index && canAddNew()">
@@ -136,7 +136,9 @@
             generateRecipe() {
                 let products = [];
                 this.categoryData.filter((data) => data.productIds.length > 0).forEach((data) => {
-                    products.push(data.productIds.map((item) => item.value));
+                    data.productIds.map((item) => item.value).forEach(id => {
+                        products.push(id);
+                    })
                 });
                 const model = {
                     language: this.$i18n.locale,

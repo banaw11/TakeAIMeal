@@ -39,8 +39,8 @@ namespace TakeAIMeal.API.Controllers
             if (ModelState.IsValid)
             {
                 string ingredients = _recipeService.GetRecipeIngridientsFromProducts(body.Products);
-                string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name;
-                string prompt = string.Format(Prompts.RecipeFromIngredients, string.Join(", ", ingredients, mealType));
+                string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
+                string prompt = string.Format(Prompts.RecipeFromIngredients, ingredients, mealType);
 
                 RecipeModel recipe = await _recipeService.GenerateRecipe(prompt, body.Language);
 

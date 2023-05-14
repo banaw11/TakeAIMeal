@@ -36,8 +36,8 @@
       "Dinner": "Kolacja"
     },
     "Categories": {
-      "Grain": "Produkty zbożowe",
-      "Dairy": "Nabiał",
+      "GrainProducts": "Produkty zbożowe",
+      "DairyProducts": "Nabiał",
       "Meat": "Mięso",
       "Fish": "Ryby",
       "Vegetables": "Warzywa",
