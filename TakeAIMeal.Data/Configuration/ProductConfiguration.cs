@@ -21,6 +21,7 @@ namespace TakeAIMeal.Data
             builder.Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().ValueGeneratedOnAdd().UseIdentityColumn();
             builder.Property(x => x.CategoryId).HasColumnName(@"CategoryId").HasColumnType("int").IsRequired();
             builder.Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(30)").IsRequired().IsUnicode(false).HasMaxLength(30);
+            builder.Property(x => x.NormalizedName).HasColumnName(@"NormalizedName").HasColumnType("varchar(30)").IsRequired().IsUnicode(false).HasMaxLength(30);
 
             // Foreign keys
             builder.HasOne(a => a.ProductCategory).WithMany(b => b.Products).HasForeignKey(c => c.CategoryId).OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Products__Category__7D439ABD");

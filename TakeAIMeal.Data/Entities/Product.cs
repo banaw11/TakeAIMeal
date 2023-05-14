@@ -18,6 +18,7 @@ namespace TakeAIMeal.Data
         public int Id { get; set; } // Id (Primary key)
         public int CategoryId { get; set; } // CategoryId
         public string Name { get; set; } // Name (length: 30)
+        public string NormalizedName { get; set; } // NormalizedName (length: 30)
 
         // Reverse navigation
 
@@ -35,6 +36,7 @@ namespace TakeAIMeal.Data
 
         public Product()
         {
+            NormalizedName = "Unknown";
             UserProductsExclusions = new List<UserProductsExclusion>();
         }
     }

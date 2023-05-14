@@ -1,17 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TakeAIMeal.API.Models.Recipe;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Extensions;
 using TakeAIMeal.Common.Resources;
 
 namespace TakeAIMeal.API.Controllers
 {
+    /// <summary>
+    /// Provides APIs for accessing recipe infrastructure.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class RecipeController : ControllerBase
     {
         private readonly IRecipeService _recipeService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecipeController"/> class.
+        /// </summary>
+        /// <param name="recipeService">The service for accessing recipe service.</param>
         public RecipeController(IRecipeService recipeService)
         {
             _recipeService = recipeService;
@@ -29,8 +38,9 @@ namespace TakeAIMeal.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                //to-do get product names from db
-                string prompt = string.Format(Prompts.RecipeFromIngredients, string.Join(", ", body.Products));
+                string ingredients = _recipeService.GetRecipeIngridientsFromProducts(body.Products);
+                string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name;
+                string prompt = string.Format(Prompts.RecipeFromIngredients, string.Join(", ", ingredients, mealType));
 
                 RecipeModel recipe = await _recipeService.GenerateRecipe(prompt, body.Language);
 

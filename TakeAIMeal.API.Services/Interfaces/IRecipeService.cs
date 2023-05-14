@@ -14,5 +14,12 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="language">The language used to generate the recipe.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the generated <see cref="RecipeModel"/>.</returns>
         Task<RecipeModel> GenerateRecipe(string prompt, string language);
+
+        /// <summary>
+        /// Gets a recipe ingredients string for the specified collection of product identifiers.
+        /// </summary>
+        /// <param name="productIds">The collection of product identifiers to get the recipe ingredients for.</param>
+        /// <returns>A string representing the recipe ingredients for the specified collection of product identifiers.</returns>
+        string GetRecipeIngridientsFromProducts(ICollection<int> productIds);
     }
 }

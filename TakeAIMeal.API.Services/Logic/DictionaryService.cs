@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TakeAIMeal.API.Services.Interfaces;
+﻿using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Dictionaries;
-using TakeAIMeal.Common.Extensions;
 using TakeAIMeal.Data.Repositories.Interfaces;
 
 namespace TakeAIMeal.API.Services.Logic
@@ -20,7 +18,7 @@ namespace TakeAIMeal.API.Services.Logic
         private static ICollection<DictionaryItem> GetEnumCollection<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>()
-                .Select(x => new DictionaryItem { Name = x.GetAttribute<DisplayAttribute>().Name, Value = x })
+                .Select(x => new DictionaryItem { Name = x.ToString(), Value = x })
                 .OrderBy(x => x.Name)
                 .ToList();
         }
@@ -35,7 +33,7 @@ namespace TakeAIMeal.API.Services.Logic
         public ICollection<DictionaryItem> GetCategories()
         {
             return _categoryRepository.GetAll()
-                .Select(x => new DictionaryItem { Name = x.Name, Value = x.Id })
+                .Select(x => new DictionaryItem { Name = x.NormalizedName, Value = x.Id })
                 .OrderBy(x => x.Name)
                 .ToList();
         }
@@ -50,7 +48,7 @@ namespace TakeAIMeal.API.Services.Logic
         public ICollection<DictionaryItem> GetProducts(int categoryId)
         {
             return _productRepository.Where(x => x.CategoryId == categoryId)
-                .Select(x => new DictionaryItem { Name = x.Name, Value = x.Id })
+                .Select(x => new DictionaryItem { Name = x.NormalizedName, Value = x.Id })
                 .OrderBy(x => x.Name)
                 .ToList();
         }

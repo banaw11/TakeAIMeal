@@ -3,6 +3,7 @@ using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Common.Resources;
 using TakeAIMeal.Common.Services.Interfaces;
+using TakeAIMeal.Data.Repositories.Interfaces;
 
 namespace TakeAIMeal.API.Services.Logic
 {
@@ -12,15 +13,36 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly ITextGeneratorService _textGeneratorService;
         private readonly ITextRecognitionService _textRecognitionService;
         private readonly ITranslateService _translateService;
+        private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService)
+        public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
+            IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
             _textRecognitionService = textRecognitionService;
             _translateService = translateService;
+            _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
+        public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
+        {
+            if(productIds != null && productIds.Count > 0)
+            {
+                productIds = productIds.Distinct().ToList();
+                var ingredients = _productRepository.Where(x => productIds.Contains(x.Id))
+                .Select(x => x.Name)
+                .ToList();
+
+                return string.Join(", ", ingredients);
+            }
+
+            return string.Empty;
+        }
+
+        /// <inheritdoc/>
         public async Task<RecipeModel> GenerateRecipe(string prompt, string language)
         {
             if(!string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(language))
