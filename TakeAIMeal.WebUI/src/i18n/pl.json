@@ -21,5 +21,63 @@
     "PressEnterForSelect": "Wciśnij enter żeby wybrać",
     "PressEnterForRemove": "Wciśnij enter żeby usunąć",
     "Selected": "Wybrano"
+  },
+  "QuickRecipe": {
+    "Title": "Szybki przepis",
+    "ProvideAtleast": "Podaj minimum trzy produkty:",
+    "Meal": "Posiłek",
+    "Category": "Kategoria",
+    "Product": "Produkty",
+    "Generate": "Generuj przepis",
+    "Add": "Dodaj",
+    "Meals": {
+      "Breakfast": "Śniadanie",
+      "Lunch": "Obiad",
+      "Dinner": "Kolacja"
+    },
+    "Categories": {
+      "Grain": "Produkty zbożowe",
+      "Dairy": "Nabiał",
+      "Meat": "Mięso",
+      "Fish": "Ryby",
+      "Vegetables": "Warzywa",
+      "Fruits": "Owoce",
+      "Herbs": "Zioła",
+      "DryLegumes": "Suche rośliny strączkowe"
+    },
+    "Products": {
+      "WhiteRice": "Ryż biały",
+      "BrownRice": "Ryż brązowy",
+      "RedRice": "Ryż czerwony",
+      "WildRice": "Ryż dziki",
+      "Milk": "Mleko",
+      "Eggs": "Jajka",
+      "Butter": "Masło",
+      "Yogurt": "Jogurt",
+      "Chicken": "Kurczak",
+      "Pork": "Wieprzowina",
+      "Beef": "Wołowina",
+      "Lamb": "Jagnięcina",
+      "Salmon": "Łosoś",
+      "Tuna": "Tuńczyk",
+      "Cod": "Dorsz",
+      "Trout": "Pstrąg",
+      "Tomato": "Pomidor",
+      "Potato": "Ziemniak",
+      "Carrot": "Marchewka",
+      "Cabbage": "Cukinia",
+      "Apple": "Jabłko",
+      "Pear": "Gruszka",
+      "Orange": "Pomarańcza",
+      "Lemon": "Cytryna",
+      "Parsley": "Pietruszka",
+      "Dill": "Koperek",
+      "Chives": "Szczypiorek",
+      "Oregano": "Oregano",
+      "WhiteBeans": "Biała fasola",
+      "RedKidneyBeans": "Czerwona fasola",
+      "SoyBeans": "Soja",
+      "Lentils": "Soczewica"
+    }
   }
 }

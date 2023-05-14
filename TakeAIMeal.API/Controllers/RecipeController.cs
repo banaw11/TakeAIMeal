@@ -29,7 +29,8 @@ namespace TakeAIMeal.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                string prompt = string.Format(Prompts.RecipeFromIngredients, string.Join(", ", body.Ingredients));
+                //to-do get product names from db
+                string prompt = string.Format(Prompts.RecipeFromIngredients, string.Join(", ", body.Products));
 
                 RecipeModel recipe = await _recipeService.GenerateRecipe(prompt, body.Language);
 

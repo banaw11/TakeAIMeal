@@ -8,18 +8,22 @@
                         :deselectLabel="t('Dropdown.PressEnterForRemove')"
                         :selectedLabel="t('Dropdown.Selected')"
                         :searchable="true"
+                        @select="onChange(value, id)"
+                        @remove="onChange(value, id)"
                         label="name"
+                        :custom-label="translateLabel"
                         track-by="value" />
     </div>
 </template>
 
 <script>
+    /* eslint-disable */
     import { useI18n } from 'vue-i18n'
     import VueMultiselect from 'vue-multiselect'
     export default {
-        name: 'custom-multi-dropdown',
+        name: 'custom-dropdown',
         components: { VueMultiselect },
-        props: ['data', 'modelValue', 'multi'],
+        props: ['data', 'modelValue', 'multi', 'translatePath'],
         emits: ['update:modelValue'],
         computed: {
             value: {
@@ -38,6 +42,17 @@
             })
 
             return { t }
+        },
+        methods: {
+            onChange(value, id) {
+                this.$emit('change')              
+            },
+            translateLabel(item) {
+                if (this.translatePath) {
+                    return this.t(`QuickRecipe.Dictionary.${item.name}`);
+                }
+                return item.name;
+            }
         }
     };
 </script>

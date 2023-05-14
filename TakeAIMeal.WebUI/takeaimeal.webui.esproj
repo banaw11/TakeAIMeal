@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\assets\css\" />
+    <Folder Include="src\components\main\recipe\" />
     <Folder Include="src\components\shared\" />
     <Folder Include="src\modules\store\" />
   </ItemGroup>
