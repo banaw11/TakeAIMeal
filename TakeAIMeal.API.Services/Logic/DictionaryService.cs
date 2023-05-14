@@ -12,6 +12,11 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
 
+        /// <summary>
+        /// Gets a collection of <see cref="DictionaryItem"/> representing the values of an <see cref="Enum"/> type.
+        /// </summary>
+        /// <typeparam name="T">The <see cref="Enum"/> type to get the collection for.</typeparam>
+        /// <returns>A collection of <see cref="DictionaryItem"/> representing the values of the <see cref="Enum"/> type.</returns>
         private static ICollection<DictionaryItem> GetEnumCollection<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>()
