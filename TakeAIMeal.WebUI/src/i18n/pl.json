@@ -20,7 +20,7 @@
   "Account": {
     "Password": "Hasło",
     "RepeatPassword": "Powtórz hasło",
-    "FirstName": "Imię",
+    "UserName": "Nazwa użytkownika",
     "ForgottenPassword": "Zapomniałeś hasła?"
   },
   "Dropdown": {

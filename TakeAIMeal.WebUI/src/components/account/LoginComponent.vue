@@ -3,7 +3,7 @@
     <form>
         <input type="text" placeholder="E-mail" v-model="email" class="text-dark"  /><br/>
         <input type="password" v-bind:placeholder="$t('Account.Password')" i18n-placeholder="{{ t('Header.SignIn') }}" v-model="password" class="text-dark"  /><br/>
-        <button class="btn btn-primary" :disabled="!isInValid()">{{ t('Header.SignIn') }}</button>
+        <button class="btn btn-primary" :disabled="!isInValid()" @click="signIn()">{{ t('Header.SignIn') }}</button>
         <span>{{ t('Account.ForgottenPassword') }}</span>
         <br/>
         <span>{{ t('Home.HaventAccound') }}</span>
@@ -15,6 +15,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import httpClient from '@/modules/http/client'
 export default defineComponent({
     name: 'LoginComponent',
     data(){
@@ -39,6 +40,19 @@ export default defineComponent({
         }
     },
     methods: {
+        signIn() {
+            let self = this;
+            httpClient.post(`/api/Account/sign-in`, {
+                email: this.email,
+                password: this.password
+            })
+                .then((response) => {
+                    console.log(response);
+                    const status = JSON.parse(response.status);
+                    if(status == '200')
+                        self.$router.push('/');
+                })
+        },
         emailValidate() {
             // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
             // sprawdza czy e-mail jest w formacie e-mail i czy nie zawiera więcej niż jeden znaków @
