@@ -22,14 +22,14 @@ namespace TakeAIMeal.Common.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Prompts {
+    public class Recipe {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Prompts() {
+        internal Recipe() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace TakeAIMeal.Common.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TakeAIMeal.Common.Resources.Prompts", typeof(Prompts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TakeAIMeal.Common.Resources.Recipe", typeof(Recipe).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace TakeAIMeal.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate a title for dish based on this ingredients :  {0}.
+        ///   Looks up a localized string similar to Breakfast.
         /// </summary>
-        public static string DishTitleFromTags {
+        public static string Breakfast {
             get {
-                return ResourceManager.GetString("DishTitleFromTags", resourceCulture);
+                return ResourceManager.GetString("Breakfast", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate a recipe for a {1} using these ingredients : {0}.
+        ///   Looks up a localized string similar to Dinner.
         /// </summary>
-        public static string RecipeFromIngredients {
+        public static string Dinner {
             get {
-                return ResourceManager.GetString("RecipeFromIngredients", resourceCulture);
+                return ResourceManager.GetString("Dinner", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate one short tip about healthy eating..
+        ///   Looks up a localized string similar to Lunch.
         /// </summary>
-        public static string TipHealthyEating {
+        public static string Lunch {
             get {
-                return ResourceManager.GetString("TipHealthyEating", resourceCulture);
+                return ResourceManager.GetString("Lunch", resourceCulture);
             }
         }
     }

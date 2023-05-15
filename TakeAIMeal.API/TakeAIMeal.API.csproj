@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TakeAIMeal.API.Services\TakeAIMeal.API.Services.csproj" />
     <ProjectReference Include="..\TakeAIMeal.Common.Services\TakeAIMeal.Common.Services.csproj" />
+    <ProjectReference Include="..\TakeAIMeal.Data.Repositories\TakeAIMeal.Data.Repositories.csproj" />
     <ProjectReference Include="..\TakeAIMeal.Data\TakeAIMeal.Data.csproj" />
   </ItemGroup>
 

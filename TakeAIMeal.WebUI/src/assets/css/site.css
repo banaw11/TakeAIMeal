@@ -29,8 +29,13 @@ body {
         top: 0;
         height: 56px;
         background-color: var(--color-white);
+        z-index: 1000;
         
     }
+
+        #app .page-header .navbar {
+            box-shadow: 0 0 10px -3px rgba(0,0,0,.8);
+        }
 
         #app .page-header .navbar .language-container{
             display: inline-flex;
@@ -93,7 +98,7 @@ body {
             font-size: 1.1rem;
         }
 
-            #app .page-container .btn:hover {
+            #app .page-container .btn:not(:disabled):hover {
                 font-weight: 600;
                 border: 2px solid;
             }
@@ -159,6 +164,95 @@ body {
                 flex-grow: 1;
             }
 
+        #app .page-container .content-container .sub-header label{
+            font-weight: 600;
+        }
+
+        #app .page-container .content-container .form-group {
+            display: flex;
+            padding-left: 0.5rem;
+        }
+
+            #app .page-container .content-container .form-group span{
+                font-size: .9rem;
+            }
+
+            #app .page-container .content-container .form-group .group {
+                display: inline-flex;
+                width: 90%;
+                gap: 20px;
+            }
+
+            #app .page-container .content-container .form-group .meal-dropdown {
+                width: 90%;
+            }
+            #app .page-container .content-container .form-group .meal-dropdown > div{
+                width: 30%;
+            }
+
+            #app .page-container .content-container .form-group .action-column {
+                height: 35px;
+                margin-top: auto;
+                margin-left: 20px;
+            }
+
+            #app .page-container .content-container .form-group .group {
+                display: inline-flex;
+                width: 90%;
+                gap: 20px;
+            }
+
+                #app .page-container .content-container .form-group .group .category-dropdown{
+                    width: 30%
+                }
+
+                #app .page-container .content-container .form-group .group .product-dropdown{
+                    flex-grow: 1;
+                }
+
+            #app .page-container .content-container .button-container {
+                display: flex;
+                padding-top: 1rem;
+            }
+
+            #app .page-container .content-container .button-container .btn{
+                margin: 0 auto;
+            }
+
+        #app .page-container .content-container .recipe-container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 30px;
+            padding: 2rem 1rem;
+            background-color: var(--color-white);
+            border-radius: .5rem;
+            border: 1px solid var(--color-grey);
+            margin: 2rem auto;
+            color: var(--color-main);
+            max-width: 1000px;
+        }
+
+            #app .page-container .content-container .recipe-container .image-area img {
+                border-radius: 1rem;
+                box-shadow: 0 0 10px -3px rgba(0,0,0,.6);
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area label{
+                color: var(--color-main);
+                font-weight: 600;
+                text-align: center;
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area span {
+                color: var(--color-main);
+                font-style: italic;
+            }
+
 .carusel {
     display: flex;
     gap: 20px;
@@ -203,8 +297,37 @@ body {
             opacity: 0.7;
         }
 
+.custom-dropdown{
+    min-width: 300px;
+    height: 100%;
+}
+
+.custom-dropdown .multiselect__option:not(.multiselect__option--highlight) span {
+    color: var(--color-main);
+}
+
+.custom-dropdown .multiselect__select::before {
+    top: 85%;
+    border-width: 8px 8px 0 8px;
+    border-color: var(--color-main) transparent transparent transparent;
+    color: var(--color-main);
+}
+
+.custom-dropdown .multiselect__single,
+.custom-dropdown .multiselect__input {
+    color: var(--color-main);
+}
+
+    .custom-dropdown .multiselect__tags{
+        min-height: 46px;
+    }
+
+    .custom-dropdown .multiselect__single {
+        line-height: 1.8rem;
+    }
+
 @media only screen and (max-width: 600px) {
-            #app .page-container .content-container .action-container{
+    #app .page-container .content-container .action-container{
         flex-direction: column;
     }
 
@@ -221,6 +344,31 @@ body {
     #app .page-container .content-container .hint-container {
         padding: 0;
     }
+
+    #app .page-container .content-container .form-group .group {
+        display: flex;
+        width: 90%;
+        gap: 0.5rem;
+        flex-direction: column;
+    }
+
+        #app .page-container .content-container .form-group .group .category-dropdown{
+            width: 100%;
+        }
+
+    #app .page-container .content-container .form-group .meal-dropdown > div{
+        width: 100%;
+    }
+
+    #app .page-container .content-container .recipe-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #app .page-container .content-container .recipe-container .image-area {
+            display: flex;
+            justify-content: center;
+        }
 }
 
 

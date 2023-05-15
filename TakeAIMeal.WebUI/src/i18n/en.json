@@ -15,5 +15,72 @@
     "SignIn": "Sign in",
     "SignOut": "Sign out",
     "Account": "Account"
+  },
+  "Dropdown": {
+    "PleaseSelect": "Select",
+    "PressEnterForSelect": "Press enter to select",
+    "PressEnterForRemove": "Press enter to remove",
+    "Selected": "Selected"
+  },
+  "QuickRecipe": {
+    "Title": "Quick recipe",
+    "ProvideAtleast": "Provide at least three products:",
+    "Meal": "Meal",
+    "Category": "Category",
+    "Product": "Products",
+    "Generate": "Generate recipe",
+    "Add": "Add",
+    "Meals": {
+      "Breakfast": "Breakfast",
+      "Lunch": "Lunch",
+      "Dinner": "Dinner"
+    },
+    "Categories": {
+      "GrainProducts": "Grain",
+      "DairyProducts": "Dairy",
+      "Meat": "Meat",
+      "Fish": "Fish",
+      "Vegetables": "Vegetables",
+      "Fruits": "Fruits",
+      "Herbs": "Herbs",
+      "DryLegumes": "Dry legumes"
+    },
+    "Products": {
+      "WhiteRice": "White rice",
+      "BrownRice": "Brown rice",
+      "RedRice": "Red rice",
+      "WildRice": "Wild rice",
+      "Milk": "Milk",
+      "Eggs": "Eggs",
+      "Butter": "Butter",
+      "Yogurt": "Yogurt",
+      "Chicken": "Chicken",
+      "Pork": "Pork",
+      "Beef": "Beef",
+      "Lamb": "Lamb",
+      "Salmon": "Salmon",
+      "Tuna": "Tuna",
+      "Cod": "Cod",
+      "Trout": "Trout",
+      "Tomato": "Tomato",
+      "Potato": "Potato",
+      "Carrot": "Carrot",
+      "Cabbage": "Cabbage",
+      "Apple": "Apple",
+      "Pear": "Pear",
+      "Orange": "Orange",
+      "Lemon": "Lemon",
+      "Parsley": "Parsley",
+      "Dill": "Dill",
+      "Chives": "Chives",
+      "Oregano": "Oregano",
+      "WhiteBeans": "White beans",
+      "RedKidneyBeans": "Red kidney beans",
+      "SoyBeans": "Soy beans",
+      "Lentils": "Lentils"
+    }
+  },
+  "Recipe": {
+    "Title": "Recipe"
   }
 }

@@ -3,6 +3,7 @@ using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Common.Resources;
 using TakeAIMeal.Common.Services.Interfaces;
+using TakeAIMeal.Data.Repositories.Interfaces;
 
 namespace TakeAIMeal.API.Services.Logic
 {
@@ -12,15 +13,34 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly ITextGeneratorService _textGeneratorService;
         private readonly ITextRecognitionService _textRecognitionService;
         private readonly ITranslateService _translateService;
+        private readonly IProductRepository _productRepository;
 
-        public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService)
+        public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
+            IProductRepository productRepository)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
             _textRecognitionService = textRecognitionService;
             _translateService = translateService;
+            _productRepository = productRepository;
         }
 
+        public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
+        {
+            if(productIds != null && productIds.Count > 0)
+            {
+                productIds = productIds.Distinct().ToList();
+                var ingredients = _productRepository.Where(x => productIds.Contains(x.Id))
+                .Select(x => x.Name.ToLower())
+                .ToList();
+
+                return string.Join(", ", ingredients);
+            }
+
+            return string.Empty;
+        }
+
+        /// <inheritdoc/>
         public async Task<RecipeModel> GenerateRecipe(string prompt, string language)
         {
             if(!string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(language))
@@ -54,7 +74,7 @@ namespace TakeAIMeal.API.Services.Logic
 
                         if (!string.IsNullOrEmpty(model.Title))
                         {
-                            model.ImageBase64 = await GenerateImageFromTitle(model.Title);
+                            model.ImageBase64 = $"data:image/svg+xml;base64, {await GenerateImageFromTitle(model.Title)}";
                         }
                     }
 
@@ -80,7 +100,7 @@ namespace TakeAIMeal.API.Services.Logic
             if(tags != null && tags.Count > 0)
             {
                 var prompt = string.Format(Prompts.DishTitleFromTags, string.Join(", ",tags));
-                var titleResponse = await _textGeneratorService.GenerateText(prompt, maxTokens: 10);
+                var titleResponse = await _textGeneratorService.GenerateText(prompt, maxTokens: 50);
                 if(titleResponse != null && titleResponse.Count > 0)
                 {
                     return titleResponse.FirstOrDefault();

@@ -7,14 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources\Prompts.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Prompts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Recipe.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Recipe.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -22,6 +23,10 @@
     <EmbeddedResource Update="Resources\Prompts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Prompts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Recipe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Recipe.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -11,7 +11,9 @@
     <div class="action-container">
         <div class="left-part">
             <div>
-                <button class="btn btn-primary">{{ t('Home.QuickRecipe') }}</button>
+                <router-link to="/quick-recipe" custom v-slot="{ navigate }">
+                    <button class="btn btn-primary" @click="navigate">{{ t('Home.QuickRecipe') }}</button>
+                </router-link>
             </div>
             <ul>
                 <li>{{ t('Home.SimpleRecipeGenerate') }}</li>

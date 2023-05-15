@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DishTitleFromTags" xml:space="preserve">
-    <value>Generate a title for dish based on this ingredients :  {0}</value>
+  <data name="Breakfast" xml:space="preserve">
+    <value>Breakfast</value>
   </data>
-  <data name="RecipeFromIngredients" xml:space="preserve">
-    <value>Generate a recipe for a {1} using these ingredients : {0}</value>
+  <data name="Dinner" xml:space="preserve">
+    <value>Dinner</value>
   </data>
-  <data name="TipHealthyEating" xml:space="preserve">
-    <value>Generate one short tip about healthy eating.</value>
+  <data name="Lunch" xml:space="preserve">
+    <value>Lunch</value>
   </data>
 </root>
