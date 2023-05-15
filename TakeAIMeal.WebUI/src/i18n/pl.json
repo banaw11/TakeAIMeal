@@ -79,5 +79,8 @@
       "SoyBeans": "Soja",
       "Lentils": "Soczewica"
     }
+  },
+  "Recipe": {
+    "Title" : "Przepis"
   }
 }

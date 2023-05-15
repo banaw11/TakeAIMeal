@@ -79,5 +79,8 @@
       "SoyBeans": "Soy beans",
       "Lentils": "Lentils"
     }
+  },
+  "Recipe": {
+    "Title": "Recipe"
   }
 }

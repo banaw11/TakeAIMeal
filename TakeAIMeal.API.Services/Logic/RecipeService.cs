@@ -14,17 +14,15 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly ITextRecognitionService _textRecognitionService;
         private readonly ITranslateService _translateService;
         private readonly IProductRepository _productRepository;
-        private readonly ICategoryRepository _categoryRepository;
 
         public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
-            IProductRepository productRepository, ICategoryRepository categoryRepository)
+            IProductRepository productRepository)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
             _textRecognitionService = textRecognitionService;
             _translateService = translateService;
             _productRepository = productRepository;
-            _categoryRepository = categoryRepository;
         }
 
         public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
@@ -76,7 +74,7 @@ namespace TakeAIMeal.API.Services.Logic
 
                         if (!string.IsNullOrEmpty(model.Title))
                         {
-                            model.ImageBase64 = await GenerateImageFromTitle(model.Title);
+                            model.ImageBase64 = $"data:image/svg+xml;base64, {await GenerateImageFromTitle(model.Title)}";
                         }
                     }
 
@@ -102,7 +100,7 @@ namespace TakeAIMeal.API.Services.Logic
             if(tags != null && tags.Count > 0)
             {
                 var prompt = string.Format(Prompts.DishTitleFromTags, string.Join(", ",tags));
-                var titleResponse = await _textGeneratorService.GenerateText(prompt, maxTokens: 10);
+                var titleResponse = await _textGeneratorService.GenerateText(prompt, maxTokens: 50);
                 if(titleResponse != null && titleResponse.Count > 0)
                 {
                     return titleResponse.FirstOrDefault();

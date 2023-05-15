@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Models.Recipe;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
@@ -36,6 +37,10 @@ namespace TakeAIMeal.API.Controllers
         [HttpPost("generate")]
         public async Task<IActionResult> GenerateRecipe([FromBody] RecipeGenerateBody body)
         {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
             if (ModelState.IsValid)
             {
                 string ingredients = _recipeService.GetRecipeIngridientsFromProducts(body.Products);
@@ -46,12 +51,16 @@ namespace TakeAIMeal.API.Controllers
 
                 if(recipe != null)
                 {
-                    return Ok(recipe);
+                    response.Success = true;
+                    response.Data = recipe;
+                    return Ok(response);
                 }
 
-                return BadRequest("Something went wrong");
+                response.Message = "Something went wrong";
+                return BadRequest(response);
             }
-            return BadRequest("Invalid body of request");
+            response.Message = "Invalid body of request";
+            return BadRequest(response);
         }
     }
 }
