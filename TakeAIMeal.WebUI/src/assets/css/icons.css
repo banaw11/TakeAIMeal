@@ -39,3 +39,11 @@ i.user {
     height: 18px;
     display: inline-block;
 }
+
+i.icon-add {
+    content: url('../icons/plus.svg');
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}

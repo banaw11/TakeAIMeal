@@ -5,6 +5,7 @@ import AboutComponent from '../components/main/AboutComponent.vue'
 import AccountView from '../views/AccountView.vue'
 import LoginComponent from '../components/account/LoginComponent.vue'
 import RegistrationComponent from '../components/account/RegistrationComponent.vue'
+import QuickRecipeComponent from '../components/main/recipe/QuickRecipeComponent.vue'
 
 import TestComponent from '../components/account/TestComponent.vue'
 
@@ -24,9 +25,11 @@ const routes = [
         name: 'about',
         component: AboutComponent
       },
-      // {
-      //   //kucharska
-      // }
+      {
+        path: 'quick-recipe',
+        name: 'quickRecipe',
+        component: QuickRecipeComponent
+      }
     ]
   },
   {
@@ -54,8 +57,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes
+    history: createWebHistory(),
+    routes
 })
 
 export default router

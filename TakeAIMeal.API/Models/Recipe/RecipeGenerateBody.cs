@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TakeAIMeal.Common.Dictionaries;
 
 namespace TakeAIMeal.API.Models.Recipe
 {
@@ -14,9 +15,15 @@ namespace TakeAIMeal.API.Models.Recipe
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection of ingredients to use in generating the recipe.
+        /// Gets or sets the enum of meal type to use in generating the recipe.
         /// </summary>
         [Required]
-        public ICollection<string> Ingredients { get; set; }
+        public MealTypes MealType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection of product id to use in generating the recipe.
+        /// </summary>
+        [Required]
+        public ICollection<int> Products { get; set; }
     }
 }
