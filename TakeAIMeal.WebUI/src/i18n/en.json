@@ -7,6 +7,7 @@
     "ChooseProducts": "Indicate the products you don't like",
     "SaveCookbook": "Save recipes in a cookbook",
     "HaveAccount": "Have you an account?",
+    "HaventAccound": "Haven't you an account?",
     "SignIn": "Sign in"
   },
   "Header": {
@@ -15,6 +16,12 @@
     "SignIn": "Sign in",
     "SignOut": "Sign out",
     "Account": "Account"
+  },
+  "Account": {
+    "Password": "Password",
+    "RepeatPassword": "Repeat password",
+    "FirstName": "First name",
+    "ForgottenPassword": "Forgotten password?"
   },
   "Dropdown": {
     "PleaseSelect": "Select",
