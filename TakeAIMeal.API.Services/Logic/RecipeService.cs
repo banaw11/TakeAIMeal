@@ -1,4 +1,5 @@
-﻿using TakeAIMeal.API.Services.Interfaces;
+﻿using Newtonsoft.Json;
+using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Common.Resources;
@@ -14,15 +15,17 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly ITextRecognitionService _textRecognitionService;
         private readonly ITranslateService _translateService;
         private readonly IProductRepository _productRepository;
+        private readonly IBlobStorageService _blobStorageService;
 
         public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
-            IProductRepository productRepository)
+            IProductRepository productRepository, IBlobStorageService blobStorageService)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
             _textRecognitionService = textRecognitionService;
             _translateService = translateService;
             _productRepository = productRepository;
+            _blobStorageService = blobStorageService;
         }
 
         public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
@@ -41,7 +44,7 @@ namespace TakeAIMeal.API.Services.Logic
         }
 
         /// <inheritdoc/>
-        public async Task<RecipeModel> GenerateRecipe(string prompt, string language)
+        public async Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language)
         {
             if(!string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(language))
             {
@@ -78,14 +81,33 @@ namespace TakeAIMeal.API.Services.Logic
                         }
                     }
 
-                    if(language.ToLower() != LanguageCodes.EN.ToString().ToLower())
+                    var clone = model.Clone() as RecipeModel;
+                    Guid identifier = Guid.NewGuid();
+                    _ = Task.Run(() => UploadRecipToStorage(clone, identifier).ConfigureAwait(false));
+
+                    if(language.ToUpper() != LanguageCodes.EN.ToString())
                     {
-                        return await TranslateRecipe(model, language);
+                        model = await TranslateRecipe(model, language);
                     }
 
-                    return model;
+                    return Tuple.Create(model, identifier);
                 }
 
+            }
+            return null;
+        }
+        
+        /// <inheritdoc/>
+        public async Task<RecipeModel> GetRecipe(Guid identifier, string language)
+        {
+            if(identifier != Guid.Empty)
+            {
+                var recipe = await DownloadRecipFromStorage(identifier);
+                if(!string.IsNullOrEmpty(language) && language.ToUpper() != LanguageCodes.EN.ToString())
+                {
+                    return await TranslateRecipe(recipe, language);
+                }
+                return recipe;
             }
             return null;
         }
@@ -148,6 +170,44 @@ namespace TakeAIMeal.API.Services.Logic
                 return model;
             }
 
+            return recipe;
+        }
+
+        /// <summary>
+        /// Uploads a recipe to Azure Blob Storage.
+        /// </summary>
+        /// <param name="recipe">The recipe to be uploaded.</param>
+        /// <param name="recipeIdentifier">The identifier of the recipe.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        private async Task UploadRecipToStorage(RecipeModel recipe, Guid recipeIdentifier)
+        {
+            try
+            {
+                if (recipe != null)
+                {
+                    var serializedObject = JsonConvert.SerializeObject(recipe);
+                    await _blobStorageService.UploadStringContent(serializedObject, BlobStorageContainerNames.RecipeContainer, recipeIdentifier.ToString());
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Downloads a recipe from Azure Blob Storage.
+        /// </summary>
+        /// <param name="recipeIdentifier">The identifier of the recipe to be downloaded.</param>
+        /// <returns>A task representing the asynchronous operation. The task result contains the downloaded recipe.</returns>
+        private async Task<RecipeModel> DownloadRecipFromStorage(Guid recipeIdentifier)
+        {
+            RecipeModel recipe = null;
+            var serializedObject = await _blobStorageService.DownloadStringContent(BlobStorageContainerNames.RecipeContainer, recipeIdentifier.ToString());
+            if(!string.IsNullOrEmpty(serializedObject))
+            {
+                recipe = JsonConvert.DeserializeObject<RecipeModel>(serializedObject);
+            }
             return recipe;
         }
     }

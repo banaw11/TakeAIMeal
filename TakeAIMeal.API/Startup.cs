@@ -67,6 +67,8 @@ namespace TakeAIMeal.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseResponseCacheOnSuccess();
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             if (!env.IsDevelopment())

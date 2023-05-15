@@ -47,12 +47,12 @@ namespace TakeAIMeal.API.Controllers
                 string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
                 string prompt = string.Format(Prompts.RecipeFromIngredients, ingredients, mealType);
 
-                RecipeModel recipe = await _recipeService.GenerateRecipe(prompt, body.Language);
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
 
-                if(recipe != null)
+                if(result != null)
                 {
                     response.Success = true;
-                    response.Data = recipe;
+                    response.Data = new { model = result.Item1 , identifier = result.Item2.ToString() };
                     return Ok(response);
                 }
 
@@ -60,6 +60,34 @@ namespace TakeAIMeal.API.Controllers
                 return BadRequest(response);
             }
             response.Message = "Invalid body of request";
+            return BadRequest(response);
+        }
+
+        /// <summary>
+        /// Retrieves a recipe based on the specified query parameters.
+        /// </summary>
+        /// <param name="query">The query parameters.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation. The task result contains an <see cref="IActionResult"/>
+        /// indicating the success or failure of the operation, and the retrieved recipe if successful.
+        /// </returns>
+        [HttpGet("get-recipe")]
+        [ResponseCache(Duration = 3600)]
+        public async Task<IActionResult> GetRecipe([FromQuery] RecipeQuery query)
+        {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
+            var result = await _recipeService.GetRecipe(query.Identifier, query.Language);
+            if(result != null)
+            {
+                response.Success = true;
+                response.Data = result;
+                return Ok(response);
+            }
+
+            response.Message = "Query is missing required values";
             return BadRequest(response);
         }
     }
