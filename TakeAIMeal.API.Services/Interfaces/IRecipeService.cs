@@ -13,7 +13,7 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="prompt">The prompt used to generate the recipe.</param>
         /// <param name="language">The language used to generate the recipe.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the generated <see cref="RecipeModel"/>.</returns>
-        Task<RecipeModel> GenerateRecipe(string prompt, string language);
+        Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language);
 
         /// <summary>
         /// Gets a recipe ingredients string for the specified collection of product identifiers.
@@ -21,5 +21,13 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="productIds">The collection of product identifiers to get the recipe ingredients for.</param>
         /// <returns>A string representing the recipe ingredients for the specified collection of product identifiers.</returns>
         string GetRecipeIngridientsFromProducts(ICollection<int> productIds);
+
+        /// <summary>
+        /// Gets a recipe by identifier and language.
+        /// </summary>
+        /// <param name="identifier">The identifier of the recipe to retrieve.</param>
+        /// <param name="language">The language in which the recipe is requested.</param>
+        /// <returns>A task representing the asynchronous operation. The task result contains the retrieved recipe.</returns>
+        Task<RecipeModel> GetRecipe(Guid identifier, string language);
     }
 }

@@ -3,8 +3,19 @@
     /// <summary>
     /// Represents a recipe, including its title, recipe instructions, and image in base64 format.
     /// </summary>
-    public class RecipeModel
+    public class RecipeModel : ICloneable
     {
+        public RecipeModel()
+        {
+        }
+
+        public RecipeModel(RecipeModel model)
+        {
+            Title = model.Title;
+            Recipe = model.Recipe;
+            ImageBase64 = model.ImageBase64;
+        }
+
         /// <summary>
         /// The title of the recipe.
         /// </summary>
@@ -19,5 +30,10 @@
         /// The image of the recipe in base64 format.
         /// </summary>
         public string ImageBase64 { get; set; }
+
+        public object Clone()
+        {
+            return new RecipeModel(this);
+        }
     }
 }

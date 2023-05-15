@@ -14,7 +14,6 @@ namespace TakeAIMeal.Common.Services.Logic
         public async Task<string> DownloadStringContent(string containerName, string blobName)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            await containerClient.CreateIfNotExistsAsync();
 
             BlobClient blobClient = containerClient.GetBlobClient(blobName);
             var downloadResponse = await blobClient.DownloadContentAsync();
@@ -31,7 +30,6 @@ namespace TakeAIMeal.Common.Services.Logic
             if (!string.IsNullOrEmpty(content))
             {
                 BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-                await containerClient.CreateIfNotExistsAsync();
 
                 BlobClient blobClient = containerClient.GetBlobClient(blobName);
 
