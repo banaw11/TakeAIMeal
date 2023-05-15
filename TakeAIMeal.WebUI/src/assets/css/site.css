@@ -29,8 +29,13 @@ body {
         top: 0;
         height: 56px;
         background-color: var(--color-white);
+        z-index: 1000;
         
     }
+
+        #app .page-header .navbar {
+            box-shadow: 0 0 10px -3px rgba(0,0,0,.8);
+        }
 
         #app .page-header .navbar .language-container{
             display: inline-flex;
@@ -214,6 +219,40 @@ body {
                 margin: 0 auto;
             }
 
+        #app .page-container .content-container .recipe-container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 30px;
+            padding: 2rem 1rem;
+            background-color: var(--color-white);
+            border-radius: .5rem;
+            border: 1px solid var(--color-grey);
+            margin: 2rem auto;
+            color: var(--color-main);
+            max-width: 1000px;
+        }
+
+            #app .page-container .content-container .recipe-container .image-area img {
+                border-radius: 1rem;
+                box-shadow: 0 0 10px -3px rgba(0,0,0,.6);
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area label{
+                color: var(--color-main);
+                font-weight: 600;
+                text-align: center;
+            }
+
+            #app .page-container .content-container .recipe-container .recipe-area span {
+                color: var(--color-main);
+                font-style: italic;
+            }
+
 .carusel {
     display: flex;
     gap: 20px;
@@ -320,6 +359,16 @@ body {
     #app .page-container .content-container .form-group .meal-dropdown > div{
         width: 100%;
     }
+
+    #app .page-container .content-container .recipe-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #app .page-container .content-container .recipe-container .image-area {
+            display: flex;
+            justify-content: center;
+        }
 }
 
 

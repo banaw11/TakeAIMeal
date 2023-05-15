@@ -31,6 +31,7 @@
             <button class="btn btn-primary" :disabled="isInValid()" @click="generateRecipe()">{{ t('QuickRecipe.Generate') }}</button>
         </div>
     </div>
+    <RecipeComponent v-if="recipe != null" :data="recipe"></RecipeComponent>
 </template>
 
 <script>
@@ -39,6 +40,7 @@
     import { useI18n } from 'vue-i18n'
     import httpClient from '@/modules/http/client'
     import CustomDropdown from '../../shared/CustomDropdownComponent.vue'
+    import RecipeComponent from './RecipeComponent.vue'
     export default defineComponent({
         name: "QuickRecipeComponent",
         data() {
@@ -46,7 +48,8 @@
                 mealTypes: [], // {name : "", value : ""}
                 categoryTypes: [], // {name : "", value : ""}
                 categoryData: [], // {categoryId : "", productTypes : [], productIds : [] , index : 0 }
-                recipeData: { mealId : null, productIds : []}
+                recipeData: { mealId: null, productIds: [] },
+                recipe : null
             }
         },
         setup() {
@@ -58,7 +61,8 @@
             return { t }
         },
         components: {
-            CustomDropdown
+            CustomDropdown,
+            RecipeComponent
         },
         computed: {
             isInValid() {
@@ -147,7 +151,7 @@
                 };
                 httpClient.post('api/recipe/generate', model)
                     .then((response) => {
-                        //to-do redirect to recipe view
+                        this.recipe = response.data;
                     });
             }
         }
