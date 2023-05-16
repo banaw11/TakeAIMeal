@@ -1,12 +1,26 @@
 <template>
-    <h1>{{ t('Home.SignUp') }}</h1>
-    <form>
-        <input type="text" placeholder="E-mail" v-model="email" class="text-dark"  /><br/>
-        <input type="password" v-bind:placeholder="$t('Account.Password')" v-model="password" class="text-dark"  /><br/>
-        <input type="password" v-bind:placeholder="$t('Account.RepeatPassword')" v-model="repeatPassword" class="text-dark"  /><br/>
-        <input type="text" v-bind:placeholder="$t('Account.UserName')" v-model="userName" class="text-dark"  /><br/>
-        <button class="btn btn-primary" :disabled="!isInValid()" @click="signUp()">{{ t('Home.SignUp') }}</button>
-    </form>
+    <div class="content-header">
+        <h1>{{ t('Home.SignUp') }}</h1>
+    </div>
+    <div class="form-container account-signup">
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="E-mail" v-model="email" class="text-dark" />
+            </div>
+            <div class="form-group">
+                <input type="password" v-bind:placeholder="$t('Account.Password')" v-model="password" class="text-dark" />
+            </div>
+            <div class="form-group">
+                <input type="password" v-bind:placeholder="$t('Account.RepeatPassword')" v-model="repeatPassword" class="text-dark" />
+            </div>
+            <div class="form-group">
+                <input type="text" v-bind:placeholder="$t('Account.UserName')" v-model="userName" class="text-dark" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary" :disabled="!isInValid()" @click="signUp()">{{ t('Home.SignUp') }}</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
