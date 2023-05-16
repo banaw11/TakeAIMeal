@@ -41,7 +41,6 @@ export default defineComponent({
     },
     methods: {
         signIn() {
-            let self = this;
             httpClient.post(`/api/Account/sign-in`, {
                 email: this.email,
                 password: this.password
@@ -50,18 +49,16 @@ export default defineComponent({
                     console.log(response);
                     const status = JSON.parse(response.status);
                     if(status == '200')
-                        self.$router.push('/');
+                        this.$router.push('/');
                 })
         },
         emailValidate() {
-            // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-            // sprawdza czy e-mail jest w formacie e-mail i czy nie zawiera więcej niż jeden znaków @
+            // check basic e-mail structure
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return this.email.length > 0 && this.email.match(emailRegex) ? true : false;
         },
         passwordValidate() {
-            // ustalić jakie ma być minimalne hasło, ewentualnie jakie ma zawierać znaki
-            return this.password.length > 5 ? true : false;
+            return this.password.length > 7 ? true : false;
         }
     }
 })

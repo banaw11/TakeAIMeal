@@ -50,17 +50,15 @@ export default defineComponent({
                 })
         },
         emailValidate() {
-            // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-            // sprawdza czy e-mail jest w formacie e-mail i czy nie zawiera więcej niż jeden znaków @
+            // check basic e-mail structure
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return this.email.length > 0 && this.email.match(emailRegex) ? true : false;
         },
         passwordValidate() {
-            // ustalić jakie ma być minimalne hasło, ewentualnie jakie ma zawierać znaki
-            return this.password.length > 5 ? true : false;
+            return this.password.length > 7 ? true : false;
         },
         repeatPasswordValidate() {
-            return this.repeatPassword.length > 5 && this.password === this.repeatPassword ? true : false;
+            return this.repeatPassword.length > 7 && this.password === this.repeatPassword ? true : false;
         },
         firstNameValidate() {
             return this.userName.length > 0 ? true : false;

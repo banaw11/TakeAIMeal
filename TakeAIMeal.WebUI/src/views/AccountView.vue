@@ -8,12 +8,7 @@
 </template>
 
 <script>
-// import NavigationComponent from '@/components/main/NavigationComponent.vue'
-
 export default { 
-    name: 'AccountView',
-    // components: {
-    //     NavigationComponent
-    // },
+    name: 'AccountView'
 }
 </script>
