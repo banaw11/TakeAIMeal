@@ -22,7 +22,7 @@ namespace TakeAIMeal.Data
     {
         public DbSet<Product> Products { get; set; } // Products
         public DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
-        public DbSet<Receipe> Receipes { get; set; } // Receipes
+        public DbSet<Recipe> Recipes { get; set; } // Recipes
         public DbSet<UserDiet> UserDiets { get; set; } // UserDiets
         public DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
@@ -32,7 +32,7 @@ namespace TakeAIMeal.Data
 
             Products = new FakeDbSet<Product>("Id");
             ProductCategories = new FakeDbSet<ProductCategory>("Id");
-            Receipes = new FakeDbSet<Receipe>("Id");
+            Recipes = new FakeDbSet<Recipe>("Id");
             UserDiets = new FakeDbSet<UserDiet>("Id");
             UserProductsExclusions = new FakeDbSet<UserProductsExclusion>("Id");
 
