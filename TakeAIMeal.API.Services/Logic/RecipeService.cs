@@ -137,7 +137,7 @@ namespace TakeAIMeal.API.Services.Logic
                     _recipeRepository.Add(recipe);
                     _recipeRepository.SaveChanges();
 
-                    // to - do save into user blob
+                    _ = Task.Run(() => SaveRecipeIntoUserBlob(_userIdentityService.EmailAddress, recipeModel, model.Identifier));
 
                     return recipe.Id;
                 }
@@ -147,16 +147,15 @@ namespace TakeAIMeal.API.Services.Logic
         }
 
         /// <inheritdoc/>
-        public async Task RemoveRecipe(int recipeId)
+        public void RemoveRecipe(int recipeId)
         {
             var recipe = _recipeRepository.Get(x => x.Id == recipeId);
             if(recipe != null)
             {
+                _ = Task.Run(() => RemoveRecipeFromUserBlob(_userIdentityService.EmailAddress, recipe.RecipeIdentifier));
+
                 _recipeRepository.Delete(recipe);
                 _recipeRepository.SaveChanges();
-
-                // to - do remove from user blob
-
             }
         }
 
@@ -260,10 +259,96 @@ namespace TakeAIMeal.API.Services.Logic
             return recipe;
         }
 
-        private async Task SaveRecipeIntoUserBlob(string email, RecipeModel recipe)
+        /// <summary>
+        /// Downloads the recipe collection from the storage for the specified <paramref name="emailIdentifier"/>.
+        /// </summary>
+        /// <param name="emailIdentifier">The email identifier associated with the recipe collection.</param>
+        /// <returns>A list of recipe collection models.</returns>
+        private async Task<List<RecipeCollectionModel>> DownloadRecipCollectionFromStorage(string emailIdentifier)
+        {
+            List<RecipeCollectionModel> recipeCollection = new List<RecipeCollectionModel>();
+            try
+            {
+                if (!string.IsNullOrEmpty(emailIdentifier))
+                {
+                    var serializedObject = await _blobStorageService.DownloadStringContent(BlobStorageContainerNames.UserCollectionContainer, emailIdentifier.ToLower());
+                    if (!string.IsNullOrEmpty(serializedObject))
+                    {
+                        recipeCollection = JsonConvert.DeserializeObject<List<RecipeCollectionModel>>(serializedObject);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Handle exception if needed
+            }
+
+            return recipeCollection;
+        }
+
+        /// <summary>
+        /// Uploads the recipe collection to the storage for the specified <paramref name="emailIdentifier"/>.
+        /// </summary>
+        /// <param name="emailIdentifier">The email identifier associated with the recipe collection.</param>
+        /// <param name="collection">The list of recipe collection models to upload.</param>
+        private async Task UploadRecipCollectionToStorage(string emailIdentifier, List<RecipeCollectionModel> collection)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(emailIdentifier) && collection != null && collection.Count > 0)
+                {
+                    var serializedObject = JsonConvert.SerializeObject(collection);
+
+                    await _blobStorageService.UploadStringContent(serializedObject, BlobStorageContainerNames.UserCollectionContainer, emailIdentifier.ToLower());
+                }
+            }
+            catch (Exception)
+            {
+                // Handle exception if needed
+            }
+        }
+
+        /// <summary>
+        /// Saves a recipe into the user's blob storage associated with the specified <paramref name="email"/>.
+        /// </summary>
+        /// <param name="email">The email associated with the user.</param>
+        /// <param name="recipe">The recipe to save.</param>
+        /// <param name="recipeIdentifier">The unique identifier for the recipe.</param>
+        private async Task SaveRecipeIntoUserBlob(string email, RecipeModel recipe, Guid recipeIdentifier)
         {
             var emailIdentifier = EmailIdentifierGenerator.GenerateIdentifier(email);
+            List<RecipeCollectionModel> recipeCollection = await DownloadRecipCollectionFromStorage(emailIdentifier);
 
+            recipeCollection.Add(new RecipeCollectionModel
+            {
+                ImageBase64 = recipe.ImageBase64,
+                Title = recipe.Title,
+                RecipeIdentifier = recipeIdentifier
+            });
+
+            await UploadRecipCollectionToStorage(emailIdentifier, recipeCollection);
+        }
+
+        /// <summary>
+        /// Removes a recipe from the user's blob storage associated with the specified <paramref name="email"/>.
+        /// </summary>
+        /// <param name="email">The email associated with the user.</param>
+        /// <param name="recipeIdentifier">The unique identifier for the recipe to remove.</param>
+        private async Task RemoveRecipeFromUserBlob(string email, Guid recipeIdentifier)
+        {
+            if (recipeIdentifier != Guid.Empty)
+            {
+                var emailIdentifier = EmailIdentifierGenerator.GenerateIdentifier(email);
+                List<RecipeCollectionModel> recipeCollection = await DownloadRecipCollectionFromStorage(emailIdentifier);
+
+                var toRemove = recipeCollection.Where(x => x.RecipeIdentifier == recipeIdentifier).FirstOrDefault();
+                if (toRemove != null)
+                {
+                    recipeCollection.Remove(toRemove);
+                }
+
+                await UploadRecipCollectionToStorage(emailIdentifier, recipeCollection);
+            }
         }
 
         #endregion

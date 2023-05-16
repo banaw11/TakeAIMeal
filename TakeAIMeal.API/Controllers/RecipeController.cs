@@ -90,5 +90,48 @@ namespace TakeAIMeal.API.Controllers
             response.Message = "Query is missing required values";
             return BadRequest(response);
         }
+
+        /// <summary>
+        /// Saves a recipe using the specified <paramref name="model"/>.
+        /// </summary>
+        /// <param name="model">The recipe reference model containing the recipe details.</param>
+        /// <returns>An <see cref="IActionResult"/> representing the response of the save operation.</returns>
+        [HttpPost("save-recipe")]
+        public async Task<IActionResult> SaveRecipe([FromBody] RecipeReferenceModel model)
+        {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
+            if (ModelState.IsValid)
+            {
+                var result = await _recipeService.AddRecipe(model);
+                if (result.HasValue)
+                {
+                    response.Success = true;
+                    response.Data = result;
+                }
+            }
+
+            response.Message = "Body is missing required values";
+            return BadRequest(response);
+        }
+
+        /// <summary>
+        /// Deletes a recipe with the specified <paramref name="recipeId"/>.
+        /// </summary>
+        /// <param name="recipeId">The ID of the recipe to be deleted.</param>
+        /// <returns>An <see cref="IActionResult"/> representing the response of the delete operation.</returns>
+        [HttpDelete("delete-recipe/{recipeId}")]
+        public IActionResult DeleteRecipe(int recipeId)
+        {
+            var response = new ResponseModel
+            {
+                Success = true
+            };
+            _recipeService.RemoveRecipe(recipeId);
+
+            return Ok(response);
+        }
     }
 }

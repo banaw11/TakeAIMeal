@@ -41,7 +41,6 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// Removes the recipe with the specified <paramref name="recipeId"/>.
         /// </summary>
         /// <param name="recipeId">The ID of the recipe to be removed.</param>
-        /// <returns>A task representing the asynchronous operation.</returns>
-        Task RemoveRecipe(int recipeId);
+        void RemoveRecipe(int recipeId);
     }
 }

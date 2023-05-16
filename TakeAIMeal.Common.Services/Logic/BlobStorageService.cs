@@ -15,16 +15,19 @@ namespace TakeAIMeal.Common.Services.Logic
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
             BlobClient blobClient = containerClient.GetBlobClient(blobName);
-            var downloadResponse = await blobClient.DownloadContentAsync();
-            if(downloadResponse != null && downloadResponse.Value != null)
+            if (blobClient.Exists().Value)
             {
-                return downloadResponse.Value.Content.ToString();
+                var downloadResponse = await blobClient.DownloadContentAsync();
+                if (downloadResponse != null && downloadResponse.Value != null)
+                {
+                    return downloadResponse.Value.Content.ToString();
+                }
             }
 
             return null;
         }
 
-        public async Task UploadStringContent(string content, string containerName, string blobName, bool createIfNotExists = false)
+        public async Task UploadStringContent(string content, string containerName, string blobName)
         {
             if (!string.IsNullOrEmpty(content))
             {
