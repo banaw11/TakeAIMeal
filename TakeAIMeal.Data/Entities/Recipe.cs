@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace TakeAIMeal.Data
 {
-    // Receipes
-    public class Receipe
+    // Recipes
+    public class Recipe
     {
         public int Id { get; set; } // Id (Primary key)
         public int UserId { get; set; } // UserId
         public int MealType { get; set; } // MealType
-        public Guid ReceipeIdentifier { get; set; } // ReceipeIdentifier
-        public Guid PictureIdentifier { get; set; } // PictureIdentifier
+        public Guid RecipeIdentifier { get; set; } // RecipeIdentifier
     }
 
 }

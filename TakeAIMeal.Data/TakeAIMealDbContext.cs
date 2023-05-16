@@ -31,7 +31,7 @@ namespace TakeAIMeal.Data
 
         public DbSet<Product> Products { get; set; } // Products
         public DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
-        public DbSet<Receipe> Receipes { get; set; } // Receipes
+        public DbSet<Recipe> Recipes { get; set; } // Recipes
         public DbSet<UserDiet> UserDiets { get; set; } // UserDiets
         public DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
@@ -58,7 +58,7 @@ namespace TakeAIMeal.Data
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new ReceipeConfiguration());
+            modelBuilder.ApplyConfiguration(new RecipeConfiguration());
             modelBuilder.ApplyConfiguration(new UserDietConfiguration());
             modelBuilder.ApplyConfiguration(new UserProductsExclusionConfiguration());
         }

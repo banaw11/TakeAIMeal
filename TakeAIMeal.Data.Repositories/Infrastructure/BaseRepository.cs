@@ -25,6 +25,12 @@ namespace TakeAIMeal.Data.Repositories.Infrastructure
         }
 
         /// <inheritdoc/>
+        public bool Any(Expression<Func<T, bool>> expression)
+        {
+            return _dbSet.Any(expression);
+        }
+
+        /// <inheritdoc/>
         public void Delete(T entity)
         {
             if(entity != null)

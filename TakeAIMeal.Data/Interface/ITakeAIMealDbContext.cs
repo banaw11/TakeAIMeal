@@ -22,7 +22,7 @@ namespace TakeAIMeal.Data
     {
         DbSet<Product> Products { get; set; } // Products
         DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
-        DbSet<Receipe> Receipes { get; set; } // Receipes
+        DbSet<Recipe> Recipes { get; set; } // Recipes
         DbSet<UserDiet> UserDiets { get; set; } // UserDiets
         DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 

@@ -21,7 +21,9 @@
         </div>
         <div class="right-part">
             <div>
-                <button class="btn btn-secondary">{{ t('Home.SignUp') }}</button>
+                <router-link to="/account/registration" custom v-slot="{ navigate }">
+                    <button class="btn btn-secondary" @click="navigate">{{ t('Home.SignUp') }}</button>
+                </router-link>
             </div>
             
             <ul>
@@ -31,7 +33,9 @@
             </ul>
             <div class="sign-in-container">
                 <span>{{ t('Home.HaveAccount') }}</span>
-                <button class="btn btn-primary">{{ t('Home.SignIn') }}</button>
+                <router-link to="/account/login" custom v-slot="{ navigate }">
+                    <button class="btn btn-primary" @click="navigate">{{ t('Home.SignIn') }}</button>
+                </router-link>
             </div>
         </div>
     </div>

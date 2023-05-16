@@ -32,6 +32,7 @@ namespace TakeAIMeal.API.Extensions
             services.AddScoped<ITemplateService, RazorViewTemplateService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IDictionarySerivce, DictionaryService>();
+            services.AddScoped<IUserIdentityService, UserIdentityService>();
 
             return services;
         }
@@ -40,6 +41,7 @@ namespace TakeAIMeal.API.Extensions
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
 
             return services;
         }

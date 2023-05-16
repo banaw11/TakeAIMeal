@@ -253,13 +253,45 @@ body {
                 font-style: italic;
             }
 
-.carusel {
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100%;
-}
+        #app .page-container .content-container .form-container.account-signin .form-group,
+        #app .page-container .content-container .form-container.account-signup .form-group {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+            #app .page-container .content-container .form-container.account-signin .form-group input,
+            #app .page-container .content-container .form-container.account-signup .form-group input {
+                min-width: 40%;
+                padding: 0 10px;
+                height: 3rem;
+                border-radius: .3rem;
+                border-color: transparent;
+            }
+
+            #app .page-container .content-container .form-container.account-signin .form-group span,
+            #app .page-container .content-container .form-container.account-signup .form-group span {
+                line-height: 45px;
+                margin-left: 2rem;
+            }
+
+        #app .page-container .content-container .form-container.account-signin .button-container,
+        #app .page-container .content-container .form-container.account-signup .button-container {
+            flex-direction: column;
+        }
+
+            #app .page-container .content-container .form-container.account-signin .button-container span,
+            #app .page-container .content-container .form-container.account-signup .button-container span {
+                text-align: center;
+                margin-bottom: .5rem;
+            }
+
+        .carusel {
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+            width: 100%;
+            min-height: 100%;
+        }
 
     .carusel .carusel-container {
         padding: 1rem 1.5rem;
