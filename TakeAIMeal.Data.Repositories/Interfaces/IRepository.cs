@@ -50,5 +50,15 @@ namespace TakeAIMeal.Data.Repositories.Interfaces
         /// Saves all changes made to the repository.
         /// </summary>
         void SaveChanges();
+
+        /// <summary>
+        /// Determines whether any elements in the collection satisfy the specified condition
+        /// defined by the provided expression.
+        /// </summary>
+        /// <param name="expression">The expression that defines the condition.</param>
+        /// <returns>
+        ///   <c>true</c> if any elements in the collection satisfy the condition; otherwise, <c>false</c>.
+        /// </returns>
+        bool Any(Expression<Func<T, bool>> expression);
     }
 }

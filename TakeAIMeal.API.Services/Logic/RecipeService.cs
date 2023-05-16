@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using TakeAIMeal.API.Services.Extensions;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
 using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Common.Resources;
 using TakeAIMeal.Common.Services.Interfaces;
+using TakeAIMeal.Data;
 using TakeAIMeal.Data.Repositories.Interfaces;
 
 namespace TakeAIMeal.API.Services.Logic
@@ -16,9 +18,11 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly ITranslateService _translateService;
         private readonly IProductRepository _productRepository;
         private readonly IBlobStorageService _blobStorageService;
+        private readonly IRecipeRepository _recipeRepository;
+        private readonly IUserIdentityService _userIdentityService;
 
         public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
-            IProductRepository productRepository, IBlobStorageService blobStorageService)
+            IProductRepository productRepository, IBlobStorageService blobStorageService, IRecipeRepository recipeRepository, IUserIdentityService userIdentityService)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
@@ -26,6 +30,8 @@ namespace TakeAIMeal.API.Services.Logic
             _translateService = translateService;
             _productRepository = productRepository;
             _blobStorageService = blobStorageService;
+            _recipeRepository = recipeRepository;
+            _userIdentityService = userIdentityService;
         }
 
         public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
@@ -112,6 +118,49 @@ namespace TakeAIMeal.API.Services.Logic
             return null;
         }
 
+        /// <inheritdoc/>
+        public async Task<int?> AddRecipe(RecipeReferenceModel model)
+        {
+            if(model != null && model.Identifier != Guid.Empty)
+            {
+                var recipe = new Recipe
+                {
+                    UserId = _userIdentityService.UserId,
+                    RecipeIdentifier = model.Identifier,
+                    MealType = (int)model.MealType
+                };
+
+                var recipeModel = await DownloadRecipFromStorage(model.Identifier);
+
+                if(!_recipeRepository.Any(x => x.UserId == recipe.UserId && x.RecipeIdentifier == model.Identifier) && recipeModel != null)
+                {
+                    _recipeRepository.Add(recipe);
+                    _recipeRepository.SaveChanges();
+
+                    // to - do save into user blob
+
+                    return recipe.Id;
+                }
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public async Task RemoveRecipe(int recipeId)
+        {
+            var recipe = _recipeRepository.Get(x => x.Id == recipeId);
+            if(recipe != null)
+            {
+                _recipeRepository.Delete(recipe);
+                _recipeRepository.SaveChanges();
+
+                // to - do remove from user blob
+
+            }
+        }
+
+        #region private methods
         /// <summary>
         /// Generates a dish title from a list of tags.
         /// </summary>
@@ -210,5 +259,13 @@ namespace TakeAIMeal.API.Services.Logic
             }
             return recipe;
         }
+
+        private async Task SaveRecipeIntoUserBlob(string email, RecipeModel recipe)
+        {
+            var emailIdentifier = EmailIdentifierGenerator.GenerateIdentifier(email);
+
+        }
+
+        #endregion
     }
 }

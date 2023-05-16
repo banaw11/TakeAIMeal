@@ -29,5 +29,19 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="language">The language in which the recipe is requested.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the retrieved recipe.</returns>
         Task<RecipeModel> GetRecipe(Guid identifier, string language);
+
+        /// <summary>
+        /// Adds a recipe using the specified <paramref name="model"/>.
+        /// </summary>
+        /// <param name="model">The reference model containing the recipe details.</param>
+        /// <returns>A task representing the asynchronous operation. The task result contains the id of recipe</returns>
+        Task<int?> AddRecipe(RecipeReferenceModel model);
+
+        /// <summary>
+        /// Removes the recipe with the specified <paramref name="recipeId"/>.
+        /// </summary>
+        /// <param name="recipeId">The ID of the recipe to be removed.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task RemoveRecipe(int recipeId);
     }
 }

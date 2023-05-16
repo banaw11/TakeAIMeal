@@ -12,7 +12,7 @@
         /// <param name="containerName">The name of the container to upload to.</param>
         /// <param name="blobName">The name of the blob to upload to.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        Task UploadStringContent(string content, string containerName, string blobName);
+        Task UploadStringContent(string content, string containerName, string blobName, bool createIfNotExist = false);
 
         /// <summary>
         /// Downloads the string content from the specified container and blob name in Azure Blob Storage.
