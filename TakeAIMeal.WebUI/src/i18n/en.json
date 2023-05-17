@@ -21,7 +21,11 @@
     "Password": "Password",
     "RepeatPassword": "Repeat password",
     "UserName": "Username",
-    "ForgottenPassword": "Forgotten password?"
+    "ForgottenPassword": "Forgotten password?",
+    "LoginSuccess": "Login success!",
+    "LoginFailed": "Login failed, check username and password are correct!",
+    "RegistrationSuccess": "Account created successfully!",
+    "RegistrationFailed": "Account not created!"
   },
   "Dropdown": {
     "PleaseSelect": "Select",

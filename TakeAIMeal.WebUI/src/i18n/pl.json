@@ -21,7 +21,11 @@
     "Password": "Hasło",
     "RepeatPassword": "Powtórz hasło",
     "UserName": "Nazwa użytkownika",
-    "ForgottenPassword": "Zapomniałeś hasła?"
+    "ForgottenPassword": "Zapomniałeś hasła?",
+    "LoginSuccess": "Zalogowano pomyślnie!",
+    "LoginFailed": "Nie zalogowano, sprawdź czy użytkownik i hasło są prawidłowe!",
+    "RegistrationSuccess": "Konto utworzone pomyślnie!",
+    "RegistrationFailed": "Nie utworzono konta!"
   },
   "Dropdown": {
     "PleaseSelect": "Wybierz",

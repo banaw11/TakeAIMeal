@@ -3,7 +3,8 @@
         <h1>{{ t('Header.SignIn') }}</h1>
     </div>
     <div class="form-container account-signin">
-        <form>
+        <!-- zastanawiam się czy from jest potrzebny, bo i tak wysyłamy jsona -->
+        <!-- <form> -->
             <div class="form-group">
                 <input type="text" placeholder="E-mail" v-model="email" class="text-dark" />
             </div>
@@ -14,7 +15,7 @@
                 <button class="btn btn-secondary" :disabled="!isInValid()" @click="signIn()">{{ t('Header.SignIn') }}</button>
                 <span>{{ t('Account.ForgottenPassword') }}</span>
             </div>
-        </form>
+        <!-- </form> -->
         <div class="button-container">
             <span>{{ t('Home.HaventAccound') }}</span>
             <router-link class="btn btn-primary" to="/account/registration">{{ t('Home.SignUp') }}</router-link>
@@ -51,15 +52,19 @@ export default defineComponent({
     },
     methods: {
         signIn() {
+            // tutaj póki co api zwraca error ale widzę, że na produkcji też (wyślę screena z consoli)
             httpClient.post(`/api/Account/sign-in`, {
                 email: this.email,
                 password: this.password
             })
                 .then((response) => {
-                    console.log(response);
-                    const status = JSON.parse(response.status);
-                    if(status == '200')
+                    const status = JSON.parse(response.success);
+                    if(status == true) {
+                        this.$toast.success(this.$t("Account.LoginSuccess"));
                         this.$router.push('/');
+                    } else {
+                        this.$toast.error(this.$t("Account.LoginFailed"));
+                    } 
                 })
         },
         emailValidate() {

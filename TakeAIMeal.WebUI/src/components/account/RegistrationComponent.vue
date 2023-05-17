@@ -54,13 +54,20 @@ export default defineComponent({
     },
     methods: {
         signUp() {
+            // tak samo jak w LoginComponent
             httpClient.post(`/api/Account/sign-up`, {
                 email: this.email,
                 password: this.password,
                 userName: this.userName
             })
                 .then((response) => {
-                    console.log(response);
+                    const status = JSON.parse(response.success);
+                    if(status == true) {
+                        this.$toast.success(this.$t("Account.RegistrationSuccess"));
+                        this.$router.push('/');
+                    } else {
+                        this.$toast.error(this.$t("Account.RegistrationFailed"));
+                    } 
                 })
         },
         emailValidate() {
