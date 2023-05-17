@@ -42,5 +42,14 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// </summary>
         /// <param name="recipeId">The ID of the recipe to be removed.</param>
         void RemoveRecipe(int recipeId);
+
+        /// <summary>
+        /// Retrieves a collection of recipe collections.
+        /// </summary>
+        /// <returns>
+        /// A task representing the asynchronous operation.
+        /// The task result contains a collection of <see cref="RecipeCollectionModel"/> objects.
+        /// </returns>
+        Task<ICollection<RecipeCollectionModel>> GetRecipeCollection(string language);
     }
 }
