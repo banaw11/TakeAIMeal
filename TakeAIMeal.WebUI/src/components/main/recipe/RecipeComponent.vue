@@ -2,6 +2,7 @@
     <div class="recipe-container">
         <div class="image-area">
             <img :src="data.model.imageBase64"/>
+            <button class="btn btn-primary" @click="saveRecipe" v-if="canSave && isAuthenticated">{{ t('Recipe.Save') }}</button>
         </div>
         <div class="recipe-area">
             <label>{{data.model.title}}</label>
@@ -12,10 +13,23 @@
 <script>
     /* eslint-disable */
     import { defineComponent } from 'vue'
+    import { useI18n } from 'vue-i18n'
     import httpClient from '@/modules/http/client'
+    import { mapGetters } from 'vuex'
     export default defineComponent({
         name: "RecipeComponent",
-        props: ['data'],
+        props: ['data', 'mealType', 'canSave'],
+        setup() {
+            const { t } = useI18n({
+                inheritLocale: true,
+                useScope: 'local'
+            })
+
+            return { t }
+        },
+        computed: {
+            ...mapGetters('context', ['isAuthenticated']),
+        },
         methods: {
             _reloadRecipe(language) {
                 const params = {
@@ -27,6 +41,17 @@
                         const model = response.data;
                         this.data.model.title = model.title;
                         this.data.model.recipe = model.recipe
+                    });
+            },
+            saveRecipe() {
+                const recipeReference = {
+                    identifier: this.data.identifier,
+                    mealType: this.mealType
+                };
+                httpClient.post('/api/recipe/save-recipe', recipeReference)
+                    .then((response) => {
+                        this.canSave = false;
+                        // add toast
                     });
             }
         },

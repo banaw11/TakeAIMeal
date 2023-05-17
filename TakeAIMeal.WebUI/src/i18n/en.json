@@ -8,7 +8,9 @@
     "SaveCookbook": "Save recipes in a cookbook",
     "HaveAccount": "Have you an account?",
     "HaventAccound": "Haven't you an account?",
-    "SignIn": "Sign in"
+    "SignIn": "Sign in",
+    "Cookbook": "Cookbook",
+    "OpenPersonalizedCookBok": "Open yours personalized cookbook"
   },
   "Header": {
     "Home": "Home",
@@ -88,6 +90,7 @@
     }
   },
   "Recipe": {
-    "Title": "Recipe"
+    "Title": "Recipe",
+    "Save": "Add to cookbook"
   }
 }
