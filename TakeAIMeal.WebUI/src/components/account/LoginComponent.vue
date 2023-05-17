@@ -3,7 +3,7 @@
         <h1>{{ t('Header.SignIn') }}</h1>
     </div>
     <div class="form-container account-signin">
-        <!-- zastanawiam się czy from jest potrzebny, bo i tak wysyłamy jsona -->
+        <!-- zastanawiam się czy form jest potrzebny, bo i tak wysyłamy jsona -->
         <!-- <form> -->
             <div class="form-group">
                 <input type="text" placeholder="E-mail" v-model="email" class="text-dark" />
