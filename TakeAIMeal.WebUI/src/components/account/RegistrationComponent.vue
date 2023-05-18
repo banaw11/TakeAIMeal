@@ -3,21 +3,21 @@
         <h1>{{ t('Home.SignUp') }}</h1>
     </div>
     <div class="form-container account-signup">
-        <form>
+        <form @submit.prevent="signUp">
             <div class="form-group">
-                <input type="text" placeholder="E-mail" v-model="email" class="text-dark" />
+                <input type="text" placeholder="E-mail" v-model="form.email" class="text-dark" />
             </div>
             <div class="form-group">
-                <input type="password" v-bind:placeholder="$t('Account.Password')" v-model="password" class="text-dark" />
+                <input type="password" v-bind:placeholder="$t('Account.Password')" v-model="form.password" class="text-dark" />
             </div>
             <div class="form-group">
-                <input type="password" v-bind:placeholder="$t('Account.RepeatPassword')" v-model="repeatPassword" class="text-dark" />
+                <input type="password" v-bind:placeholder="$t('Account.RepeatPassword')" v-model="form.repeatPassword" class="text-dark" />
             </div>
             <div class="form-group">
-                <input type="text" v-bind:placeholder="$t('Account.UserName')" v-model="userName" class="text-dark" />
+                <input type="text" v-bind:placeholder="$t('Account.UserName')" v-model="form.userName" class="text-dark" />
             </div>
             <div class="form-group">
-                <button class="btn btn-secondary" :disabled="!isInValid()" @click="signUp()">{{ t('Home.SignUp') }}</button>
+                <button class="btn btn-secondary" :disabled="!isInValid()" type="submit">{{ t('Home.SignUp') }}</button>
             </div>
         </form>
     </div>
@@ -31,10 +31,12 @@ export default defineComponent({
     name: 'LoginComponent',
     data(){
         return {
-            email: '',
-            password: '',
-            repeatPassword: '',
-            userName: ''
+            form: {
+                email: '',
+                password: '',
+                repeatPassword: '',
+                userName: '',
+            }
         }
     },
     setup() {
@@ -48,41 +50,35 @@ export default defineComponent({
     computed: {
         isInValid() {
             return () => {
-                return this.emailValidate() && this.passwordValidate() && this.repeatPasswordValidate() && this.firstNameValidate() ? true : false;
+                return this.emailValidate() && this.passwordValidate() && this.repeatPasswordValidate() && this.firstNameValidate();
             }
         }
     },
     methods: {
         signUp() {
-            // tak samo jak w LoginComponent
-            httpClient.post(`/api/Account/sign-up`, {
-                email: this.email,
-                password: this.password,
-                userName: this.userName
-            })
+            httpClient.post(`/api/Account/sign-up`, this.form)
                 .then((response) => {
-                    const status = JSON.parse(response.success);
-                    if(status == true) {
-                        this.$toast.success(this.$t("Account.RegistrationSuccess"));
-                        this.$router.push('/');
-                    } else {
-                        this.$toast.error(this.$t("Account.RegistrationFailed"));
-                    } 
-                })
+                    console.log(response);
+                    this.$toast.success(this.$t("Account.Registration.Success"));
+                    this.$router.push('/');
+                }).catch(() => {
+                    this.$toast.error(this.$t("Account.Registration.Failed"));
+                });
         },
         emailValidate() {
+            console.log(this.$route.params); // będzie zawarty obiekt email i code - sprawdzić jak to wygląda
             // check basic e-mail structure
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return this.email.length > 0 && this.email.match(emailRegex) ? true : false;
+            return this.form.email.length > 0 && this.form.email.match(emailRegex);
         },
         passwordValidate() {
-            return this.password.length > 7 ? true : false;
+            return this.form.password.length > 7;
         },
         repeatPasswordValidate() {
-            return this.repeatPassword.length > 7 && this.password === this.repeatPassword ? true : false;
+            return this.form.repeatPassword.length > 7 && this.form.password === this.form.repeatPassword;
         },
         firstNameValidate() {
-            return this.userName.length > 0 ? true : false;
+            return this.form.userName.length > 0;
         }
     }
 })
