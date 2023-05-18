@@ -46,7 +46,32 @@
     "Category": "Category",
     "Product": "Products",
     "Generate": "Generate recipe",
-    "Add": "Add",
+    "Add": "Add"
+  },
+  "Recipe": {
+    "Title": "Recipe",
+    "Save": "Add to cookbook",
+    "SaveSuccess": "Recipe has been added to cookbook"
+  },
+  "Cookbook": {
+    "Title": "Cookbook",
+    "QuickRecipe": "Quick recipe",
+    "PersonalizedRecipe": "Personalized recipe",
+    "RandomRecipe": "Random recipe",
+    "See": "See"
+  },
+  "SavedRecipe": {
+    "Title": "Recipe",
+    "Delete": "Delete",
+    "DeleteSuccess": "Recipe has been removed from cookbook"
+  },
+  "RandomRecipe": {
+    "Title": "Random recipe",
+    "Meal": "Meal",
+    "Generate": "Generate recipe",
+    "ProvideMealType": "Provide a meal type:"
+  },
+  "Dictionaries": {
     "Meals": {
       "Breakfast": "Breakfast",
       "Lunch": "Lunch",
@@ -96,22 +121,5 @@
       "SoyBeans": "Soy beans",
       "Lentils": "Lentils"
     }
-  },
-  "Recipe": {
-    "Title": "Recipe",
-    "Save": "Add to cookbook",
-    "SaveSuccess": "Recipe has been added to cookbook"
-  },
-  "Cookbook": {
-    "Title": "Cookbook",
-    "QuickRecipe": "Quick recipe",
-    "PersonalizedRecipe": "Personalized recipe",
-    "RandomRecipe": "Random recipe",
-    "See": "See"
-  },
-  "SavedRecipe": {
-    "Title": "Recipe",
-    "Delete": "Delete",
-    "DeleteSuccess": "Recipe has been removed from cookbook"
   }
 }

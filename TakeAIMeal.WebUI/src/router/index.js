@@ -8,6 +8,7 @@ import RegistrationComponent from '../components/account/RegistrationComponent.v
 import QuickRecipeComponent from '../components/main/recipe/QuickRecipeComponent.vue'
 import CookbookComponent from '../components/main/recipe/CookbookComponent.vue'
 import SavedRecipeComponent from '../components/main/recipe/SavedRecipeComponent.vue'
+import RandomRecipeComponent from '../components/main/recipe/RandomRecipeCmponent.vue'
 
 const routes = [
     {
@@ -39,6 +40,11 @@ const routes = [
                 path: 'recipe/:identifier',
                 name: 'savedRecipe',
                 component: SavedRecipeComponent
+            },
+            {
+                path: 'random-recipe',
+                name: 'randomRecipe',
+                component: RandomRecipeComponent
             }
         ]
     },

@@ -65,6 +65,43 @@ namespace TakeAIMeal.API.Controllers
         }
 
         /// <summary>
+        /// Generates a random recipe based on the specified body parameters.
+        /// </summary>
+        /// <param name="body">The <see cref="RecipeGenerateRandomBody"/> object containing the required parameters.</param>
+        /// <returns>An <see cref="IActionResult"/> representing the HTTP response containing the generated recipe or an error message.</returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
+        [HttpPost("generate-random")]
+        public async Task<IActionResult> GenerateRandomRecipe([FromBody] RecipeGenerateRandomBody body)
+        {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
+            if (ModelState.IsValid)
+            {
+                string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
+                string prompt = string.Format(Prompts.RecipeRandomForMeal, mealType);
+
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
+
+                if (result != null)
+                {
+                    response.Success = true;
+                    response.Data = new { model = result.Item1, identifier = result.Item2.ToString() };
+                    return Ok(response);
+                }
+
+                response.Message = "Something went wrong";
+                return BadRequest(response);
+            }
+            response.Message = "Invalid body of request";
+            return BadRequest(response);
+        }
+
+        /// <summary>
         /// Retrieves a recipe based on the specified query parameters.
         /// </summary>
         /// <param name="query">The query parameters.</param>
