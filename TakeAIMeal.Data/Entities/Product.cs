@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 
 namespace TakeAIMeal.Data
 {
-    // ****************************************************************************************************
-    // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
-    // ****************************************************************************************************
-
     // Products
     public class Product
     {

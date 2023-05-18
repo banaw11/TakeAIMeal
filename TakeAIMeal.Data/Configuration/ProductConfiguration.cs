@@ -6,10 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TakeAIMeal.Data
 {
-    // ****************************************************************************************************
-    // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
-    // ****************************************************************************************************
-
     // Products
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {

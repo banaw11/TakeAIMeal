@@ -15,7 +15,7 @@ namespace TakeAIMeal.Data
             builder.HasKey(x => x.Id).HasName("PK__UserDiet__3214EC07B46E7C20").IsClustered();
 
             builder.Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().ValueGeneratedOnAdd().UseIdentityColumn();
-            builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("nvarchar(450)").IsRequired().HasMaxLength(450);
+            builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired();
             builder.Property(x => x.DietType).HasColumnName(@"DietType").HasColumnType("int").IsRequired();
         }
     }
