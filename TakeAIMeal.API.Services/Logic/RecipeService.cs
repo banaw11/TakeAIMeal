@@ -159,6 +159,27 @@ namespace TakeAIMeal.API.Services.Logic
             }
         }
 
+        /// <inheritdoc/>
+        public async Task<ICollection<RecipeCollectionModel>> GetRecipeCollection(string language)
+        {
+            ICollection<RecipeCollectionModel> recipes = new List<RecipeCollectionModel>();
+
+            var userEmail = _userIdentityService.EmailAddress;
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                var identifier = EmailIdentifierGenerator.GenerateIdentifier(userEmail);
+
+                recipes = await DownloadRecipCollectionFromStorage(identifier);
+
+                if (!string.IsNullOrEmpty(language) && language.ToUpper() != LanguageCodes.EN.ToString())
+                {
+                    recipes = await TranslateRecipeCollection(recipes, language);
+                }
+            }
+
+            return recipes;
+        }
+
         #region private methods
         /// <summary>
         /// Generates a dish title from a list of tags.
@@ -219,6 +240,32 @@ namespace TakeAIMeal.API.Services.Logic
             }
 
             return recipe;
+        }
+
+        /// <summary>
+        /// Translates the titles of recipe collections using the specified language.
+        /// </summary>
+        /// <param name="recipes">The collection of recipe collections to translate.</param>
+        /// <param name="language">The target language for translation.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation.
+        /// The task result contains the translated collection of <see cref="RecipeCollectionModel"/> objects.
+        /// </returns>
+        private async Task<ICollection<RecipeCollectionModel>> TranslateRecipeCollection(ICollection<RecipeCollectionModel> recipes, string language)
+        {
+            var titles = recipes.Select(x => x.Title).ToList();
+            var translations = await _translateService.TranslateTexts(titles, language);
+            if (translations != null && translations.Count == recipes.Count)
+            {
+                int counter = 0;
+                foreach (var translation in translations)
+                {
+                    recipes.ElementAt(counter).Title = translation;
+                    counter++;
+                }
+            }
+
+            return recipes;
         }
 
         /// <summary>
@@ -350,7 +397,6 @@ namespace TakeAIMeal.API.Services.Logic
                 await UploadRecipCollectionToStorage(emailIdentifier, recipeCollection);
             }
         }
-
         #endregion
     }
 }

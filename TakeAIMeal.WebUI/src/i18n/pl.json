@@ -8,7 +8,9 @@
     "SaveCookbook": "Zapisuj przepisy w książce kucharskiej",
     "HaveAccount": "Masz konto?",
     "HaventAccound": "Nie masz konta?",
-    "SignIn": "Zaloguj się"
+    "SignIn": "Zaloguj się",
+    "Cookbook": "Książka kucharska",
+    "OpenPersonalizedCookBok": "Otwórz swoją spersonalizowaną książkę kucharską"
   },
   "Header": {
     "Home": "Strona główna",
@@ -96,6 +98,7 @@
     }
   },
   "Recipe": {
-    "Title" : "Przepis"
+    "Title": "Przepis",
+    "Save": "Dodaj do książki kucharskiej"
   }
 }

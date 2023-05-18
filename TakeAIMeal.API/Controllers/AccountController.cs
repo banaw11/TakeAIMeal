@@ -64,6 +64,9 @@ namespace TakeAIMeal.API.Controllers
         /// Returns an IActionResult representing the result of the operation:
         /// </returns>
         /// <response code="204">The user was signed out successfully.</response>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
         [Authorize]
         [HttpPost("sign-out")]
         public async Task<IActionResult> SignOutUser()

@@ -92,10 +92,12 @@ body {
 
         #app .page-container .btn {
             min-width: 250px;
-            height: 45px;
+            min-height: 45px;
             border-radius: .4rem;
             border: 1px solid;
             font-size: 1.1rem;
+            word-wrap: break-word;
+            white-space: normal;
         }
 
             #app .page-container .btn:not(:disabled):hover {
@@ -231,6 +233,12 @@ body {
             color: var(--color-main);
             max-width: 1000px;
         }
+
+            #app .page-container .content-container .recipe-container .image-area {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
 
             #app .page-container .content-container .recipe-container .image-area img {
                 border-radius: 1rem;
