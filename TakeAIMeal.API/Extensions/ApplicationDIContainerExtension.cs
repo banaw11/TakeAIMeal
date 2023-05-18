@@ -42,6 +42,8 @@ namespace TakeAIMeal.API.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IUserDietRepository, UserDietRepository>();
+            services.AddScoped<IUserProductExclusionRepository, UserProductExclusionRepository>();
 
             return services;
         }
