@@ -99,6 +99,19 @@
   },
   "Recipe": {
     "Title": "Recipe",
-    "Save": "Add to cookbook"
+    "Save": "Add to cookbook",
+    "SaveSuccess": "Recipe has been added to cookbook"
+  },
+  "Cookbook": {
+    "Title": "Cookbook",
+    "QuickRecipe": "Quick recipe",
+    "PersonalizedRecipe": "Personalized recipe",
+    "RandomRecipe": "Random recipe",
+    "See": "See"
+  },
+  "SavedRecipe": {
+    "Title": "Recipe",
+    "Delete": "Delete",
+    "DeleteSuccess": "Recipe has been removed from cookbook"
   }
 }

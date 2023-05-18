@@ -99,6 +99,19 @@
   },
   "Recipe": {
     "Title": "Przepis",
-    "Save": "Dodaj do książki kucharskiej"
+    "Save": "Dodaj do książki kucharskiej",
+    "SaveSuccess": "Przepis został dodany do książki kucharskiej"
+  },
+  "Cookbook": {
+    "Title": "Książka kucharska",
+    "QuickRecipe": "Szybki przepis",
+    "PersonalizedRecipe": "Przepis spersonalizowany",
+    "RandomRecipe": "Losowy przepis",
+    "See": "Zobacz"
+  },
+  "SavedRecipe": {
+    "Title": "Przepis",
+    "Delete": "Usuń",
+    "DeleteSuccess": "Usunięto przepis z książki kucharskiej"
   }
 }

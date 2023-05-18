@@ -31,6 +31,18 @@ namespace TakeAIMeal.API.Services.Interfaces
         Task<RecipeModel> GetRecipe(Guid identifier, string language);
 
         /// <summary>
+        /// Retrieves a saved recipe based on the provided identifier and language.
+        /// </summary>
+        /// <param name="identifier">The unique identifier of the recipe.</param>
+        /// <param name="language">The language in which the recipe should be retrieved.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation. The task result contains a tuple with the following:
+        /// - RecipeModel: The retrieved recipe model.
+        /// - int: The id number of related entity identifier.
+        /// </returns>
+        Task<Tuple<RecipeModel, int>> GetSavedRecipe(Guid identifier, string language);
+
+        /// <summary>
         /// Adds a recipe using the specified <paramref name="model"/>.
         /// </summary>
         /// <param name="model">The reference model containing the recipe details.</param>

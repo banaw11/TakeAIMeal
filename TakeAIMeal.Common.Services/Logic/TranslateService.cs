@@ -49,7 +49,7 @@ namespace TakeAIMeal.Common.Services.Logic
                 try
                 {
                     var result = await _translateApi.GetTextTranslation(body, from, to);
-                    return result.FirstOrDefault()?.Translations.Select(x => x.Text).ToList();
+                    return result.Select(x => x.Translations.FirstOrDefault())?.Select(x => x.Text).ToList();
                 }
                 catch (Exception ex)
                 {

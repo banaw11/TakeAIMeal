@@ -2,7 +2,7 @@
     <div class="recipe-container">
         <div class="image-area">
             <img :src="data.model.imageBase64"/>
-            <button class="btn btn-primary" @click="saveRecipe" v-if="canSave && isAuthenticated">{{ t('Recipe.Save') }}</button>
+            <button class="btn btn-primary" @click="saveRecipe" v-if="canSave && !saved && isAuthenticated">{{ t('Recipe.Save') }}</button>
         </div>
         <div class="recipe-area">
             <label>{{data.model.title}}</label>
@@ -19,6 +19,11 @@
     export default defineComponent({
         name: "RecipeComponent",
         props: ['data', 'mealType', 'canSave'],
+        data() {
+            return {
+                saved: false
+            }
+        },
         setup() {
             const { t } = useI18n({
                 inheritLocale: true,
@@ -50,8 +55,8 @@
                 };
                 httpClient.post('/api/recipe/save-recipe', recipeReference)
                     .then((response) => {
-                        this.canSave = false;
-                        // add toast
+                        this.saved = true;
+                        this.$toast.success(this.$t("Recipe.SaveSuccess"));
                     });
             }
         },

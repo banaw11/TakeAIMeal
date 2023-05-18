@@ -119,6 +119,23 @@ namespace TakeAIMeal.API.Services.Logic
         }
 
         /// <inheritdoc/>
+        public async Task<Tuple<RecipeModel, int>> GetSavedRecipe(Guid identifier, string language)
+        {
+            var recipeId = _recipeRepository
+                .Where(x => x.UserId == _userIdentityService.UserId && x.RecipeIdentifier == identifier)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
+            if(recipeId > 0)
+            {
+                var recipe = await GetRecipe(identifier, language);
+                return Tuple.Create(recipe, recipeId);
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc/>
         public async Task<int?> AddRecipe(RecipeReferenceModel model)
         {
             if(model != null && model.Identifier != Guid.Empty)
@@ -342,7 +359,7 @@ namespace TakeAIMeal.API.Services.Logic
         {
             try
             {
-                if (!string.IsNullOrEmpty(emailIdentifier) && collection != null && collection.Count > 0)
+                if (!string.IsNullOrEmpty(emailIdentifier) && collection != null)
                 {
                     var serializedObject = JsonConvert.SerializeObject(collection);
 
