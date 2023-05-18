@@ -31,7 +31,7 @@
             <button class="btn btn-primary" :disabled="isInValid()" @click="generateRecipe()">{{ t('QuickRecipe.Generate') }}</button>
         </div>
     </div>
-    <RecipeComponent v-if="recipe != null" :data="recipe"></RecipeComponent>
+    <RecipeComponent v-if="recipe != null" :data="recipe" :meal-type="recipeData.mealId" :can-save="true"></RecipeComponent>
 </template>
 
 <script>

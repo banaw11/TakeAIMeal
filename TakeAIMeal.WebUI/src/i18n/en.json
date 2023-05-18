@@ -8,7 +8,9 @@
     "SaveCookbook": "Save recipes in a cookbook",
     "HaveAccount": "Have you an account?",
     "HaventAccound": "Haven't you an account?",
-    "SignIn": "Sign in"
+    "SignIn": "Sign in",
+    "Cookbook": "Cookbook",
+    "OpenPersonalizedCookBok": "Open yours personalized cookbook"
   },
   "Header": {
     "Home": "Home",
@@ -21,7 +23,15 @@
     "Password": "Password",
     "RepeatPassword": "Repeat password",
     "UserName": "Username",
-    "ForgottenPassword": "Forgotten password?"
+    "ForgottenPassword": "Forgotten password?",
+    "Login": {
+      "Success": "Login success!",
+      "Failed": "Login failed, check username and password are correct!"
+    },
+    "Registration": {
+      "Success": "Account created successfully!",
+      "Failed": "Account not created!"
+    }
   },
   "Dropdown": {
     "PleaseSelect": "Select",
@@ -88,6 +98,7 @@
     }
   },
   "Recipe": {
-    "Title": "Recipe"
+    "Title": "Recipe",
+    "Save": "Add to cookbook"
   }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Models.Recipe;
@@ -96,6 +97,10 @@ namespace TakeAIMeal.API.Controllers
         /// </summary>
         /// <param name="model">The recipe reference model containing the recipe details.</param>
         /// <returns>An <see cref="IActionResult"/> representing the response of the save operation.</returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
         [HttpPost("save-recipe")]
         public async Task<IActionResult> SaveRecipe([FromBody] RecipeReferenceModel model)
         {
@@ -122,6 +127,10 @@ namespace TakeAIMeal.API.Controllers
         /// </summary>
         /// <param name="recipeId">The ID of the recipe to be deleted.</param>
         /// <returns>An <see cref="IActionResult"/> representing the response of the delete operation.</returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
         [HttpDelete("delete-recipe/{recipeId}")]
         public IActionResult DeleteRecipe(int recipeId)
         {
@@ -130,6 +139,32 @@ namespace TakeAIMeal.API.Controllers
                 Success = true
             };
             _recipeService.RemoveRecipe(recipeId);
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Retrieves a list of recipe collections.
+        /// </summary>
+        /// <param name="language">The language to use for retrieving the recipe collections.</param>
+        /// <returns>
+        /// Returns an <see cref="IActionResult"/> representing the HTTP response.
+        /// The response contains a <see cref="ResponseModel"/> object with the retrieved recipe collections in the <see cref="ResponseModel.Data"/> property.
+        /// </returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
+        [HttpGet("get-list")]
+        public async Task<IActionResult> GetRecipeList([FromBody] string language)
+        {
+            var response = new ResponseModel
+            {
+                Success = true
+            };
+
+            var collection = await _recipeService.GetRecipeCollection(language);
+            response.Data = collection;
 
             return Ok(response);
         }

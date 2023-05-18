@@ -19,13 +19,13 @@
                 <li>{{ t('Home.SimpleRecipeGenerate') }}</li>
             </ul>
         </div>
-        <div class="right-part">
+        <div class="right-part" v-if="!isAuthenticated">
             <div>
                 <router-link to="/account/registration" custom v-slot="{ navigate }">
                     <button class="btn btn-secondary" @click="navigate">{{ t('Home.SignUp') }}</button>
                 </router-link>
             </div>
-            
+
             <ul>
                 <li>{{ t('Home.SimpleRecipeGenerate') }}</li>
                 <li>{{ t('Home.PersonalizeDietData') }}</li>
@@ -38,6 +38,16 @@
                 </router-link>
             </div>
         </div>
+        <div class="right-part" v-if="isAuthenticated">
+            <div>
+                <router-link to="/cookbook" custom v-slot="{ navigate }">
+                    <button class="btn btn-secondary" @click="navigate">{{ t('Home.Cookbook') }}</button>
+                </router-link>
+            </div>
+            <ul>
+                <li>{{ t('Home.OpenPersonalizedCookBok') }}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -46,12 +56,16 @@
     import { useI18n } from 'vue-i18n'
     import CaruselComponent from '../shared/CaruselComponent.vue'
     import httpClient from '@/modules/http/client'
+    import { mapGetters } from 'vuex'
     export default defineComponent({
         name: 'HomeComponent',
         data() {
             return {
                 tips : []
             }
+        },
+        computed: {
+            ...mapGetters('context', ['isAuthenticated']),
         },
         setup() {
             const { t } = useI18n({

@@ -6,5 +6,6 @@ import i18n from './i18n'
 import router from './router'
 import Vuex from 'vuex'
 import store from './modules/store'
+import Toaster from "@meforma/vue-toaster";
 
-createApp(App).use(router).use(i18n).use(Vuex).use(store).mount('#app')
+createApp(App).use(router).use(i18n).use(Vuex).use(store).use(Toaster).mount('#app')

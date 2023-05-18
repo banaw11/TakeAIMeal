@@ -3,15 +3,15 @@
         <h1>{{ t('Header.SignIn') }}</h1>
     </div>
     <div class="form-container account-signin">
-        <form>
+        <form @submit.prevent="signIn">
             <div class="form-group">
-                <input type="text" placeholder="E-mail" v-model="email" class="text-dark" />
+                <input type="text" placeholder="E-mail" v-model="form.email" class="text-dark" />
             </div>
             <div class="form-group">
-                <input type="password" v-bind:placeholder="$t('Account.Password')" i18n-placeholder="{{ t('Header.SignIn') }}" v-model="password" class="text-dark" />
+                <input type="password" v-bind:placeholder="$t('Account.Password')" i18n-placeholder="{{ t('Header.SignIn') }}" v-model="form.password" class="text-dark" />
             </div>
             <div class="form-group">
-                <button class="btn btn-secondary" :disabled="!isInValid()" @click="signIn()">{{ t('Header.SignIn') }}</button>
+                <button class="btn btn-secondary" :disabled="!isInValid()" type="submit">{{ t('Header.SignIn') }}</button>
                 <span>{{ t('Account.ForgottenPassword') }}</span>
             </div>
         </form>
@@ -25,13 +25,15 @@
 <script>
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import httpClient from '@/modules/http/client'
+import { mapActions } from 'vuex'
 export default defineComponent({
     name: 'LoginComponent',
     data(){
         return {
-            email: '',
-            password: ''
+            form: {
+                email: '',
+                password: ''
+            }
         }
     },
     setup() {
@@ -45,30 +47,28 @@ export default defineComponent({
     computed: {
         isInValid() {
             return () => {
-                return this.emailValidate() && this.passwordValidate() ? true : false;
+                return this.emailValidate() && this.passwordValidate();
             }
         }
     },
     methods: {
+        ...mapActions('context', ['login']),
         signIn() {
-            httpClient.post(`/api/Account/sign-in`, {
-                email: this.email,
-                password: this.password
-            })
-                .then((response) => {
-                    console.log(response);
-                    const status = JSON.parse(response.status);
-                    if(status == '200')
-                        this.$router.push('/');
-                })
+            this.login(this.form)
+                .then(() => {
+                    this.$toast.success(this.$t("Account.Login.Success"));
+                    this.$router.push('/');
+                }).catch(() => {
+                    this.$toast.error(this.$t("Account.Login.Failed"));
+                });
         },
         emailValidate() {
             // check basic e-mail structure
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return this.email.length > 0 && this.email.match(emailRegex) ? true : false;
+            return this.form.email.length > 0 && this.form.email.match(emailRegex);
         },
         passwordValidate() {
-            return this.password.length > 7 ? true : false;
+            return this.form.password.length > 7;
         }
     }
 })
