@@ -17,6 +17,10 @@ import client from './client'
         async delete(url, data) {
             return client.delete(url, data);
         }
+
+        async patch(url, data) {
+            return client.patch(url, data);
+        }
     }
 
     export default new HttpClient()

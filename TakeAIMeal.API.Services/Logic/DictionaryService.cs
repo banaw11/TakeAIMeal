@@ -9,6 +9,8 @@ namespace TakeAIMeal.API.Services.Logic
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IUserDietRepository _userDietRepository;
+        private readonly IUserIdentityService _userIdentityService;
 
         /// <summary>
         /// Gets a collection of <see cref="DictionaryItem"/> representing the values of an <see cref="Enum"/> type.
@@ -23,10 +25,12 @@ namespace TakeAIMeal.API.Services.Logic
                 .ToList();
         }
 
-        public DictionaryService(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public DictionaryService(IProductRepository productRepository, ICategoryRepository categoryRepository, IUserDietRepository userDietRepository, IUserIdentityService userIdentityService)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _userDietRepository = userDietRepository;
+            _userIdentityService = userIdentityService;
         }
 
         /// <inheritdoc/>
@@ -51,6 +55,29 @@ namespace TakeAIMeal.API.Services.Logic
                 .Select(x => new DictionaryItem { Name = x.NormalizedName, Value = x.Id })
                 .OrderBy(x => x.Name)
                 .ToList();
+        }
+
+        /// <inheritdoc/>
+        public ICollection<DictionaryItem> GetAllDiets()
+        {
+            return GetEnumCollection<DietTypes>();
+        }
+
+
+        /// <inheritdoc/>
+        public ICollection<DictionaryItem> GetUsedDiets()
+        {
+            var userId = _userIdentityService.UserId;
+            if(userId > 0)
+            {
+                return _userDietRepository.Where(x => x.UserId == userId)
+                    .Select(x => x.DietType)
+                    .ToList()
+                    .Select(x => new DictionaryItem { Name = ((DietTypes)x).ToString(), Value = x })
+                    .OrderBy(x => x.Name)
+                    .ToList();
+            }
+            return new List<DictionaryItem>();
         }
     }
 }
