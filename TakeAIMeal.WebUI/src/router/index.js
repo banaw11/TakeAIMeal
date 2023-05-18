@@ -7,6 +7,7 @@ import LoginComponent from '../components/account/LoginComponent.vue'
 import RegistrationComponent from '../components/account/RegistrationComponent.vue'
 import QuickRecipeComponent from '../components/main/recipe/QuickRecipeComponent.vue'
 import CookbookComponent from '../components/main/recipe/CookbookComponent.vue'
+import SavedRecipeComponent from '../components/main/recipe/SavedRecipeComponent.vue'
 
 const routes = [
     {
@@ -33,6 +34,11 @@ const routes = [
                 path: 'cookbook',
                 name: 'cookbook',
                 component: CookbookComponent
+            },
+            {
+                path: 'recipe/:identifier',
+                name: 'savedRecipe',
+                component: SavedRecipeComponent
             }
         ]
     },

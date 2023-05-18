@@ -93,6 +93,38 @@ namespace TakeAIMeal.API.Controllers
         }
 
         /// <summary>
+        /// Retrieves a saved recipe based on the provided query parameters.
+        /// </summary>
+        /// <param name="query">The query parameters for retrieving the saved recipe.</param>
+        /// <returns>
+        /// An asynchronous task that returns an <see cref="IActionResult"/> representing the HTTP response, which can be one of the following:
+        /// - <see cref="OkObjectResult"/> with a <see cref="ResponseModel"/> containing the retrieved recipe model and its associated identifier if successful.
+        /// - <see cref="BadRequestObjectResult"/> with a <see cref="ResponseModel"/> indicating that the query is missing required values.
+        /// </returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
+        [HttpGet("get-saved-recipe")]
+        public async Task<IActionResult> GetSavedRecipe([FromQuery] RecipeQuery query)
+        {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
+            var result = await _recipeService.GetSavedRecipe(query.Identifier, query.Language);
+            if (result != null)
+            {
+                response.Success = true;
+                response.Data = new { model = result.Item1, id = result.Item2 };
+                return Ok(response);
+            }
+
+            response.Message = "Query is missing required values";
+            return BadRequest(response);
+        }
+
+        /// <summary>
         /// Saves a recipe using the specified <paramref name="model"/>.
         /// </summary>
         /// <param name="model">The recipe reference model containing the recipe details.</param>

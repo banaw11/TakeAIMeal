@@ -45,7 +45,7 @@
         methods: {
             goToRecipe(identifier) {
                 this.$router.push({
-                    to: "/recipe",
+                    name: "savedRecipe",
                     params: {identifier : identifier}
                 })
             },
