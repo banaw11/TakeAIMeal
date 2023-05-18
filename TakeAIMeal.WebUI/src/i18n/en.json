@@ -100,5 +100,12 @@
   "Recipe": {
     "Title": "Recipe",
     "Save": "Add to cookbook"
+  },
+  "Cookbook": {
+    "Title": "Cookbook",
+    "QuickRecipe": "Quick recipe",
+    "PersonalizedRecipe": "Personalized recipe",
+    "RandomRecipe": "Random recipe",
+    "See": "See"
   }
 }

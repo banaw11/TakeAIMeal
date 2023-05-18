@@ -115,6 +115,7 @@ namespace TakeAIMeal.API.Controllers
                 {
                     response.Success = true;
                     response.Data = result;
+                    return Ok(response);
                 }
             }
 
@@ -156,7 +157,7 @@ namespace TakeAIMeal.API.Controllers
         /// </remarks>
         [Authorize]
         [HttpGet("get-list")]
-        public async Task<IActionResult> GetRecipeList([FromBody] string language)
+        public async Task<IActionResult> GetRecipeList([FromQuery] string language)
         {
             var response = new ResponseModel
             {

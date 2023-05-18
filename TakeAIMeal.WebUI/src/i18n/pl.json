@@ -100,5 +100,12 @@
   "Recipe": {
     "Title": "Przepis",
     "Save": "Dodaj do książki kucharskiej"
+  },
+  "Cookbook": {
+    "Title": "Książka kucharska",
+    "QuickRecipe": "Szybki przepis",
+    "PersonalizedRecipe": "Przepis spersonalizowany",
+    "RandomRecipe": "Losowy przepis",
+    "See": "Zobacz"
   }
 }
