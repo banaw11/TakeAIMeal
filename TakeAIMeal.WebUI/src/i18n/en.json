@@ -31,6 +31,12 @@
     "Registration": {
       "Success": "Account created successfully!",
       "Failed": "Account not created!"
+    },
+    "EmailConfirmation": {
+      "AccountActivation" : "Account activation",
+      "Information" : "Thank you for choosing our application, verification is required due to application policy",
+      "Success": "Correct account verification",
+      "Failed": "Incorrect account verification"
     }
   },
   "Dropdown": {
