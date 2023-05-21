@@ -17,7 +17,7 @@
                 })
                     .then(() => {
                         this.$toast.success(this.$t("Account.EmailConfirmation.Success"));
-                        setInterval(_redirectToLogin(), 5000);
+                        setTimeout(this._redirectToLogin(), 5000);
                     }).catch(() => {
                         this.$toast.error(this.$t("Account.EmailConfirmation.Failed"));
                     });
