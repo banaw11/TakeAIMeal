@@ -31,6 +31,12 @@
     "Registration": {
       "Success": "Konto utworzone pomyślnie!",
       "Failed": "Nie utworzono konta!"
+    },
+    "EmailConfirmation": {
+      "AccountActivation": "Aktywacja konta",
+      "Information": "Dziękujemy za wybranie naszej aplikacji, weryfikacja jest konieczna ze względu na politykę aplikacji",
+      "Success": "Poprawna weryfikacja konta",
+      "Failed": "Niepoprawna weryfikacja konta"
     }
   },
   "Dropdown": {

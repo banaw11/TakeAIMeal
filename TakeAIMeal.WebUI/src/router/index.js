@@ -5,6 +5,7 @@ import AboutComponent from '../components/main/AboutComponent.vue'
 import AccountView from '../views/AccountView.vue'
 import LoginComponent from '../components/account/LoginComponent.vue'
 import RegistrationComponent from '../components/account/RegistrationComponent.vue'
+import EmailConfirmationComponent from '../components/account/EmailConfirmationComponent.vue'
 import QuickRecipeComponent from '../components/main/recipe/QuickRecipeComponent.vue'
 import CookbookComponent from '../components/main/recipe/CookbookComponent.vue'
 import SavedRecipeComponent from '../components/main/recipe/SavedRecipeComponent.vue'
@@ -62,6 +63,11 @@ const routes = [
                 path: 'registration',
                 name: 'registration',
                 component: RegistrationComponent
+            },
+            {
+                path: 'email-confirmation',
+                name: 'email-confirmation',
+                component: EmailConfirmationComponent
             }
         ]
     }
