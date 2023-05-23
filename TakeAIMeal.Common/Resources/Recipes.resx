@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Basic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
   <data name="Breakfast" xml:space="preserve">
     <value>Breakfast</value>
   </data>
   <data name="Dinner" xml:space="preserve">
     <value>Dinner</value>
   </data>
+  <data name="LowCarb" xml:space="preserve">
+    <value>Low-carbohydrate</value>
+  </data>
   <data name="Lunch" xml:space="preserve">
     <value>Lunch</value>
+  </data>
+  <data name="Protein" xml:space="preserve">
+    <value>High protein</value>
+  </data>
+  <data name="Soft" xml:space="preserve">
+    <value>Easily digestible</value>
+  </data>
+  <data name="Vege" xml:space="preserve">
+    <value>Vegetarian</value>
   </data>
 </root>

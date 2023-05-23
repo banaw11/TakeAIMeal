@@ -31,6 +31,12 @@
     "Registration": {
       "Success": "Konto utworzone pomyślnie!",
       "Failed": "Nie utworzono konta!"
+    },
+    "EmailConfirmation": {
+      "AccountActivation": "Aktywacja konta",
+      "Information": "Dziękujemy za wybranie naszej aplikacji, weryfikacja jest konieczna ze względu na politykę aplikacji",
+      "Success": "Poprawna weryfikacja konta",
+      "Failed": "Niepoprawna weryfikacja konta"
     }
   },
   "Dropdown": {
@@ -46,7 +52,32 @@
     "Category": "Kategoria",
     "Product": "Produkty",
     "Generate": "Generuj przepis",
-    "Add": "Dodaj",
+    "Add": "Dodaj"
+  },
+  "Recipe": {
+    "Title": "Przepis",
+    "Save": "Dodaj do książki kucharskiej",
+    "SaveSuccess": "Przepis został dodany do książki kucharskiej"
+  },
+  "Cookbook": {
+    "Title": "Książka kucharska",
+    "QuickRecipe": "Szybki przepis",
+    "PersonalizedRecipe": "Przepis spersonalizowany",
+    "RandomRecipe": "Losowy przepis",
+    "See": "Zobacz"
+  },
+  "SavedRecipe": {
+    "Title": "Przepis",
+    "Delete": "Usuń",
+    "DeleteSuccess": "Usunięto przepis z książki kucharskiej"
+  },
+  "RandomRecipe": {
+    "Title": "Losowy przepis",
+    "Meal": "Posiłek",
+    "Generate": "Generuj przepis",
+    "ProvideMealType": "Podaj typ posiłku:"
+  },
+  "Dictionaries": {
     "Meals": {
       "Breakfast": "Śniadanie",
       "Lunch": "Obiad",
@@ -96,22 +127,5 @@
       "SoyBeans": "Soja",
       "Lentils": "Soczewica"
     }
-  },
-  "Recipe": {
-    "Title": "Przepis",
-    "Save": "Dodaj do książki kucharskiej",
-    "SaveSuccess": "Przepis został dodany do książki kucharskiej"
-  },
-  "Cookbook": {
-    "Title": "Książka kucharska",
-    "QuickRecipe": "Szybki przepis",
-    "PersonalizedRecipe": "Przepis spersonalizowany",
-    "RandomRecipe": "Losowy przepis",
-    "See": "Zobacz"
-  },
-  "SavedRecipe": {
-    "Title": "Przepis",
-    "Delete": "Usuń",
-    "DeleteSuccess": "Usunięto przepis z książki kucharskiej"
   }
 }

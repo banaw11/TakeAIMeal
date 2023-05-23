@@ -12,7 +12,7 @@ namespace TakeAIMeal.Data
     public class UserDiet
     {
         public int Id { get; set; } // Id (Primary key)
-        public string UserId { get; set; } // UserId (length: 450)
+        public int UserId { get; set; } // UserId
         public int DietType { get; set; } // DietType
 
         // Reverse navigation

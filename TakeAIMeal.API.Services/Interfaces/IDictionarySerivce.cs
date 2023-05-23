@@ -25,5 +25,17 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// </summary>
         /// <returns>A collection of <see cref="DictionaryItem"/> representing all the meals.</returns>
         ICollection<DictionaryItem> GetMeals();
+
+        /// <summary>
+        /// Retrieves all diets as a collection of dictionary items.
+        /// </summary>
+        /// <returns>A collection of <see cref="DictionaryItem"/> representing all diets.</returns>
+        ICollection<DictionaryItem> GetAllDiets();
+
+        /// <summary>
+        /// Retrieves the used diets as a collection of dictionary items.
+        /// </summary>
+        /// <returns>A collection of <see cref="DictionaryItem"/> representing the used diets.</returns>
+        ICollection<DictionaryItem> GetUsedDiets();
     }
 }

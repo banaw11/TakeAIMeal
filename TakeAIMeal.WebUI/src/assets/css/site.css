@@ -344,6 +344,11 @@ body {
                 justify-content: center;
             }
 
+        #app .page-container .content-container .action-container.email-confirmation span {
+            margin: auto;
+            font-size: 1.2rem;
+        }
+
         .carusel {
             display: flex;
             gap: 20px;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Services.Interfaces;
 
@@ -66,6 +67,42 @@ namespace TakeAIMeal.API.Controllers
             {
                 Success = true,
                 Data = _dictionarySerivce.GetProducts(categoryId)
+            };
+
+            return Ok(responseModel);
+        }
+
+        /// <summary>
+        /// Retrieves all diet types.
+        /// </summary>
+        /// <returns>An <see cref="IActionResult"/> containing the response with a collection of diet types.</returns>
+        [HttpGet("diet-all-types")]
+        public IActionResult GetDietAllTypes()
+        {
+            var responseModel = new ResponseModel
+            {
+                Success = true,
+                Data = _dictionarySerivce.GetAllDiets()
+            };
+
+            return Ok(responseModel);
+        }
+
+        /// <summary>
+        /// Retrieves used diet types.
+        /// </summary>
+        /// <returns>An <see cref="IActionResult"/> containing the response with a collection of used diet types.</returns>
+        /// <remarks>
+        /// This endpoint requires the user to be authenticated.
+        /// </remarks>
+        [Authorize]
+        [HttpGet("diet-used-types")]
+        public IActionResult GetDietUsedTypes()
+        {
+            var responseModel = new ResponseModel
+            {
+                Success = true,
+                Data = _dictionarySerivce.GetUsedDiets()
             };
 
             return Ok(responseModel);

@@ -61,6 +61,15 @@ namespace TakeAIMeal.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic.
+        /// </summary>
+        public static string Basic {
+            get {
+                return ResourceManager.GetString("Basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breakfast.
         /// </summary>
         public static string Breakfast {
@@ -79,11 +88,47 @@ namespace TakeAIMeal.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Low-carbohydrate.
+        /// </summary>
+        public static string LowCarb {
+            get {
+                return ResourceManager.GetString("LowCarb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lunch.
         /// </summary>
         public static string Lunch {
             get {
                 return ResourceManager.GetString("Lunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High protein.
+        /// </summary>
+        public static string Protein {
+            get {
+                return ResourceManager.GetString("Protein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easily digestible.
+        /// </summary>
+        public static string Soft {
+            get {
+                return ResourceManager.GetString("Soft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vegetarian.
+        /// </summary>
+        public static string Vege {
+            get {
+                return ResourceManager.GetString("Vege", resourceCulture);
             }
         }
     }

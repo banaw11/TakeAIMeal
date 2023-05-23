@@ -123,6 +123,9 @@
   <data name="RecipeFromIngredients" xml:space="preserve">
     <value>Generate a recipe for a {1} using these ingredients : {0}</value>
   </data>
+  <data name="RecipeRandomForMeal" xml:space="preserve">
+    <value>Generate a random recipe for a {0}.</value>
+  </data>
   <data name="TipHealthyEating" xml:space="preserve">
     <value>Generate one short tip about healthy eating.</value>
   </data>
