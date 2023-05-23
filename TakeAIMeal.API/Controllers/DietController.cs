@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TakeAIMeal.API.Models;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Dictionaries;
 
 namespace TakeAIMeal.API.Controllers
 {
@@ -42,6 +43,23 @@ namespace TakeAIMeal.API.Controllers
             response.Success = false;
             response.Message = "Invalid body of request";
             return BadRequest(response);
+        }
+
+        /// <summary>
+        /// Retrieves the diet product exclusions based on the specified diet type.
+        /// </summary>
+        /// <param name="dietType">The type of diet for which to retrieve the product exclusions.</param>
+        /// <returns>An IActionResult containing a response model with the retrieved diet product exclusions.</returns>
+        [HttpGet("product-exclusions")]
+        public IActionResult GetDietProductExclusions([FromQuery] DietTypes dietType)
+        {
+            var responseModel = new ResponseModel
+            {
+                Success = true,
+                Data = _userDietService.GetUserProductExclusionsForDiet(dietType)
+            };
+
+            return Ok(responseModel);
         }
     }
 }

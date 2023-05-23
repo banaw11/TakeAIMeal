@@ -25,6 +25,7 @@ namespace TakeAIMeal.Data
         public DbSet<ProductCategory> ProductCategories { get; set; } // ProductCategories
         public DbSet<Recipe> Recipes { get; set; } // Recipes
         public DbSet<UserDiet> UserDiets { get; set; } // UserDiets
+        public DbSet<UserProductExclusionView> UserProductExclusionViews { get; set; } // UserProductExclusionView
         public DbSet<UserProductsExclusion> UserProductsExclusions { get; set; } // UserProductsExclusions
 
         public FakeTakeAIMealDbContext()
@@ -36,6 +37,7 @@ namespace TakeAIMeal.Data
             ProductCategories = new FakeDbSet<ProductCategory>("Id");
             Recipes = new FakeDbSet<Recipe>("Id");
             UserDiets = new FakeDbSet<UserDiet>("Id");
+            UserProductExclusionViews = new FakeDbSet<UserProductExclusionView>();
             UserProductsExclusions = new FakeDbSet<UserProductsExclusion>("Id");
 
         }
