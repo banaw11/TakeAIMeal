@@ -1,6 +1,10 @@
 <template>
-    <h1>{{ t('Account.EmailConfirmation.AccountActivation') }}</h1>
-    <p>{{ t('Account.EmailConfirmation.Information') }}</p>
+    <div class="content-header">
+        <h1>{{ t('Account.EmailConfirmation.AccountActivation') }}</h1>
+    </div>
+    <div class="action-container email-confirmation">
+        <span>{{ t('Account.EmailConfirmation.Information') }}</span>
+    </div>
 </template>
 
 <script>
@@ -11,7 +15,7 @@
         name: 'EmailConfirmationComponent',
         methods: {
             emailConfirmation() {
-                httpClient.post(`/api/Account/email-confirmation`, {
+                httpClient.post(`/api/account/email-confirm`, {
                     email: this.$route.query.email,
                     code: this.$route.query.code
                 })
@@ -33,6 +37,9 @@
             })
 
             return { t }
+        },
+        mounted: function () {
+            this.emailConfirmation();
         }
     })
 </script>
