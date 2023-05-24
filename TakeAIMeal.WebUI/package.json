@@ -16,6 +16,7 @@
     "jest-editor-support": "^31.0.1",
     "vue": "^3.2.13",
     "vue-i18n": "^9.1.0",
+    "vue-loading-overlay": "^6.0.3",
     "vue-multiselect": "^3.0.0-beta.1",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"

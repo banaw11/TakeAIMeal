@@ -1,6 +1,5 @@
 <template>
-    <!-- <NavigationComponent />  -->
-    <div class="page-container">
+    <div class="page-container" ref="loaderContainer">
         <div class="content-container">
             <router-view></router-view>
         </div>
