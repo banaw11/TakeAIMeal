@@ -52,7 +52,7 @@ namespace TakeAIMeal.API.Services.Logic
         }
 
         /// <inheritdoc/>
-        public async Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language)
+        public async Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language, MealTypes mealType)
         {
             if(!string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(language))
             {
@@ -97,6 +97,8 @@ namespace TakeAIMeal.API.Services.Logic
                     {
                         model = await TranslateRecipe(model, language);
                     }
+                    var userId = _userIdentityService.UserId;
+                    _recipeRepository.AddGeneratedRecipeLog(mealType, userId > 0 ? userId : null);
 
                     return Tuple.Create(model, identifier);
                 }

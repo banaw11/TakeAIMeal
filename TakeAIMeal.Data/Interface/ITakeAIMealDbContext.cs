@@ -73,28 +73,8 @@ namespace TakeAIMeal.Data
         IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression);
 
         // Stored Procedures
-        int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition);
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition);
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpDropdiagram(string diagramname, int? ownerId);
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId);
-        List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult);
-        Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId);
-
-        List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId);
-        List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult);
-        Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId);
-
-        int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname);
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpUpgraddiagrams();
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
+        int AddGeneretedRecipe(int? mealType, int? userId);
+        // AddGeneretedRecipeAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
 
     }
 }

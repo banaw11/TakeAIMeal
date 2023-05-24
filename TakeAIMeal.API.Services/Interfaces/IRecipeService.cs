@@ -14,7 +14,7 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="prompt">The prompt used to generate the recipe.</param>
         /// <param name="language">The language used to generate the recipe.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the generated <see cref="RecipeModel"/>.</returns>
-        Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language);
+        Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language, MealTypes mealType);
 
         /// <summary>
         /// Gets a recipe ingredients string for the specified collection of product identifiers.

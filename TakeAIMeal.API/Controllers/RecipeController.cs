@@ -48,7 +48,7 @@ namespace TakeAIMeal.API.Controllers
                 string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
                 string prompt = string.Format(Prompts.RecipeFromIngredients, ingredients, mealType);
 
-                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language, body.MealType);
 
                 if(result != null)
                 {
@@ -85,7 +85,7 @@ namespace TakeAIMeal.API.Controllers
                 string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
                 string prompt = string.Format(Prompts.RecipeRandomForMeal, mealType);
 
-                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language, body.MealType);
 
                 if (result != null)
                 {
@@ -134,7 +134,7 @@ namespace TakeAIMeal.API.Controllers
                     prompt = string.Format(Prompts.RecipeFromIngredientsWithDiet, ingredients, mealType, dietType);
                 }
 
-                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language, body.MealType);
 
                 if (result != null)
                 {

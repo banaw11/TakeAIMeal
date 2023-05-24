@@ -238,78 +238,12 @@ namespace TakeAIMeal.Data
 
         // Stored Procedures
 
-        public int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition)
+        public int AddGeneretedRecipe(int? mealType = null, int? userId = null)
         {
             return 0;
         }
 
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            return 0;
-        }
-
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpDropdiagram(string diagramname, int? ownerId = null)
-        {
-            return 0;
-        }
-
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public DbSet<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinitionReturnModel { get; set; }
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return SpHelpdiagramdefinition(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult)
-        {
-            procResult = 0;
-            return new List<SpHelpdiagramdefinitionReturnModel>();
-        }
-
-        public Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return Task.FromResult(SpHelpdiagramdefinition(diagramname, ownerId, out procResult));
-        }
-
-        public DbSet<SpHelpdiagramsReturnModel> SpHelpdiagramsReturnModel { get; set; }
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return SpHelpdiagrams(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult)
-        {
-            procResult = 0;
-            return new List<SpHelpdiagramsReturnModel>();
-        }
-
-        public Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return Task.FromResult(SpHelpdiagrams(diagramname, ownerId, out procResult));
-        }
-
-        public int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname)
-        {
-            return 0;
-        }
-
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpUpgraddiagrams()
-        {
-            return 0;
-        }
-
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
+        // AddGeneretedRecipeAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
     }
 }
 // </auto-generated>
