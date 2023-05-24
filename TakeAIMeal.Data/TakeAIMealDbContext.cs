@@ -66,206 +66,28 @@ namespace TakeAIMeal.Data
             modelBuilder.ApplyConfiguration(new UserProductExclusionViewConfiguration());
             modelBuilder.ApplyConfiguration(new UserProductsExclusionConfiguration());
 
-            modelBuilder.Entity<SpHelpdiagramdefinitionReturnModel>().HasNoKey();
-            modelBuilder.Entity<SpHelpdiagramsReturnModel>().HasNoKey();
         }
 
 
         // Stored Procedures
-        public int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition)
+        public int AddGeneretedRecipe(int? mealType = null, int? userId = null)
         {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
+            var mealTypeParam = new SqlParameter { ParameterName = "@MealType", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = mealType.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!mealType.HasValue)
+                mealTypeParam.Value = DBNull.Value;
 
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var versionParam = new SqlParameter { ParameterName = "@version", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = version.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!version.HasValue)
-                versionParam.Value = DBNull.Value;
-
-            var definitionParam = new SqlParameter { ParameterName = "@definition", SqlDbType = SqlDbType.VarBinary, Direction = ParameterDirection.Input, Value = definition, Size = -1 };
-            if (definitionParam.Value == null)
-                definitionParam.Value = DBNull.Value;
+            var userIdParam = new SqlParameter { ParameterName = "@UserId", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = userId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!userId.HasValue)
+                userIdParam.Value = DBNull.Value;
 
             var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[sp_alterdiagram] @diagramname, @owner_id, @version, @definition", diagramnameParam, ownerIdParam, versionParam, definitionParam, procResultParam);
+            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[AddGeneretedRecipe] @MealType, @UserId", mealTypeParam, userIdParam, procResultParam);
 
             return (int)procResultParam.Value;
         }
 
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var versionParam = new SqlParameter { ParameterName = "@version", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = version.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!version.HasValue)
-                versionParam.Value = DBNull.Value;
-
-            var definitionParam = new SqlParameter { ParameterName = "@definition", SqlDbType = SqlDbType.VarBinary, Direction = ParameterDirection.Input, Value = definition, Size = -1 };
-            if (definitionParam.Value == null)
-                definitionParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[sp_creatediagram] @diagramname, @owner_id, @version, @definition", diagramnameParam, ownerIdParam, versionParam, definitionParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpDropdiagram(string diagramname, int? ownerId = null)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[sp_dropdiagram] @diagramname, @owner_id", diagramnameParam, ownerIdParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return SpHelpdiagramdefinition(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            const string sqlCommand = "EXEC @procResult = [dbo].[sp_helpdiagramdefinition] @diagramname, @owner_id";
-            var procResultData = Set<SpHelpdiagramdefinitionReturnModel>()
-                .FromSqlRaw(sqlCommand, diagramnameParam, ownerIdParam, procResultParam)
-                .ToList();
-
-            procResult = (int) procResultParam.Value;
-            return procResultData;
-        }
-
-        public async Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId = null)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            const string sqlCommand = "EXEC [dbo].[sp_helpdiagramdefinition] @diagramname, @owner_id";
-            var procResultData = await Set<SpHelpdiagramdefinitionReturnModel>()
-                .FromSqlRaw(sqlCommand, diagramnameParam, ownerIdParam)
-                .ToListAsync();
-
-            return procResultData;
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId = null)
-        {
-            int procResult;
-            return SpHelpdiagrams(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            const string sqlCommand = "EXEC @procResult = [dbo].[sp_helpdiagrams] @diagramname, @owner_id";
-            var procResultData = Set<SpHelpdiagramsReturnModel>()
-                .FromSqlRaw(sqlCommand, diagramnameParam, ownerIdParam, procResultParam)
-                .ToList();
-
-            procResult = (int) procResultParam.Value;
-            return procResultData;
-        }
-
-        public async Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId = null)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            const string sqlCommand = "EXEC [dbo].[sp_helpdiagrams] @diagramname, @owner_id";
-            var procResultData = await Set<SpHelpdiagramsReturnModel>()
-                .FromSqlRaw(sqlCommand, diagramnameParam, ownerIdParam)
-                .ToListAsync();
-
-            return procResultData;
-        }
-
-        public int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var newDiagramnameParam = new SqlParameter { ParameterName = "@new_diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = newDiagramname, Size = 128 };
-            if (newDiagramnameParam.Value == null)
-                newDiagramnameParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[sp_renamediagram] @diagramname, @owner_id, @new_diagramname", diagramnameParam, ownerIdParam, newDiagramnameParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpUpgraddiagrams()
-        {
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[sp_upgraddiagrams] ", procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
+        // AddGeneretedRecipeAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
 
     }
 }

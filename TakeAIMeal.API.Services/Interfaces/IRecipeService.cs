@@ -1,4 +1,5 @@
 ﻿using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Dictionaries;
 
 namespace TakeAIMeal.API.Services.Interfaces
 {
@@ -13,7 +14,7 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// <param name="prompt">The prompt used to generate the recipe.</param>
         /// <param name="language">The language used to generate the recipe.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the generated <see cref="RecipeModel"/>.</returns>
-        Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language);
+        Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language, MealTypes mealType);
 
         /// <summary>
         /// Gets a recipe ingredients string for the specified collection of product identifiers.
@@ -63,5 +64,14 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// The task result contains a collection of <see cref="RecipeCollectionModel"/> objects.
         /// </returns>
         Task<ICollection<RecipeCollectionModel>> GetRecipeCollection(string language);
+
+        /// <summary>
+        /// Retrieves a collection of exclussion product ids with the specified <paramref name="dietType"/>.
+        /// </summary>
+        /// <returns>
+        /// A task representing the asynchronous operation.
+        /// The task result contains a collection of <see cref="int"/> objects.
+        /// </returns>
+        ICollection<int> GetUserProductExclussionsByDiet(DietTypes dietType);
     }
 }

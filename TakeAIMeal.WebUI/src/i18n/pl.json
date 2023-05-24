@@ -85,7 +85,17 @@
     "Product": "Produkt",
     "Save": "Zapisz",
     "ProductExclusions": "Produkty, których unikam:",
-    "Success" :  "Dieta została zapisana"
+    "Success": "Dieta została zapisana"
+  },
+  "PersonalizedRecipe": {
+    "Title": "Przepis spersonalizowany",
+    "ProvideAtleast": "Podaj minimum trzy produkty, musisz dodać przynajmniej jedną dietę w ustawieniach konta:",
+    "Meal": "Posiłek",
+    "Category": "Kategoria",
+    "Product": "Produkty",
+    "Generate": "Generuj przepis",
+    "Add": "Dodaj",
+    "Diet": "Dieta"
   },
   "Dictionaries": {
     "Meals": {

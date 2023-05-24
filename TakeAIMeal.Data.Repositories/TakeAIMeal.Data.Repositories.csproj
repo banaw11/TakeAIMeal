@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TakeAIMeal.Common\TakeAIMeal.Common.csproj" />
     <ProjectReference Include="..\TakeAIMeal.Data\TakeAIMeal.Data.csproj" />
   </ItemGroup>
 

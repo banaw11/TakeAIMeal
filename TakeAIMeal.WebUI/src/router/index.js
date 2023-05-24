@@ -11,6 +11,7 @@ import CookbookComponent from '../components/main/recipe/CookbookComponent.vue'
 import SavedRecipeComponent from '../components/main/recipe/SavedRecipeComponent.vue'
 import RandomRecipeComponent from '../components/main/recipe/RandomRecipeCmponent.vue'
 import PersonalizationComponent from '../components/main/recipe/PersonalizationComponent.vue'
+import PersonalizedRecipeComponent from '../components/main/recipe/PersonalizedRecipeComponent.vue'
 
 const routes = [
     {
@@ -52,6 +53,11 @@ const routes = [
                 path: 'personalization',
                 name: 'personalization',
                 component: PersonalizationComponent
+            },
+            {
+                path: 'personalized-recipe',
+                name: 'personalizedRecipe',
+                component: PersonalizedRecipeComponent
             }
         ]
     },
