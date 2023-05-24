@@ -33,8 +33,8 @@
       "Failed": "Account not created!"
     },
     "EmailConfirmation": {
-      "AccountActivation" : "Account activation",
-      "Information" : "Thank you for choosing our application, verification is required due to application policy",
+      "AccountActivation": "Account activation",
+      "Information": "Thank you for choosing our application, verification is required due to application policy",
       "Success": "Correct account verification",
       "Failed": "Incorrect account verification"
     }
@@ -76,6 +76,16 @@
     "Meal": "Meal",
     "Generate": "Generate recipe",
     "ProvideMealType": "Provide a meal type:"
+  },
+  "Personalization": {
+    "Title": "Personalization",
+    "Welcome": "Welcome, ",
+    "Diet": "Diet",
+    "Category": "Category",
+    "Product": "Product",
+    "Save": "Save",
+    "ProductExclusions": "Products I avoid:",
+    "Success": "Diet has been saved"
   },
   "Dictionaries": {
     "Meals": {
@@ -126,6 +136,13 @@
       "RedKidneyBeans": "Red kidney beans",
       "SoyBeans": "Soy beans",
       "Lentils": "Lentils"
+    },
+    "Diets": {
+      "Basic": "Basic",
+      "LowCarb": "Low carb",
+      "Protein": "Protein",
+      "Soft": "Soft",
+      "Vege": "Vege"
     }
   }
 }

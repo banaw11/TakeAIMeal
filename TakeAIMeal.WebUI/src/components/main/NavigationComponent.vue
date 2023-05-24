@@ -18,7 +18,7 @@
                     <span class="user-name">{{ profile.userName }}</span>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="userMenuButton">
-                    <router-link class="dropdown-item" to="">{{ t('Header.Account') }}</router-link>
+                    <router-link class="dropdown-item" to="/personalization">{{ t('Header.Account') }}</router-link>
                     <span class="dropdown-item" @click="logout()">{{ t('Header.SignOut') }}</span>
                 </div>
             </div>

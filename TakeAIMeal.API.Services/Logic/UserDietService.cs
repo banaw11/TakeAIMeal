@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Data;
 using TakeAIMeal.Data.Repositories.Interfaces;
 
@@ -11,12 +12,30 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly IUserDietRepository _userDietRepository;
         private readonly IUserProductExclusionRepository _userProductExclusionRepository;
         private readonly IUserIdentityService _userIdentityService;
+        private readonly IUserProductExclusionViewRepository _userProductExclusionViewRepository;
 
-        public UserDietService(IUserDietRepository userDietRepository, IUserProductExclusionRepository userProductExclusionRepository, IUserIdentityService userIdentityService)
+        public UserDietService(IUserDietRepository userDietRepository, IUserProductExclusionRepository userProductExclusionRepository, IUserIdentityService userIdentityService, IUserProductExclusionViewRepository userProductExclusionViewRepository)
         {
             _userDietRepository = userDietRepository;
             _userProductExclusionRepository = userProductExclusionRepository;
             _userIdentityService = userIdentityService;
+            _userProductExclusionViewRepository = userProductExclusionViewRepository;
+        }
+
+        /// <inheritdoc/>
+        public ICollection<ProductExclusions> GetUserProductExclusionsForDiet(DietTypes dietType)
+        {
+            var userId = _userIdentityService.UserId;
+            return _userProductExclusionViewRepository
+                .Where(x => x.UserId == userId && x.DietType == (int)dietType)
+                .ToList()
+                .GroupBy(x => x.CategoryId)
+                .Select( x => new ProductExclusions
+                {
+                    CategoryId = x.Key,
+                    ProductIds = x.Select(p => p.ProductId).ToList()
+                })
+                .ToList();
         }
 
         /// <inheritdoc/>
