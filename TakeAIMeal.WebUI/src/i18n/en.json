@@ -87,6 +87,16 @@
     "ProductExclusions": "Products I avoid:",
     "Success": "Diet has been saved"
   },
+  "PersonalizedRecipe": {
+    "Title": "Personalized recipe",
+    "ProvideAtleast": "Provide at least three products, you have to configure at least one diet in accoount settings:",
+    "Meal": "Meal",
+    "Category": "Category",
+    "Product": "Products",
+    "Generate": "Generate recipe",
+    "Add": "Add",
+    "Diet": "Diet"
+  },
   "Dictionaries": {
     "Meals": {
       "Breakfast": "Breakfast",
