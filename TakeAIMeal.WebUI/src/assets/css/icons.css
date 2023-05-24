@@ -34,7 +34,11 @@ i.logo {
 }
 
 i.user {
-    content: url('../icons/user.svg');
+    background-color: var(--color-main);
+    -webkit-mask-image: url('../icons/user.svg');
+    mask-image: url('../icons/user.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
     width: 18px;
     height: 18px;
     display: inline-block;

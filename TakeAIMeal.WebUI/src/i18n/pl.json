@@ -77,6 +77,16 @@
     "Generate": "Generuj przepis",
     "ProvideMealType": "Podaj typ posiłku:"
   },
+  "Personalization": {
+    "Title": "Personalizacja",
+    "Welcome": "Witaj, ",
+    "Diet": "Dieta",
+    "Category": "Kategoria",
+    "Product": "Produkt",
+    "Save": "Zapisz",
+    "ProductExclusions": "Produkty, których unikam:",
+    "Success" :  "Dieta została zapisana"
+  },
   "Dictionaries": {
     "Meals": {
       "Breakfast": "Śniadanie",
@@ -126,6 +136,13 @@
       "RedKidneyBeans": "Czerwona fasola",
       "SoyBeans": "Soja",
       "Lentils": "Soczewica"
+    },
+    "Diets": {
+      "Basic": "Podstawowa",
+      "LowCarb": "Niskowęglowodanowa",
+      "Protein": "Białkowa",
+      "Soft": "Lekka",
+      "Vege": "Wege"
     }
   }
 }

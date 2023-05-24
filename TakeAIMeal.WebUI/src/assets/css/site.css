@@ -349,6 +349,27 @@ body {
             font-size: 1.2rem;
         }
 
+        #app .page-container .content-container .form-container .user-container {
+            display: flex;
+            gap: 20px;
+        }
+
+            #app .page-container .content-container .form-container .user-container .user {
+                background-color: var(--color-white);
+                width: 80px;
+                height: 80px;
+            }
+
+            #app .page-container .content-container .form-container .user-container .user-name {
+                margin: auto;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+
+        #app .page-container .content-container .form-group.personalization-user-area{
+            margin-bottom: 4rem;
+        }
+
         .carusel {
             display: flex;
             gap: 20px;
