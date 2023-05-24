@@ -102,6 +102,55 @@ namespace TakeAIMeal.API.Controllers
         }
 
         /// <summary>
+        /// Generates a personalized recipe based on the provided request body.
+        /// </summary>
+        /// <param name="body">The request body containing the necessary information for generating the recipe.</param>
+        /// <returns>An IActionResult representing the result of the recipe generation.</returns>
+        /// <remarks>
+        /// This method requires the user to be authorized.
+        /// </remarks>
+        [Authorize]
+        [HttpPost("generate-personalized")]
+        public async Task<IActionResult> GeneratePersonalizedRecipe([FromBody] RecipeGeneratePersonalizedBody body)
+        {
+            var response = new ResponseModel
+            {
+                Success = false
+            };
+            if (ModelState.IsValid)
+            {
+                string ingredients = _recipeService.GetRecipeIngridientsFromProducts(body.Products);
+                string mealType = body.MealType.GetAttribute<DisplayAttribute>().Name.ToLower();
+                string dietType = body.DietType.GetAttribute<DisplayAttribute>().Name.ToLower();
+                var products = _recipeService.GetUserProductExclussionsByDiet(body.DietType);
+                string prompt;
+                if(products != null && products.Count > 0)
+                {
+                    string exclussionIngredients = _recipeService.GetRecipeIngridientsFromProducts(products);
+                    prompt = string.Format(Prompts.RecipeFromIngredientsWithDietAndExclusions, ingredients, mealType, dietType, exclussionIngredients);
+                }
+                else
+                {
+                    prompt = string.Format(Prompts.RecipeFromIngredientsWithDiet, ingredients, mealType, dietType);
+                }
+
+                var result = await _recipeService.GenerateRecipe(prompt, body.Language);
+
+                if (result != null)
+                {
+                    response.Success = true;
+                    response.Data = new { model = result.Item1, identifier = result.Item2.ToString() };
+                    return Ok(response);
+                }
+
+                response.Message = "Something went wrong";
+                return BadRequest(response);
+            }
+            response.Message = "Invalid body of request";
+            return BadRequest(response);
+        }
+
+        /// <summary>
         /// Retrieves a recipe based on the specified query parameters.
         /// </summary>
         /// <param name="query">The query parameters.</param>

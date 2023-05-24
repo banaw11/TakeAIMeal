@@ -121,7 +121,13 @@
     <value>Generate a title for dish based on this ingredients :  {0}</value>
   </data>
   <data name="RecipeFromIngredients" xml:space="preserve">
-    <value>Generate a recipe for a {1} using these ingredients : {0}</value>
+    <value>Generate a recipe for a {1} using this ingredients : {0}</value>
+  </data>
+  <data name="RecipeFromIngredientsWithDiet" xml:space="preserve">
+    <value>Generate a recipe for a {1} using these ingredients : {0}. Recipe has to match for diet {2}.</value>
+  </data>
+  <data name="RecipeFromIngredientsWithDietAndExclusions" xml:space="preserve">
+    <value>Generate a recipe for a {1} using these ingredients : {0}. Recipe has to match for diet {2} and can not included this ingredients : {3}</value>
   </data>
   <data name="RecipeRandomForMeal" xml:space="preserve">
     <value>Generate a random recipe for a {0}.</value>

@@ -20,9 +20,10 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly IBlobStorageService _blobStorageService;
         private readonly IRecipeRepository _recipeRepository;
         private readonly IUserIdentityService _userIdentityService;
+        private readonly IUserDietRepository _userDietRepository;
 
         public RecipeService(IImageService imageService, ITextGeneratorService textGeneratorService, ITextRecognitionService textRecognitionService, ITranslateService translateService,
-            IProductRepository productRepository, IBlobStorageService blobStorageService, IRecipeRepository recipeRepository, IUserIdentityService userIdentityService)
+            IProductRepository productRepository, IBlobStorageService blobStorageService, IRecipeRepository recipeRepository, IUserIdentityService userIdentityService, IUserDietRepository userDietRepository)
         {
             _imageService = imageService;
             _textGeneratorService = textGeneratorService;
@@ -32,6 +33,7 @@ namespace TakeAIMeal.API.Services.Logic
             _blobStorageService = blobStorageService;
             _recipeRepository = recipeRepository;
             _userIdentityService = userIdentityService;
+            _userDietRepository = userDietRepository;
         }
 
         public string GetRecipeIngridientsFromProducts(ICollection<int> productIds)
@@ -195,6 +197,15 @@ namespace TakeAIMeal.API.Services.Logic
             }
 
             return recipes;
+        }
+
+        /// <inheritdoc/>
+        public ICollection<int> GetUserProductExclussionsByDiet(DietTypes dietType)
+        {
+            var userId = _userIdentityService.UserId;
+            return _userDietRepository.Where(x => x.UserId == userId && x.DietType == (int)dietType)
+                .Select(x => x.UserProductsExclusions.Select(x => x.ProductId).ToList())
+                .FirstOrDefault();
         }
 
         #region private methods

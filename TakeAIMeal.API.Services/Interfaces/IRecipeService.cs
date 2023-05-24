@@ -1,4 +1,5 @@
 ﻿using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Dictionaries;
 
 namespace TakeAIMeal.API.Services.Interfaces
 {
@@ -63,5 +64,14 @@ namespace TakeAIMeal.API.Services.Interfaces
         /// The task result contains a collection of <see cref="RecipeCollectionModel"/> objects.
         /// </returns>
         Task<ICollection<RecipeCollectionModel>> GetRecipeCollection(string language);
+
+        /// <summary>
+        /// Retrieves a collection of exclussion product ids with the specified <paramref name="dietType"/>.
+        /// </summary>
+        /// <returns>
+        /// A task representing the asynchronous operation.
+        /// The task result contains a collection of <see cref="int"/> objects.
+        /// </returns>
+        ICollection<int> GetUserProductExclussionsByDiet(DietTypes dietType);
     }
 }
