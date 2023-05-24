@@ -52,13 +52,13 @@ namespace TakeAIMeal.API.Services.Logic
         }
 
         /// <inheritdoc/>
-        public async Task<Tuple<RecipeModel, Guid>> GenerateRecipe(string prompt, string language, MealTypes mealType)
+        public async Task<Tuple<RecipeModel, Guid>> GenerateRecipe(GenerateRecipeModel data)
         {
-            if(!string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(language))
+            if(!string.IsNullOrEmpty(data.Prompt) && !string.IsNullOrEmpty(data.Language))
             {
                 RecipeModel model = new RecipeModel();
 
-                var recipeResponse = await _textGeneratorService.GenerateText(prompt);
+                var recipeResponse = await _textGeneratorService.GenerateText(data.Prompt);
                 if(recipeResponse != null && recipeResponse.Count > 0)
                 {
                     model.Recipe = recipeResponse.FirstOrDefault();
@@ -93,12 +93,12 @@ namespace TakeAIMeal.API.Services.Logic
                     Guid identifier = Guid.NewGuid();
                     _ = Task.Run(() => UploadRecipToStorage(clone, identifier).ConfigureAwait(false));
 
-                    if(language.ToUpper() != LanguageCodes.EN.ToString())
+                    if(data.Language.ToUpper() != LanguageCodes.EN.ToString())
                     {
-                        model = await TranslateRecipe(model, language);
+                        model = await TranslateRecipe(model, data.Language);
                     }
                     var userId = _userIdentityService.UserId;
-                    _recipeRepository.AddGeneratedRecipeLog(mealType, userId > 0 ? userId : null);
+                    _recipeRepository.AddGeneratedRecipeLog(data.MealType, userId > 0 ? userId : null, data.RecipeType);
 
                     return Tuple.Create(model, identifier);
                 }

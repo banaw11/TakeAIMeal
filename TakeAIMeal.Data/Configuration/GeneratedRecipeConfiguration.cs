@@ -22,6 +22,7 @@ namespace TakeAIMeal.Data
             builder.Property(x => x.Date).HasColumnName(@"Date").HasColumnType("datetime").IsRequired(false);
             builder.Property(x => x.MealType).HasColumnName(@"MealType").HasColumnType("int").IsRequired();
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired(false);
+            builder.Property(x => x.RecipeType).HasColumnName(@"RecipeType").HasColumnType("int").IsRequired();
         }
     }
 
