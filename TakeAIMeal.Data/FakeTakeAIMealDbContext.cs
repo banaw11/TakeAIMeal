@@ -238,7 +238,7 @@ namespace TakeAIMeal.Data
 
         // Stored Procedures
 
-        public int AddGeneretedRecipe(int? mealType = null, int? userId = null)
+        public int AddGeneretedRecipe(int? mealType = null, int? userId = null, int? recipeType = null)
         {
             return 0;
         }

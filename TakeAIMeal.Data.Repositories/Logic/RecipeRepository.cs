@@ -13,9 +13,9 @@ namespace TakeAIMeal.Data.Repositories.Logic
             _dbContext = dbContext;
         }
 
-        public void AddGeneratedRecipeLog(MealTypes mealType, int? userId)
+        public void AddGeneratedRecipeLog(MealTypes mealType, int? userId, RecipeTypes recipeType)
         {
-            _dbContext.AddGeneretedRecipe((int)mealType, userId);
+            _dbContext.AddGeneretedRecipe((int)mealType, userId, (int)recipeType);
         }
     }
 }

@@ -15,6 +15,6 @@ namespace TakeAIMeal.Data.Repositories.Interfaces
         /// The user ID parameter identifies the user for whom the recipe was generated. If the user ID is unknown,
         /// it can be set to null.
         /// </remarks>
-        void AddGeneratedRecipeLog(MealTypes mealType, int? userId);
+        void AddGeneratedRecipeLog(MealTypes mealType, int? userId, RecipeTypes recipeType);
     }
 }

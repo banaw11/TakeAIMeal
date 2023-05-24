@@ -73,7 +73,7 @@ namespace TakeAIMeal.Data
         IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression);
 
         // Stored Procedures
-        int AddGeneretedRecipe(int? mealType, int? userId);
+        int AddGeneretedRecipe(int? mealType, int? userId, int? recipeType);
         // AddGeneretedRecipeAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
 
     }

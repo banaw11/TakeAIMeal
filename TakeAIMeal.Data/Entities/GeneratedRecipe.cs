@@ -19,10 +19,12 @@ namespace TakeAIMeal.Data
         public DateTime? Date { get; set; } // Date
         public int MealType { get; set; } // MealType
         public int? UserId { get; set; } // UserId
+        public int RecipeType { get; set; } // RecipeType
 
         public GeneratedRecipe()
         {
             Date = DateTime.Now;
+            RecipeType = 1;
         }
     }
 

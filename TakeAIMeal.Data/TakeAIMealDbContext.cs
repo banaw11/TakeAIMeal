@@ -70,7 +70,7 @@ namespace TakeAIMeal.Data
 
 
         // Stored Procedures
-        public int AddGeneretedRecipe(int? mealType = null, int? userId = null)
+        public int AddGeneretedRecipe(int? mealType = null, int? userId = null, int? recipeType = null)
         {
             var mealTypeParam = new SqlParameter { ParameterName = "@MealType", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = mealType.GetValueOrDefault(), Precision = 10, Scale = 0 };
             if (!mealType.HasValue)
@@ -80,9 +80,13 @@ namespace TakeAIMeal.Data
             if (!userId.HasValue)
                 userIdParam.Value = DBNull.Value;
 
+            var recipeTypeParam = new SqlParameter { ParameterName = "@RecipeType", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = recipeType.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!recipeType.HasValue)
+                recipeTypeParam.Value = DBNull.Value;
+
             var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[AddGeneretedRecipe] @MealType, @UserId", mealTypeParam, userIdParam, procResultParam);
+            Database.ExecuteSqlRaw("EXEC @procResult = [dbo].[AddGeneretedRecipe] @MealType, @UserId, @RecipeType", mealTypeParam, userIdParam, recipeTypeParam, procResultParam);
 
             return (int)procResultParam.Value;
         }
