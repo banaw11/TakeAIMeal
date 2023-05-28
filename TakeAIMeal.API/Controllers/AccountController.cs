@@ -150,8 +150,11 @@ namespace TakeAIMeal.API.Controllers
             {
                 try
                 {
-                    await _accountService.ConfirmEmailAsync(body.Email, body.Code);
-                    return Ok();
+                    if(await _accountService.ConfirmEmailAsync(body.Email, body.Code))
+                    {
+                        return Ok(responseModel);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

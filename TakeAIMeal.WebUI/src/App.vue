@@ -1,4 +1,5 @@
 <template>
+    <LoaderComponent :is-loading="isLoading"></LoaderComponent>
      <router-view />
 </template>
 
@@ -6,12 +7,17 @@
     import { defineComponent } from 'vue'
     import { mapActions } from 'vuex'
     import client from './modules/http/client/client'
+    import LoaderComponent from './components/shared/LoaderComponent.vue'
     export default defineComponent({
         name: 'App',
+        components: {
+            LoaderComponent
+        },
         data() {
             return {
-                loader: null,
-                isLoading: false
+                isLoading: false,
+                responseStarted: false,
+                requests : [],
             }
         },
         beforeMount: function () {
@@ -39,19 +45,18 @@
         methods: {
             ...mapActions('context', ['restoreSession']),
             _showLoader() {
-                this.isLoading = true;
+                this.requests.push(this.requests.length);
                 this.pooling = setTimeout(() => {
-                    if (this.isLoading) {
-                        this.loader = this.$loading.show({
-                            container: this.$refs.loaderContainer,
-                            canCancel: false
-                        });
+                    if (this.requests.length > 0) {
+                        this.isLoading = true;
                     }
-                }, 200)
+                }, 200);
             },
             _hideLoader() {
-                this.isLoading = false;
-                this.loader?.hide();
+                this.requests.pop();
+                if (this.requests.length === 0) {
+                    this.isLoading = false;
+                }
             }
         }
     })
