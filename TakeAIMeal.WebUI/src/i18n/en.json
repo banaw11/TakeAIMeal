@@ -154,5 +154,9 @@
       "Soft": "Soft",
       "Vege": "Vege"
     }
+  },
+  "About": {
+    "Header": "About application",
+    "Paragraph": "The app generates recipes. Each of them is created by artificial intelligence. Thanks to the \"knowledge\" of OpenAI, the generated meal suggestions will be a novelty for many users, which is worth trying, especially when there is no idea how to prepare the dish. It's worth trying to generate a couple of recipes and test which one tastes better. It is also possible to save the obtained content, which is available only to logged in users."
   }
 }
