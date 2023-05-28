@@ -19,7 +19,7 @@
                 </div>
                 <div class="dropdown-menu" aria-labelledby="userMenuButton">
                     <router-link class="dropdown-item" to="/personalization">{{ t('Header.Account') }}</router-link>
-                    <span class="dropdown-item" @click="logout()">{{ t('Header.SignOut') }}</span>
+                    <span class="dropdown-item" @click="signOut()">{{ t('Header.SignOut') }}</span>
                 </div>
             </div>
             <div class="language-container">
@@ -47,6 +47,13 @@
             },
             isCurrentLocale(locale) {
                 return this.$i18n.locale === locale
+            },
+            signOut() {
+                this.logout().then(() => {
+                    this.$router.push({
+                        name: 'home'
+                    });
+                })
             }
         },
         setup() {

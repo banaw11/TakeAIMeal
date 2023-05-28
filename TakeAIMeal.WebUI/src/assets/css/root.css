@@ -5,6 +5,7 @@
 
 :root {
     --color-main: rgb(55, 188, 247);
+    --color-black: rgb(0, 0, 0);
     --color-white: #fff;
     --color-grey: #ccc;
     --color-yellow: rgb(255, 217, 102);

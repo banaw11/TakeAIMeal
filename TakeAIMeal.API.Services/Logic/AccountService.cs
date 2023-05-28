@@ -38,7 +38,7 @@ namespace TakeAIMeal.API.Services.Logic
                 throw new Exception("Invalid credentials");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, System.Web.HttpUtility.UrlDecode(code));
+            var result = await _userManager.ConfirmEmailAsync(user, code);
 
             return result.Succeeded;
         }
@@ -143,7 +143,7 @@ namespace TakeAIMeal.API.Services.Logic
                 uri.Port = (int)request.Host.Port;
             }
             uri.Path = "account/email-confirmation";
-            uri.Query = $"email={user.Email}&code={System.Web.HttpUtility.UrlEncode(code)}";
+            uri.Query = $"email={user.Email}&code={code}";
 
             var body = await _templateService.RenderTemplateAsync("Templates/EmailConfirmationTemplate", new ConfirmationEmailModel { Url = uri.ToString() });
 

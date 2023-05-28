@@ -1,8 +1,10 @@
 <template>
-  <div class="recipe-container">
-    <h1>{{ t('About.Header') }}</h1>
-    <p>{{ t('About.Paragraph') }}</p>
-  </div>
+    <div class="content-header">
+        <h1>{{ t('About.Header') }}</h1>
+    </div>
+    <div class="recipe-container">
+        <p>{{ t('About.Paragraph') }}</p>
+    </div>
 </template>
 
 <script>

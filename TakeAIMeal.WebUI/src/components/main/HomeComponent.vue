@@ -1,6 +1,6 @@
 <template>
     <div class="content-header">
-        <h1>Take a<sup>i</sup> meal</h1>
+        <h1>Take AI meal</h1>
     </div>
     <div class="hint-container">
         <i class="icon-hint"></i>

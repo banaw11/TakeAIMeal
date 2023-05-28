@@ -34,7 +34,7 @@ i.logo {
 }
 
 i.user {
-    background-color: var(--color-main);
+    background-color: var(--color-black);
     -webkit-mask-image: url('../icons/user.svg');
     mask-image: url('../icons/user.svg');
     -webkit-mask-repeat: no-repeat;

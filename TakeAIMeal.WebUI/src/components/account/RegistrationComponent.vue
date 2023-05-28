@@ -66,7 +66,6 @@ export default defineComponent({
                 });
         },
         emailValidate() {
-            console.log(this.$route.params); // będzie zawarty obiekt email i code - sprawdzić jak to wygląda
             // check basic e-mail structure
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return this.form.email.length > 0 && this.form.email.match(emailRegex);
