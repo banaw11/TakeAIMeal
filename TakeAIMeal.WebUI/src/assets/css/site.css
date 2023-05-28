@@ -41,9 +41,13 @@ body {
             display: inline-flex;
         }
 
-        #app .page-header .navbar .navbar-toggler{
-            margin-right: auto;
-        }
+            #app .page-header .navbar .language-container .icon-flag:not(:last-child){
+                margin-right: 5px;
+            }
+
+            #app .page-header .navbar .navbar-toggler {
+                margin-right: auto;
+            }
 
         #app .page-header .navbar .navbar-collapse {
             justify-content: end;

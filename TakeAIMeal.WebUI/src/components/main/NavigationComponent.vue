@@ -23,8 +23,8 @@
                 </div>
             </div>
             <div class="language-container">
-                <i v-if="isCurrentLocale('pl')" class="icon-flag pl" @click="changeLanguage('en')"></i>
-                <i v-if="isCurrentLocale('en')" class="icon-flag en" @click="changeLanguage('pl')"></i>
+                <i class="icon-flag pl" :class="{active : isCurrentLocale('pl')}" @click="changeLanguage('pl')"></i>
+                <i class="icon-flag en" :class="{active : isCurrentLocale('en')}" @click="changeLanguage('en')"></i>
             </div>
         </nav>
     </div>
