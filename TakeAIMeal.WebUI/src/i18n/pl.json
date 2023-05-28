@@ -154,5 +154,9 @@
       "Soft": "Lekka",
       "Vege": "Wege"
     }
+  },
+  "About": {
+    "Header": "O aplikacji",
+    "Paragraph": "Aplikacja generuje przepisy kulinarne. Każdy z nich jest tworzony przez sztuczną inteligencję. Dzięki \"wiedzy\" OpenAI wygenerowane propozycje posiłków, dla wielu użytkowników będą nowością, którą warto wypróbować, szczególnie wtedy gdy brak pomysłu na przygotowanie potrawy. Warto spróbować wygenerować parę przepisów i przetestować, który bardziej smakuje. Istnieje również możliwość zapisania uzyskanej treści, która jest dostępna tylko dla zalogowanych użytkowników."
   }
 }
