@@ -6,6 +6,7 @@ using System.Security.Claims;
 using TakeAIMeal.API.Services.Extensions;
 using TakeAIMeal.API.Services.Interfaces;
 using TakeAIMeal.API.Services.Models;
+using TakeAIMeal.Common.Dictionaries;
 using TakeAIMeal.Common.Services.Interfaces;
 using TakeAIMeal.Data.Entities;
 
@@ -18,14 +19,16 @@ namespace TakeAIMeal.API.Services.Logic
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IEmailService _emailService;
         private readonly ITemplateService _templateService;
+        private readonly IBlobStorageService _blobStorageService;
 
-        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor, IEmailService emailService, ITemplateService templateService)
+        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor, IEmailService emailService, ITemplateService templateService, IBlobStorageService blobStorageService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
             _emailService = emailService;
             _templateService = templateService;
+            _blobStorageService = blobStorageService;
         }
 
         /// <inheritdoc />
@@ -37,8 +40,10 @@ namespace TakeAIMeal.API.Services.Logic
             {
                 throw new Exception("Invalid credentials");
             }
-
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+            var emailGuid = EmailIdentifierGenerator.GenerateIdentifier(user.Email);
+            var savedCode = await _blobStorageService.DownloadStringContent(BlobStorageContainerNames.EmailTokens, emailGuid);
+            var res = System.Web.HttpUtility.UrlEncode(code);
+            var result = await _userManager.ConfirmEmailAsync(user, savedCode);
 
             return result.Succeeded;
         }
@@ -136,6 +141,8 @@ namespace TakeAIMeal.API.Services.Logic
         {
             var request = _httpContextAccessor.HttpContext.Request;
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var emailGuid = EmailIdentifierGenerator.GenerateIdentifier(user.Email);
+            await _blobStorageService.UploadStringContent(code, BlobStorageContainerNames.EmailTokens, emailGuid);
 
             var uri = new UriBuilder(request.Scheme, request.Host.Host);
             if (request.Host.Port.HasValue)
@@ -143,7 +150,7 @@ namespace TakeAIMeal.API.Services.Logic
                 uri.Port = (int)request.Host.Port;
             }
             uri.Path = "account/email-confirmation";
-            uri.Query = $"email={user.Email}&code={code}";
+            uri.Query = $"email={user.Email}&code={emailGuid}";
 
             var body = await _templateService.RenderTemplateAsync("Templates/EmailConfirmationTemplate", new ConfirmationEmailModel { Url = uri.ToString() });
 
