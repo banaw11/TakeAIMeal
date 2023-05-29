@@ -413,13 +413,7 @@ body {
         cursor: pointer
     }
 
-    .carusel .dot::after {
-        content: "\23fa";
-        display: inline-block;
-        font-style: normal;
-    }
-
-        .carusel .dot.active::after{
+        .carusel .dot.active{
             opacity: 0.7;
         }
 
@@ -515,6 +509,14 @@ body {
 
     #app .page-header .navbar .navbar-nav .account-item{
         padding: 0;
+    }
+
+    #app .page-container .content-container .action-container.cookbook{
+        gap: 0;
+    }
+
+    #app .page-container .content-container .action-container.cookbook .btn:not(:last-child){
+        margin-bottom: 10px;
     }
 }
 

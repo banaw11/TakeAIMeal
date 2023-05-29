@@ -56,3 +56,14 @@ i.icon-add {
     display: inline-block;
     cursor: pointer;
 }
+
+i.dot {
+    background-color: var(--color-white);
+    -webkit-mask-image: url('../icons/dot.svg');
+    mask-image: url('../icons/dot.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
