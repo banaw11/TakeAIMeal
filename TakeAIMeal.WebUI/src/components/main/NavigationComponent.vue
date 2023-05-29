@@ -10,21 +10,23 @@
                     <router-link class="nav-item nav-link active" to="/">{{ t('Header.Home') }}<span class="sr-only">(current)</span></router-link>
                     <router-link class="nav-item nav-link" to="/about">{{ t('Header.About') }}</router-link>
                     <router-link v-if="!isAuthenticated" class="nav-item nav-link" to="/account/login">{{ t('Home.SignIn') }}</router-link>
+                    <div class="nav-item account-item">
+                        <div v-if="isAuthenticated" class="user-container dropdown">
+                            <div class="user-toggle" id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="user"></i>
+                                <span class="user-name">{{ profile.userName }}</span>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="userMenuButton">
+                                <router-link class="dropdown-item" to="/personalization">{{ t('Header.Account') }}</router-link>
+                                <span class="dropdown-item" @click="signOut()">{{ t('Header.SignOut') }}</span>
+                            </div>
+                        </div>
+                        <div class="language-container">
+                            <i class="icon-flag pl" :class="{active : isCurrentLocale('pl')}" @click="changeLanguage('pl')"></i>
+                            <i class="icon-flag en" :class="{active : isCurrentLocale('en')}" @click="changeLanguage('en')"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div v-if="isAuthenticated" class="user-container dropdown">
-                <div class="user-toggle" id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="user" ></i>
-                    <span class="user-name">{{ profile.userName }}</span>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="userMenuButton">
-                    <router-link class="dropdown-item" to="/personalization">{{ t('Header.Account') }}</router-link>
-                    <span class="dropdown-item" @click="signOut()">{{ t('Header.SignOut') }}</span>
-                </div>
-            </div>
-            <div class="language-container">
-                <i class="icon-flag pl" :class="{active : isCurrentLocale('pl')}" @click="changeLanguage('pl')"></i>
-                <i class="icon-flag en" :class="{active : isCurrentLocale('en')}" @click="changeLanguage('en')"></i>
             </div>
         </nav>
     </div>
