@@ -27,7 +27,7 @@ body {
         position: sticky;
         width: 100%;
         top: 0;
-        height: 56px;
+        height: auto;
         background-color: var(--color-white);
         z-index: 1000;
         
@@ -45,9 +45,6 @@ body {
                 margin-right: 5px;
             }
 
-            #app .page-header .navbar .navbar-toggler {
-                margin-right: auto;
-            }
 
         #app .page-header .navbar .navbar-collapse {
             justify-content: end;
@@ -59,8 +56,12 @@ body {
             font-weight: 600;
         }
 
+            #app .page-header .navbar .navbar-nav .account-item{
+                display: flex;
+                justify-content: space-between;
+            }
+
         #app .page-header .navbar .user-container {
-            padding: 0 .5rem;
             display: inline-flex
         }
 
@@ -73,6 +74,7 @@ body {
             #app .page-header .navbar .user-container .dropdown-menu {
                 width: 100%;
                 min-width: max-content;
+                position: absolute;
             }
 
                 #app .page-header .navbar .user-container .dropdown-menu .dropdown-item{
@@ -450,6 +452,12 @@ body {
         line-height: 1.8rem;
     }
 
+@media only screen and (min-width: 992px){
+    #app .page-header .navbar .navbar-nav .account-item {
+        padding: 0 .5rem;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     #app .page-container .content-container .action-container{
         flex-direction: column;
@@ -504,6 +512,10 @@ body {
         #app .page-container .content-container .grid-container .list-row label{
             padding-right: 0;
         }
+
+    #app .page-header .navbar .navbar-nav .account-item{
+        padding: 0;
+    }
 }
 
 
