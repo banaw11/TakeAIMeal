@@ -85,7 +85,7 @@ namespace TakeAIMeal.API.Services.Logic
 
                         if (!string.IsNullOrEmpty(model.Title))
                         {
-                            model.ImageBase64 = $"data:image/svg+xml;base64, {await GenerateImageFromTitle(model.Title)}";
+                            model.ImageBase64 = $"data:image/png;base64, {await GenerateImageFromTitle(model.Title)}";
                         }
                     }
 
