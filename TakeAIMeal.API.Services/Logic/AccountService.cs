@@ -36,13 +36,12 @@ namespace TakeAIMeal.API.Services.Logic
         {
             var normalizedEmail = _userManager.NormalizeEmail(email);
             var user = await _userManager.FindByEmailAsync(normalizedEmail);
-            if (user == null)
+            if (user == null || code != EmailIdentifierGenerator.GenerateIdentifier(user.Email))
             {
                 throw new Exception("Invalid credentials");
             }
-            var emailGuid = EmailIdentifierGenerator.GenerateIdentifier(user.Email);
-            var savedCode = await _blobStorageService.DownloadStringContent(BlobStorageContainerNames.EmailTokens, emailGuid);
-            var res = System.Web.HttpUtility.UrlEncode(code);
+
+            var savedCode = await _blobStorageService.DownloadStringContent(BlobStorageContainerNames.EmailTokens, code);
             var result = await _userManager.ConfirmEmailAsync(user, savedCode);
 
             return result.Succeeded;

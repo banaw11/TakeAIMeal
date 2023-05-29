@@ -17,6 +17,7 @@ namespace TakeAIMeal.API.Extensions
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
                 options.User.RequireUniqueEmail = true;
             })
                 .AddSignInManager<SignInManager<ApplicationUser>>()
