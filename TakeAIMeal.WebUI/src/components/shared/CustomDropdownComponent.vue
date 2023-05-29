@@ -1,7 +1,7 @@
 <template lang="html">
     <div>
         <VueMultiselect class="custom-dropdown" v-model="value"
-                        :options="data"
+                        :options="options"
                         :multiple="multi"
                         :placeholder="t('Dropdown.PleaseSelect')"
                         :selectLabel="t('Dropdown.PressEnterForSelect')"
@@ -33,6 +33,17 @@
                 set(value) {
                     this.$emit('update:modelValue', value)
                 }
+            },
+            options: {
+                get() {
+                    return this.data
+                        .sort((a, b) => {
+                            const a_name = this.t(`${this.translatePath}.${a.name}`);
+                            const b_name = this.t(`${this.translatePath}.${b.name}`);
+
+                            return a_name.localeCompare(b_name);
+                        });
+                },
             }
         },
         setup() {
